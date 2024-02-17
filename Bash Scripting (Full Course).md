@@ -48,7 +48,7 @@ Variables in Bash
 Variables in Bash are used to store data. Unlike many other programming languages, Bash doesn't require explicit declaration of variables.
 
 Let's create a script that demonstrates variable usage:
-
+```bash
 #!/bin/bash
 # This is a comment
 
@@ -57,7 +57,7 @@ name="John"
 
 # Accessing the variable
 echo "Hello, $name!"
-
+```
 
 Explanation:
 
@@ -66,7 +66,7 @@ echo "Hello, $name!": Here, we're printing the value of the variable name using 
 
 Data Types
 Bash doesn't have explicit data types. It treats all variables as strings by default. However, you can still perform operations that mimic data types.
-
+```bash
 #!/bin/bash
 # This is a comment
 
@@ -81,7 +81,7 @@ str1="Hello"
 str2="World"
 concat="$str1 $str2"
 echo "$concat"
-
+```
 
 Explanation:
 
@@ -91,7 +91,7 @@ Basic Control Structures
 Bash supports basic control structures like if statements and loops.
 
 Let's create a script that demonstrates an if statement:
-
+```bash
 #!/bin/bash
 # This is a comment
 
@@ -104,6 +104,8 @@ if [ $age -ge 18 ]; then
 else
     echo "You are a minor."
 fi
+
+```
 
 
 Explanation:
