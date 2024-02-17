@@ -8114,3 +8114,4 @@ gcc -fsanitize=address -o my_program my_code.c
 
 Scanning for buffer overflow vulnerabilities requires a combination of automated tools, manual review, and expert knowledge. By following the steps outlined in this tutorial, you can systematically identify and address buffer overflow vulnerabilities in your C/C++ codebase, helping to improve the security of your software applications.
 
+For more tools on bash: https://github.com/saidehossain/hacking_with_bash
