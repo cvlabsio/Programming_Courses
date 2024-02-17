@@ -1479,3 +1479,2285 @@ By creating a simple XPath Injection detection tool with Bash scripting, you can
 
 In the next lesson, we'll discuss additional security considerations and best practices for developing and using security tools effectively.
 
+### Lesson 21: Creating HTML Injection Detection Tools with Bash
+
+HTML Injection vulnerabilities can lead to unauthorized content injection, phishing attacks, or defacement of web pages. In this lesson, we'll develop a simple HTML Injection detection tool using Bash scripting:
+
+#### Use Case: HTML Injection Detection Tool
+
+Let's create a Bash script that scans a web application for potential HTML Injection vulnerabilities by injecting malicious HTML payloads and analyzing the responses.
+
+**Bash Script:**
+```bash
+#!/bin/bash
+# This is a comment
+
+# Function to perform HTML Injection detection
+detect_html_injection() {
+    echo "Detecting HTML Injection vulnerabilities..."
+    # Define HTML Injection payloads
+    payloads=("><script>alert('XSS')</script>" "<img src='http://attacker-controlled-domain.com/malicious-image.jpg' />")
+
+    # Iterate over payloads and inject them into vulnerable parameters
+    for payload in "${payloads[@]}"; do
+        echo "Testing payload: $payload"
+        curl -s -d "comment=$payload" -X POST "$1"
+    done
+}
+
+# Main function
+main() {
+    echo "HTML Injection Detection Tool"
+    echo "------------------------------"
+
+    # Validate input
+    if [ $# -ne 1 ]; then
+        echo "Usage: $0 <target_url>"
+        exit 1
+    fi
+
+    # Perform HTML Injection detection
+    detect_html_injection "$1"
+}
+
+# Call main function with target URL as argument
+main "$@"
+```
+
+**Explanation:**
+- The script defines a function `detect_html_injection` to perform HTML Injection detection.
+- It defines a list of HTML Injection payloads representing malicious HTML content.
+- The `main` function serves as the entry point, validating input and invoking the HTML Injection detection function.
+- When executed with a target URL as an argument, the script injects HTML Injection payloads into vulnerable parameters and analyzes the responses for potential vulnerabilities.
+
+#### Usage:
+Save the script to a file (e.g., `html_injection_detector.sh`) and make it executable (`chmod +x html_injection_detector.sh`). Then, run the script with the URL of the target server or web application as an argument:
+
+```bash
+./html_injection_detector.sh http://example.com/comment
+```
+
+Replace `http://example.com/comment` with the URL of the vulnerable endpoint susceptible to HTML Injection attacks.
+
+#### Considerations:
+- **Payloads**: Customize the list of HTML Injection payloads based on your knowledge of common HTML injection attack vectors and techniques.
+- **HTTP Method**: Adjust the HTTP method (`-X POST` in this example) and payload format based on the target application's request handling.
+- **Response Analysis**: Analyze the responses from the server to identify any indications of successful HTML Injection attacks, such as rendering of injected content or unexpected behavior.
+
+By creating a simple HTML Injection detection tool with Bash scripting, you can automate the process of identifying potential vulnerabilities in web applications, helping to mitigate security risks and protect against unauthorized content injection or defacement.
+
+In the next lesson, we'll discuss additional security considerations and best practices for developing and using security tools effectively.
+
+### Lesson 22: Creating Server-Side Includes (SSI) Injection Detection Tools with Bash
+
+Server-Side Includes (SSI) Injection vulnerabilities can lead to unauthorized code execution or sensitive information disclosure in web applications that utilize SSI directives. In this lesson, we'll develop a simple SSI Injection detection tool using Bash scripting:
+
+#### Use Case: SSI Injection Detection Tool
+
+Let's create a Bash script that scans a web application for potential SSI Injection vulnerabilities by injecting malicious SSI payloads and analyzing the responses.
+
+**Bash Script:**
+```bash
+#!/bin/bash
+# This is a comment
+
+# Function to perform SSI Injection detection
+detect_ssi_injection() {
+    echo "Detecting SSI Injection vulnerabilities..."
+    # Define SSI Injection payloads
+    payloads=("<!--#echo var=\"DATE_LOCAL\" -->" "<!--#exec cmd=\"ls /etc\" -->")
+
+    # Iterate over payloads and inject them into vulnerable parameters
+    for payload in "${payloads[@]}"; do
+        echo "Testing payload: $payload"
+        curl -s -d "param=$payload" -X POST "$1"
+    done
+}
+
+# Main function
+main() {
+    echo "SSI Injection Detection Tool"
+    echo "---------------------------"
+
+    # Validate input
+    if [ $# -ne 1 ]; then
+        echo "Usage: $0 <target_url>"
+        exit 1
+    fi
+
+    # Perform SSI Injection detection
+    detect_ssi_injection "$1"
+}
+
+# Call main function with target URL as argument
+main "$@"
+```
+
+**Explanation:**
+- The script defines a function `detect_ssi_injection` to perform SSI Injection detection.
+- It defines a list of SSI Injection payloads representing malicious SSI directives.
+- The `main` function serves as the entry point, validating input and invoking the SSI Injection detection function.
+- When executed with a target URL as an argument, the script injects SSI Injection payloads into vulnerable parameters and analyzes the responses for potential vulnerabilities.
+
+#### Usage:
+Save the script to a file (e.g., `ssi_injection_detector.sh`) and make it executable (`chmod +x ssi_injection_detector.sh`). Then, run the script with the URL of the target server or web application as an argument:
+
+```bash
+./ssi_injection_detector.sh http://example.com/page
+```
+
+Replace `http://example.com/page` with the URL of the vulnerable page susceptible to SSI Injection attacks.
+
+#### Considerations:
+- **Payloads**: Customize the list of SSI Injection payloads based on your knowledge of common SSI injection attack vectors and techniques.
+- **HTTP Method**: Adjust the HTTP method (`-X POST` in this example) and payload format based on the target application's request handling.
+- **Response Analysis**: Analyze the responses from the server to identify any indications of successful SSI Injection attacks, such as execution of injected directives or unexpected behavior.
+
+By creating a simple SSI Injection detection tool with Bash scripting, you can automate the process of identifying potential vulnerabilities in web applications, helping to mitigate security risks and protect against unauthorized code execution or information disclosure.
+
+In the next lesson, we'll discuss additional security considerations and best practices for developing and using security tools effectively.
+
+### Lesson 23: Creating OS Command Injection Detection Tools with Bash
+
+OS Command Injection vulnerabilities can lead to arbitrary command execution on the underlying operating system, potentially resulting in unauthorized access or system compromise. In this lesson, we'll develop a simple OS Command Injection detection tool using Bash scripting:
+
+#### Use Case: OS Command Injection Detection Tool
+
+Let's create a Bash script that scans a web application for potential OS Command Injection vulnerabilities by injecting malicious command payloads and analyzing the responses.
+
+**Bash Script:**
+```bash
+#!/bin/bash
+# This is a comment
+
+# Function to perform OS Command Injection detection
+detect_os_command_injection() {
+    echo "Detecting OS Command Injection vulnerabilities..."
+    # Define OS Command Injection payloads
+    payloads=(";ls" ";cat /etc/passwd")
+
+    # Iterate over payloads and inject them into vulnerable parameters
+    for payload in "${payloads[@]}"; do
+        echo "Testing payload: $payload"
+        curl -s -d "param=$payload" -X POST "$1"
+    done
+}
+
+# Main function
+main() {
+    echo "OS Command Injection Detection Tool"
+    echo "----------------------------------"
+
+    # Validate input
+    if [ $# -ne 1 ]; then
+        echo "Usage: $0 <target_url>"
+        exit 1
+    fi
+
+    # Perform OS Command Injection detection
+    detect_os_command_injection "$1"
+}
+
+# Call main function with target URL as argument
+main "$@"
+```
+
+**Explanation:**
+- The script defines a function `detect_os_command_injection` to perform OS Command Injection detection.
+- It defines a list of OS Command Injection payloads representing malicious command injections.
+- The `main` function serves as the entry point, validating input and invoking the OS Command Injection detection function.
+- When executed with a target URL as an argument, the script injects OS Command Injection payloads into vulnerable parameters and analyzes the responses for potential vulnerabilities.
+
+#### Usage:
+Save the script to a file (e.g., `os_command_injection_detector.sh`) and make it executable (`chmod +x os_command_injection_detector.sh`). Then, run the script with the URL of the target server or web application as an argument:
+
+```bash
+./os_command_injection_detector.sh http://example.com/action
+```
+
+Replace `http://example.com/action` with the URL of the vulnerable endpoint susceptible to OS Command Injection attacks.
+
+#### Considerations:
+- **Payloads**: Customize the list of OS Command Injection payloads based on your knowledge of common command injection attack vectors and techniques.
+- **HTTP Method**: Adjust the HTTP method (`-X POST` in this example) and payload format based on the target application's request handling.
+- **Response Analysis**: Analyze the responses from the server to identify any indications of successful OS Command Injection attacks, such as execution of injected commands or unexpected behavior.
+
+By creating a simple OS Command Injection detection tool with Bash scripting, you can automate the process of identifying potential vulnerabilities in web applications, helping to mitigate security risks and protect against unauthorized access or system compromise.
+
+In the next lesson, we'll discuss additional security considerations and best practices for developing and using security tools effectively.
+
+### Lesson 24: Creating Blind SQL Injection Detection Tools with Bash
+
+Blind SQL Injection vulnerabilities allow attackers to extract information from a database through a series of true/false queries without directly viewing the results. In this lesson, we'll develop a simple Blind SQL Injection detection tool using Bash scripting:
+
+#### Use Case: Blind SQL Injection Detection Tool
+
+Let's create a Bash script that scans a web application for potential Blind SQL Injection vulnerabilities by sending crafted SQL queries and analyzing the responses.
+
+**Bash Script:**
+```bash
+#!/bin/bash
+# This is a comment
+
+# Function to perform Blind SQL Injection detection
+detect_blind_sql_injection() {
+    echo "Detecting Blind SQL Injection vulnerabilities..."
+    # Define Blind SQL Injection payloads
+    payloads=("' AND SLEEP(5)--" "' AND (SELECT COUNT(*) FROM users) = 1 --")
+
+    # Iterate over payloads and inject them into vulnerable parameters
+    for payload in "${payloads[@]}"; do
+        echo "Testing payload: $payload"
+        curl -s -d "username=admin&password=$payload" -X POST "$1"
+    done
+}
+
+# Main function
+main() {
+    echo "Blind SQL Injection Detection Tool"
+    echo "----------------------------------"
+
+    # Validate input
+    if [ $# -ne 1 ]; then
+        echo "Usage: $0 <target_url>"
+        exit 1
+    fi
+
+    # Perform Blind SQL Injection detection
+    detect_blind_sql_injection "$1"
+}
+
+# Call main function with target URL as argument
+main "$@"
+```
+
+**Explanation:**
+- The script defines a function `detect_blind_sql_injection` to perform Blind SQL Injection detection.
+- It defines a list of Blind SQL Injection payloads representing crafted SQL queries that induce delays or conditional responses.
+- The `main` function serves as the entry point, validating input and invoking the Blind SQL Injection detection function.
+- When executed with a target URL as an argument, the script injects Blind SQL Injection payloads into vulnerable parameters and analyzes the responses for potential vulnerabilities.
+
+#### Usage:
+Save the script to a file (e.g., `blind_sql_injection_detector.sh`) and make it executable (`chmod +x blind_sql_injection_detector.sh`). Then, run the script with the URL of the target server or web application as an argument:
+
+```bash
+./blind_sql_injection_detector.sh http://example.com/login
+```
+
+Replace `http://example.com/login` with the URL of the vulnerable endpoint susceptible to Blind SQL Injection attacks.
+
+#### Considerations:
+- **Payloads**: Customize the list of Blind SQL Injection payloads based on your knowledge of common Blind SQL injection attack vectors and techniques.
+- **HTTP Method**: Adjust the HTTP method (`-X POST` in this example) and payload format based on the target application's request handling.
+- **Response Analysis**: Analyze the responses from the server to identify any indications of successful Blind SQL Injection attacks, such as delays or conditional behavior.
+
+By creating a simple Blind SQL Injection detection tool with Bash scripting, you can automate the process of identifying potential vulnerabilities in web applications, helping to mitigate security risks and protect against unauthorized access or data disclosure.
+
+In the next lesson, we'll discuss additional security considerations and best practices for developing and using security tools effectively.
+
+### Lesson 25: Creating Server-Side Template Injection Detection Tools with Bash
+
+Server-Side Template Injection (SSTI) vulnerabilities can lead to remote code execution on the server-side, potentially resulting in unauthorized access or system compromise. In this lesson, we'll develop a simple Server-Side Template Injection detection tool using Bash scripting:
+
+#### Use Case: Server-Side Template Injection Detection Tool
+
+Let's create a Bash script that scans a web application for potential Server-Side Template Injection vulnerabilities by injecting malicious template payloads and analyzing the responses.
+
+**Bash Script:**
+```bash
+#!/bin/bash
+# This is a comment
+
+# Function to perform Server-Side Template Injection detection
+detect_ssti() {
+    echo "Detecting Server-Side Template Injection vulnerabilities..."
+    # Define Server-Side Template Injection payloads
+    payloads=("${{7*7}}" "${{7*'7'}}")
+
+    # Iterate over payloads and inject them into vulnerable parameters
+    for payload in "${payloads[@]}"; do
+        echo "Testing payload: $payload"
+        curl -s -d "param=$payload" -X POST "$1"
+    done
+}
+
+# Main function
+main() {
+    echo "Server-Side Template Injection Detection Tool"
+    echo "--------------------------------------------"
+
+    # Validate input
+    if [ $# -ne 1 ]; then
+        echo "Usage: $0 <target_url>"
+        exit 1
+    fi
+
+    # Perform Server-Side Template Injection detection
+    detect_ssti "$1"
+}
+
+# Call main function with target URL as argument
+main "$@"
+```
+
+**Explanation:**
+- The script defines a function `detect_ssti` to perform Server-Side Template Injection detection.
+- It defines a list of Server-Side Template Injection payloads representing malicious template expressions.
+- The `main` function serves as the entry point, validating input and invoking the Server-Side Template Injection detection function.
+- When executed with a target URL as an argument, the script injects Server-Side Template Injection payloads into vulnerable parameters and analyzes the responses for potential vulnerabilities.
+
+#### Usage:
+Save the script to a file (e.g., `ssti_detection_tool.sh`) and make it executable (`chmod +x ssti_detection_tool.sh`). Then, run the script with the URL of the target server or web application as an argument:
+
+```bash
+./ssti_detection_tool.sh http://example.com/page
+```
+
+Replace `http://example.com/page` with the URL of the vulnerable page susceptible to Server-Side Template Injection attacks.
+
+#### Considerations:
+- **Payloads**: Customize the list of Server-Side Template Injection payloads based on your knowledge of common SSTI attack vectors and techniques.
+- **HTTP Method**: Adjust the HTTP method (`-X POST` in this example) and payload format based on the target application's request handling.
+- **Response Analysis**: Analyze the responses from the server to identify any indications of successful Server-Side Template Injection attacks, such as rendering of injected content or unexpected behavior.
+
+By creating a simple Server-Side Template Injection detection tool with Bash scripting, you can automate the process of identifying potential vulnerabilities in web applications, helping to mitigate security risks and protect against unauthorized code execution or system compromise.
+
+In the next lesson, we'll discuss additional security considerations and best practices for developing and using security tools effectively.
+
+### Lesson 26: Creating Session Fixation Detection Tools with Bash
+
+Session Fixation vulnerabilities can lead to unauthorized access to user accounts or sessions in web applications. In this lesson, we'll develop a simple Session Fixation detection tool using Bash scripting:
+
+#### Use Case: Session Fixation Detection Tool
+
+Let's create a Bash script that scans a web application for potential Session Fixation vulnerabilities by analyzing session cookies and detecting inconsistencies.
+
+**Bash Script:**
+```bash
+#!/bin/bash
+# This is a comment
+
+# Function to perform Session Fixation detection
+detect_session_fixation() {
+    echo "Detecting Session Fixation vulnerabilities..."
+    # Get initial session cookie
+    initial_cookie=$(curl -s -c initial_cookie.txt "$1" | grep -oP 'Set-Cookie:\s*\K\S+')
+    
+    # Make a request with the initial session cookie
+    curl -s -b "initial_cookie.txt" "$1" > /dev/null
+    
+    # Get the current session cookie
+    current_cookie=$(curl -s -c - "$1" | grep -oP 'Set-Cookie:\s*\K\S+')
+
+    # Compare initial and current session cookies
+    if [ "$initial_cookie" != "$current_cookie" ]; then
+        echo "Session Fixation vulnerability detected!"
+    else
+        echo "Session Fixation vulnerability not detected."
+    fi
+
+    # Clean up
+    rm initial_cookie.txt
+}
+
+# Main function
+main() {
+    echo "Session Fixation Detection Tool"
+    echo "--------------------------------"
+
+    # Validate input
+    if [ $# -ne 1 ]; then
+        echo "Usage: $0 <target_url>"
+        exit 1
+    fi
+
+    # Perform Session Fixation detection
+    detect_session_fixation "$1"
+}
+
+# Call main function with target URL as argument
+main "$@"
+```
+
+**Explanation:**
+- The script defines a function `detect_session_fixation` to perform Session Fixation detection.
+- It first retrieves the initial session cookie by making a request to the target URL and saving the cookie to a file.
+- Then, it makes another request to the target URL with the initial session cookie and retrieves the current session cookie.
+- Finally, it compares the initial and current session cookies to determine if there is a mismatch, indicating a potential Session Fixation vulnerability.
+
+#### Usage:
+Save the script to a file (e.g., `session_fixation_detector.sh`) and make it executable (`chmod +x session_fixation_detector.sh`). Then, run the script with the URL of the target server or web application as an argument:
+
+```bash
+./session_fixation_detector.sh http://example.com/login
+```
+
+Replace `http://example.com/login` with the URL of the vulnerable endpoint susceptible to Session Fixation attacks.
+
+#### Considerations:
+- **HTTP Requests**: Ensure that the target application properly handles session cookies and maintains session state.
+- **Response Analysis**: Analyze the responses from the server to identify any indications of Session Fixation, such as inconsistencies in session cookies.
+
+By creating a simple Session Fixation detection tool with Bash scripting, you can automate the process of identifying potential vulnerabilities in web applications, helping to mitigate security risks and protect against unauthorized access to user accounts or sessions.
+
+In the next lesson, we'll discuss additional security considerations and best practices for developing and using security tools effectively.
+
+### Lesson 27: Creating Brute Force Attack Tools with Bash
+
+Brute force attacks involve systematically trying all possible combinations of usernames and passwords to gain unauthorized access to a system or application. In this lesson, we'll develop a simple Brute Force Attack tool for HTTP Basic Authentication using Bash scripting:
+
+#### Use Case: Brute Force Attack Tool for HTTP Basic Authentication
+
+Let's create a Bash script that performs a brute force attack on a web application using HTTP Basic Authentication.
+
+**Bash Script:**
+```bash
+#!/bin/bash
+# This is a comment
+
+# Function to perform Brute Force Attack
+brute_force_attack() {
+    echo "Starting Brute Force Attack..."
+    # Define usernames and passwords
+    usernames=("admin" "user" "test")
+    passwords=("password" "123456" "admin123")
+
+    # Iterate over usernames and passwords
+    for username in "${usernames[@]}"; do
+        for password in "${passwords[@]}"; do
+            echo "Trying credentials: $username:$password"
+            status_code=$(curl -s -o /dev/null -w "%{http_code}" -u "$username:$password" "$1")
+            if [ "$status_code" == "200" ]; then
+                echo "Credentials found: $username:$password"
+                exit 0
+            fi
+        done
+    done
+
+    echo "Brute Force Attack finished. No credentials found."
+}
+
+# Main function
+main() {
+    echo "Brute Force Attack Tool for HTTP Basic Authentication"
+    echo "------------------------------------------------------"
+
+    # Validate input
+    if [ $# -ne 1 ]; then
+        echo "Usage: $0 <target_url>"
+        exit 1
+    fi
+
+    # Perform Brute Force Attack
+    brute_force_attack "$1"
+}
+
+# Call main function with target URL as argument
+main "$@"
+```
+
+**Explanation:**
+- The script defines a function `brute_force_attack` to perform the brute force attack.
+- It defines a list of usernames and passwords to try.
+- The script iterates over all combinations of usernames and passwords and makes HTTP requests using `curl` with HTTP Basic Authentication.
+- If the status code of the response is `200`, it means the credentials are valid, and the script terminates.
+
+#### Usage:
+Save the script to a file (e.g., `brute_force_http_basic.sh`) and make it executable (`chmod +x brute_force_http_basic.sh`). Then, run the script with the URL of the target server or web application as an argument:
+
+```bash
+./brute_force_http_basic.sh http://example.com/protected
+```
+
+Replace `http://example.com/protected` with the URL of the resource protected by HTTP Basic Authentication.
+
+#### Considerations:
+- **Usernames and Passwords**: Customize the list of usernames and passwords based on your knowledge or any leaked credentials relevant to the target.
+- **HTTP Basic Authentication**: Ensure that the target application uses HTTP Basic Authentication for authentication.
+- **Rate Limiting**: Be cautious not to trigger any rate limiting mechanisms on the target server.
+
+By creating a simple Brute Force Attack tool with Bash scripting, you can automate the process of testing for weak credentials and help strengthen the security of web applications.
+
+In the next lesson, we'll discuss additional security considerations and best practices for developing and using security tools effectively.
+
+### Lesson 28: Creating Session Hijacking Detection Tools with Bash
+
+Session hijacking occurs when an attacker takes over a valid user session to gain unauthorized access to a web application. In this lesson, we'll develop a simple Session Hijacking detection tool using Bash scripting:
+
+#### Use Case: Session Hijacking Detection Tool
+
+Let's create a Bash script that monitors session activity and detects potential session hijacking by analyzing session cookies.
+
+**Bash Script:**
+```bash
+#!/bin/bash
+# This is a comment
+
+# Function to perform Session Hijacking detection
+detect_session_hijacking() {
+    echo "Detecting Session Hijacking..."
+    # Retrieve session cookie
+    session_cookie=$(curl -s -b - "$1" | grep -oP 'Set-Cookie:\s*\K\S+')
+
+    # Monitor session activity
+    while true; do
+        # Check for changes in session cookie
+        current_session_cookie=$(curl -s -b - "$1" | grep -oP 'Set-Cookie:\s*\K\S+')
+        if [ "$session_cookie" != "$current_session_cookie" ]; then
+            echo "Session hijacking detected!"
+            break
+        fi
+        sleep 5  # Check every 5 seconds
+    done
+}
+
+# Main function
+main() {
+    echo "Session Hijacking Detection Tool"
+    echo "--------------------------------"
+
+    # Validate input
+    if [ $# -ne 1 ]; then
+        echo "Usage: $0 <target_url>"
+        exit 1
+    fi
+
+    # Perform Session Hijacking detection
+    detect_session_hijacking "$1"
+}
+
+# Call main function with target URL as argument
+main "$@"
+```
+
+**Explanation:**
+- The script defines a function `detect_session_hijacking` to perform Session Hijacking detection.
+- It retrieves the session cookie from the target URL and monitors changes to the session cookie.
+- If the session cookie changes, it indicates potential session hijacking, and the script terminates.
+
+#### Usage:
+Save the script to a file (e.g., `session_hijacking_detector.sh`) and make it executable (`chmod +x session_hijacking_detector.sh`). Then, run the script with the URL of the target server or web application as an argument:
+
+```bash
+./session_hijacking_detector.sh http://example.com/profile
+```
+
+Replace `http://example.com/profile` with the URL of the page where user sessions are managed.
+
+#### Considerations:
+- **Session Management**: Ensure that the target application uses cookies for session management and that session cookies are properly secured.
+- **HTTP Requests**: Adjust the HTTP requests to match the session management mechanism used by the target application.
+
+By creating a simple Session Hijacking detection tool with Bash scripting, you can monitor session activity and detect potential unauthorized access, helping to enhance the security of web applications.
+
+In the next lesson, we'll discuss additional security considerations and best practices for developing and using security tools effectively.
+
+### Lesson 29: Creating Password Cracking Tools with Bash
+
+Password cracking tools are used to recover passwords by attempting different combinations of characters until the correct password is found. In this lesson, we'll develop a simple password cracking tool using Bash scripting:
+
+#### Use Case: Password Cracking Tool
+
+Let's create a Bash script that performs a dictionary attack to crack passwords stored in a file.
+
+**Bash Script:**
+```bash
+#!/bin/bash
+# This is a comment
+
+# Function to perform password cracking
+crack_passwords() {
+    echo "Starting Password Cracking..."
+
+    # Check if password file exists
+    if [ ! -f "$2" ]; then
+        echo "Password file not found: $2"
+        exit 1
+    fi
+
+    # Iterate over passwords in the file
+    while IFS= read -r password; do
+        echo "Trying password: $password"
+        # Check if the hashed password matches the given hash
+        if [ "$(echo -n "$password" | sha256sum | cut -d ' ' -f1)" == "$1" ]; then
+            echo "Password found: $password"
+            exit 0
+        fi
+    done < "$2"
+
+    echo "Password not found."
+}
+
+# Main function
+main() {
+    echo "Password Cracking Tool"
+    echo "----------------------"
+
+    # Validate input
+    if [ $# -ne 2 ]; then
+        echo "Usage: $0 <hash> <password_file>"
+        exit 1
+    fi
+
+    # Perform password cracking
+    crack_passwords "$1" "$2"
+}
+
+# Call main function with hash and password file as arguments
+main "$@"
+```
+
+**Explanation:**
+- The script defines a function `crack_passwords` to perform password cracking.
+- It reads passwords from a file specified as the second argument.
+- For each password in the file, it calculates its SHA-256 hash and compares it with the target hash specified as the first argument.
+- If a match is found, it prints the password and exits.
+
+#### Usage:
+Save the script to a file (e.g., `password_cracker.sh`) and make it executable (`chmod +x password_cracker.sh`). Then, run the script with the hash of the password you want to crack and the file containing candidate passwords:
+
+```bash
+./password_cracker.sh <hash> <password_file>
+```
+
+Replace `<hash>` with the hash of the password you want to crack, and `<password_file>` with the path to the file containing candidate passwords.
+
+#### Considerations:
+- **Password File**: The password file should contain one password per line.
+- **Hashing Algorithm**: Adjust the hashing algorithm used based on the hashed passwords you are trying to crack.
+- **Password Complexity**: The success of the password cracking depends on the complexity and length of the passwords in the file.
+
+By creating a simple password cracking tool with Bash scripting, you can automate the process of testing password strength and identifying weak passwords, helping to improve the security of systems and applications.
+
+In the next lesson, we'll discuss additional security considerations and best practices for developing and using security tools effectively.
+
+### Lesson 30: Creating Weak Password Storage Detection Tools with Bash
+
+Weak password storage practices, such as storing passwords in plaintext or using weak cryptographic algorithms, can lead to security breaches and unauthorized access to sensitive information. In this lesson, we'll develop a simple Weak Password Storage detection tool using Bash scripting:
+
+#### Use Case: Weak Password Storage Detection Tool
+
+Let's create a Bash script that scans a file containing hashed passwords and identifies weak password storage practices, such as storing passwords in plaintext or using weak hashing algorithms.
+
+**Bash Script:**
+```bash
+#!/bin/bash
+# This is a comment
+
+# Function to perform Weak Password Storage detection
+detect_weak_password_storage() {
+    echo "Detecting Weak Password Storage..."
+    # Read each line (password hash) from the file
+    while IFS= read -r hash; do
+        # Check if the hash is too short to be secure (MD5 or SHA1)
+        if [ ${#hash} -le 40 ]; then
+            echo "Weak Password Storage detected: $hash (MD5 or SHA1)"
+        fi
+    done < "$1"
+}
+
+# Main function
+main() {
+    echo "Weak Password Storage Detection Tool"
+    echo "------------------------------------"
+
+    # Validate input
+    if [ $# -ne 1 ]; then
+        echo "Usage: $0 <password_file>"
+        exit 1
+    fi
+
+    # Perform Weak Password Storage detection
+    detect_weak_password_storage "$1"
+}
+
+# Call main function with password file as argument
+main "$@"
+```
+
+**Explanation:**
+- The script defines a function `detect_weak_password_storage` to perform Weak Password Storage detection.
+- It reads each line (password hash) from the file specified as the argument.
+- For each hash, it checks if the length of the hash is less than or equal to 40 characters, indicating MD5 or SHA1 hashing.
+- If a weak hash is detected, it prints a warning message.
+
+#### Usage:
+Save the script to a file (e.g., `weak_password_storage_detector.sh`) and make it executable (`chmod +x weak_password_storage_detector.sh`). Then, run the script with the path to the file containing hashed passwords:
+
+```bash
+./weak_password_storage_detector.sh <password_file>
+```
+
+Replace `<password_file>` with the path to the file containing hashed passwords.
+
+#### Considerations:
+- **Password File**: The password file should contain one hashed password per line.
+- **Hashing Algorithms**: Adjust the script to detect other weak hashing algorithms or password storage practices as needed.
+- **Security Recommendations**: Provide guidance on using strong cryptographic algorithms and securely storing passwords.
+
+By creating a simple Weak Password Storage detection tool with Bash scripting, you can automate the process of identifying potential security risks related to password storage, helping to improve the security posture of systems and applications.
+
+In the next lesson, we'll summarize key takeaways and provide guidance on further learning resources.
+
+### Lesson 31: Creating Insecure Authentication Detection Tools with Bash
+
+Insecure authentication practices can lead to security vulnerabilities and unauthorized access to systems or applications. In this lesson, we'll develop a simple Insecure Authentication detection tool using Bash scripting:
+
+#### Use Case: Insecure Authentication Detection Tool
+
+Let's create a Bash script that analyzes the configuration of a web application to identify insecure authentication practices, such as the absence of HTTPS or the use of weak authentication mechanisms.
+
+**Bash Script:**
+```bash
+#!/bin/bash
+# This is a comment
+
+# Function to perform Insecure Authentication detection
+detect_insecure_authentication() {
+    echo "Detecting Insecure Authentication..."
+    # Check if HTTPS is enabled
+    if ! curl -s -I "$1" | grep -q 'HTTPS'; then
+        echo "Insecure Authentication detected: HTTPS not enabled"
+    fi
+
+    # Check for weak authentication mechanisms (e.g., HTTP Basic)
+    if curl -s -I "$1" | grep -q 'Basic'; then
+        echo "Insecure Authentication detected: HTTP Basic authentication used"
+    fi
+}
+
+# Main function
+main() {
+    echo "Insecure Authentication Detection Tool"
+    echo "-------------------------------------"
+
+    # Validate input
+    if [ $# -ne 1 ]; then
+        echo "Usage: $0 <target_url>"
+        exit 1
+    fi
+
+    # Perform Insecure Authentication detection
+    detect_insecure_authentication "$1"
+}
+
+# Call main function with target URL as argument
+main "$@"
+```
+
+**Explanation:**
+- The script defines a function `detect_insecure_authentication` to perform Insecure Authentication detection.
+- It checks if HTTPS is enabled by sending a HEAD request and looking for the presence of "HTTPS" in the response headers.
+- It also checks if weak authentication mechanisms like HTTP Basic authentication are used by looking for the presence of "Basic" in the response headers.
+
+#### Usage:
+Save the script to a file (e.g., `insecure_authentication_detector.sh`) and make it executable (`chmod +x insecure_authentication_detector.sh`). Then, run the script with the URL of the target web application:
+
+```bash
+./insecure_authentication_detector.sh <target_url>
+```
+
+Replace `<target_url>` with the URL of the web application you want to analyze.
+
+#### Considerations:
+- **HTTPS**: Ensure that the target application should support HTTPS for secure communication.
+- **Authentication Mechanisms**: Identify and assess other weak authentication mechanisms such as HTTP Digest or form-based authentication.
+- **Additional Checks**: Implement additional checks as per specific security requirements and best practices.
+
+By creating a simple Insecure Authentication detection tool with Bash scripting, you can automate the process of identifying potential security risks related to authentication practices, helping to enhance the security posture of web applications.
+
+In the next section, we'll summarize key takeaways from this tutorial and provide guidance on further learning resources.
+
+### Lesson 32: Creating Cookie Theft Detection Tools with Bash
+
+Cookie theft occurs when an attacker gains unauthorized access to session cookies, allowing them to impersonate a legitimate user. In this lesson, we'll develop a simple Cookie Theft detection tool using Bash scripting:
+
+#### Use Case: Cookie Theft Detection Tool
+
+Let's create a Bash script that monitors the session cookies of a web application and detects potential cookie theft by comparing the session cookies between requests.
+
+**Bash Script:**
+```bash
+#!/bin/bash
+# This is a comment
+
+# Function to perform Cookie Theft detection
+detect_cookie_theft() {
+    echo "Detecting Cookie Theft..."
+    # Get initial session cookie
+    initial_cookie=$(curl -s -c initial_cookie.txt "$1" | grep -oP 'Set-Cookie:\s*\K\S+')
+    
+    # Make a request with the initial session cookie
+    curl -s -b "initial_cookie.txt" "$1" > /dev/null
+    
+    # Get the current session cookie
+    current_cookie=$(curl -s -c - "$1" | grep -oP 'Set-Cookie:\s*\K\S+')
+
+    # Compare initial and current session cookies
+    if [ "$initial_cookie" != "$current_cookie" ]; then
+        echo "Cookie theft detected!"
+    else
+        echo "Cookie theft not detected."
+    fi
+
+    # Clean up
+    rm initial_cookie.txt
+}
+
+# Main function
+main() {
+    echo "Cookie Theft Detection Tool"
+    echo "----------------------------"
+
+    # Validate input
+    if [ $# -ne 1 ]; then
+        echo "Usage: $0 <target_url>"
+        exit 1
+    fi
+
+    # Perform Cookie Theft detection
+    detect_cookie_theft "$1"
+}
+
+# Call main function with target URL as argument
+main "$@"
+```
+
+**Explanation:**
+- The script defines a function `detect_cookie_theft` to perform Cookie Theft detection.
+- It retrieves the initial session cookie by making a request to the target URL and saving the cookie to a file.
+- Then, it makes another request to the target URL with the initial session cookie and retrieves the current session cookie.
+- Finally, it compares the initial and current session cookies to determine if there is a mismatch, indicating potential cookie theft.
+
+#### Usage:
+Save the script to a file (e.g., `cookie_theft_detector.sh`) and make it executable (`chmod +x cookie_theft_detector.sh`). Then, run the script with the URL of the target server or web application as an argument:
+
+```bash
+./cookie_theft_detector.sh http://example.com/profile
+```
+
+Replace `http://example.com/profile` with the URL of the page where user sessions are managed.
+
+#### Considerations:
+- **Session Management**: Ensure that the target application properly manages session cookies and prevents unauthorized access.
+- **Response Analysis**: Analyze the responses from the server to identify any indications of session hijacking or unauthorized access.
+
+By creating a simple Cookie Theft detection tool with Bash scripting, you can automate the process of monitoring session cookies and detecting potential security threats, helping to enhance the security of web applications.
+
+In the next lesson, we'll summarize key takeaways from this tutorial and provide guidance on further learning resources.
+
+### Lesson 33: Creating Credential Reuse Detection Tools with Bash
+
+Credential reuse occurs when users reuse the same username and password combination across multiple accounts, increasing the risk of unauthorized access if one account is compromised. In this lesson, we'll develop a simple Credential Reuse detection tool using Bash scripting:
+
+#### Use Case: Credential Reuse Detection Tool
+
+Let's create a Bash script that checks if a given username and password combination has been reused across multiple accounts.
+
+**Bash Script:**
+```bash
+#!/bin/bash
+# This is a comment
+
+# Function to perform Credential Reuse detection
+detect_credential_reuse() {
+    echo "Detecting Credential Reuse..."
+    # Check if the given username and password combination is found in the password file
+    if grep -q "^$1:$2$" "$3"; then
+        echo "Credential reuse detected!"
+    else
+        echo "No credential reuse detected."
+    fi
+}
+
+# Main function
+main() {
+    echo "Credential Reuse Detection Tool"
+    echo "--------------------------------"
+
+    # Validate input
+    if [ $# -ne 3 ]; then
+        echo "Usage: $0 <username> <password> <password_file>"
+        exit 1
+    fi
+
+    # Perform Credential Reuse detection
+    detect_credential_reuse "$1" "$2" "$3"
+}
+
+# Call main function with username, password, and password file as arguments
+main "$@"
+```
+
+**Explanation:**
+- The script defines a function `detect_credential_reuse` to perform Credential Reuse detection.
+- It checks if the given username and password combination exists in the specified password file.
+- If the combination is found, it indicates credential reuse.
+
+#### Usage:
+Save the script to a file (e.g., `credential_reuse_detector.sh`) and make it executable (`chmod +x credential_reuse_detector.sh`). Then, run the script with the username, password, and the path to the password file as arguments:
+
+```bash
+./credential_reuse_detector.sh <username> <password> <password_file>
+```
+
+Replace `<username>` with the username, `<password>` with the password, and `<password_file>` with the path to the file containing username-password combinations.
+
+#### Considerations:
+- **Password File**: The password file should contain username-password combinations in the format `username:password`.
+- **Sensitive Data Handling**: Ensure that the password file is securely managed and accessible only to authorized personnel.
+
+By creating a simple Credential Reuse detection tool with Bash scripting, you can automate the process of identifying potential security risks related to credential reuse, helping to strengthen the security posture of systems and applications.
+
+In the next lesson, we'll summarize key takeaways from this tutorial and provide guidance on further learning resources.
+
+### Lesson 34: Creating Inadequate Encryption Detection Tools with Bash
+
+Inadequate encryption practices can lead to the exposure of sensitive data and compromise the confidentiality of information. In this lesson, we'll develop a simple Inadequate Encryption detection tool using Bash scripting:
+
+#### Use Case: Inadequate Encryption Detection Tool
+
+Let's create a Bash script that analyzes files or directories to identify inadequate encryption practices, such as the use of weak encryption algorithms or insufficient key lengths.
+
+**Bash Script:**
+```bash
+#!/bin/bash
+# This is a comment
+
+# Function to perform Inadequate Encryption detection
+detect_inadequate_encryption() {
+    echo "Detecting Inadequate Encryption..."
+    # Check if the file or directory contains any files using weak encryption
+    weak_encryption_files=$(find "$1" -type f -exec grep -lE '(DES|RC4|MD5)' {} +)
+    if [ -n "$weak_encryption_files" ]; then
+        echo "Inadequate Encryption detected in the following files:"
+        echo "$weak_encryption_files"
+    else
+        echo "No inadequate encryption detected."
+    fi
+}
+
+# Main function
+main() {
+    echo "Inadequate Encryption Detection Tool"
+    echo "------------------------------------"
+
+    # Validate input
+    if [ $# -ne 1 ]; then
+        echo "Usage: $0 <directory>"
+        exit 1
+    fi
+
+    # Perform Inadequate Encryption detection
+    detect_inadequate_encryption "$1"
+}
+
+# Call main function with directory as argument
+main "$@"
+```
+
+**Explanation:**
+- The script defines a function `detect_inadequate_encryption` to perform Inadequate Encryption detection.
+- It searches for files within the specified directory that contain references to weak encryption algorithms such as DES, RC4, or MD5.
+- If any files using weak encryption are found, it prints a list of those files.
+
+#### Usage:
+Save the script to a file (e.g., `inadequate_encryption_detector.sh`) and make it executable (`chmod +x inadequate_encryption_detector.sh`). Then, run the script with the directory to be analyzed as an argument:
+
+```bash
+./inadequate_encryption_detector.sh <directory>
+```
+
+Replace `<directory>` with the path to the directory you want to analyze for inadequate encryption practices.
+
+#### Considerations:
+- **Encryption Standards**: Keep abreast of current encryption standards and best practices to identify weak encryption algorithms.
+- **File Types**: Modify the script to target specific file types or directories relevant to your analysis.
+
+By creating a simple Inadequate Encryption detection tool with Bash scripting, you can automate the process of identifying potential security risks related to inadequate encryption practices, helping to improve the security posture of systems and applications.
+
+In the next lesson, we'll summarize key takeaways from this tutorial and provide guidance on further learning resources.
+
+### Lesson 35: Creating Insecure Direct Object Reference (IDOR) Detection Tools with Bash
+
+Insecure Direct Object Reference (IDOR) vulnerabilities occur when an application exposes internal implementation details, such as file paths or database keys, directly to users. In this lesson, we'll develop a simple IDOR detection tool using Bash scripting:
+
+#### Use Case: Insecure Direct Object Reference (IDOR) Detection Tool
+
+Let's create a Bash script that analyzes web application URLs to identify potential IDOR vulnerabilities by checking for sequential or predictable object references.
+
+**Bash Script:**
+```bash
+#!/bin/bash
+# This is a comment
+
+# Function to perform Insecure Direct Object Reference (IDOR) detection
+detect_idor() {
+    echo "Detecting Insecure Direct Object References (IDOR)..."
+    # Check for sequential or predictable object references in URLs
+    if grep -E -q '/[0-9]+' <<< "$1"; then
+        echo "Insecure Direct Object Reference (IDOR) detected: $1"
+    else
+        echo "No Insecure Direct Object Reference (IDOR) detected."
+    fi
+}
+
+# Main function
+main() {
+    echo "Insecure Direct Object Reference (IDOR) Detection Tool"
+    echo "------------------------------------------------------"
+
+    # Validate input
+    if [ $# -ne 1 ]; then
+        echo "Usage: $0 <url>"
+        exit 1
+    fi
+
+    # Perform Insecure Direct Object Reference (IDOR) detection
+    detect_idor "$1"
+}
+
+# Call main function with URL as argument
+main "$@"
+```
+
+**Explanation:**
+- The script defines a function `detect_idor` to perform Insecure Direct Object Reference (IDOR) detection.
+- It checks for sequential or predictable object references (e.g., `/1`, `/2`, `/3`, etc.) in the provided URL.
+- If such references are found, it indicates a potential IDOR vulnerability.
+
+#### Usage:
+Save the script to a file (e.g., `idor_detector.sh`) and make it executable (`chmod +x idor_detector.sh`). Then, run the script with the URL of the web application endpoint as an argument:
+
+```bash
+./idor_detector.sh <url>
+```
+
+Replace `<url>` with the URL of the web application endpoint you want to analyze for IDOR vulnerabilities.
+
+#### Considerations:
+- **URL Patterns**: Adjust the script to target specific URL patterns relevant to your analysis.
+- **Manual Verification**: Always manually verify potential IDOR vulnerabilities before concluding their existence.
+
+By creating a simple Insecure Direct Object Reference (IDOR) detection tool with Bash scripting, you can automate the process of identifying potential security risks related to object references in web application URLs, helping to strengthen the security posture of systems and applications.
+
+In the next lesson, we'll summarize key takeaways from this tutorial and provide guidance on further learning resources.
+
+### Lesson 36: Creating Data Leakage Detection Tools with Bash
+
+Data leakage occurs when sensitive information is unintentionally exposed or disclosed to unauthorized parties, leading to potential security breaches. In this lesson, we'll develop a simple Data Leakage detection tool using Bash scripting:
+
+#### Use Case: Data Leakage Detection Tool
+
+Let's create a Bash script that scans files for sensitive information, such as credit card numbers, social security numbers, or passwords, and alerts if any such information is found.
+
+**Bash Script:**
+```bash
+#!/bin/bash
+# This is a comment
+
+# Function to perform Data Leakage detection
+detect_data_leakage() {
+    echo "Detecting Data Leakage..."
+    # Scan files for sensitive information using regex patterns
+    sensitive_info=$(grep -E -r '\b[0-9]{16}\b|\b[0-9]{3}-[0-9]{2}-[0-9]{4}\b|\bpassword\b' "$1")
+    if [ -n "$sensitive_info" ]; then
+        echo "Potential data leakage detected:"
+        echo "$sensitive_info"
+    else
+        echo "No potential data leakage detected."
+    fi
+}
+
+# Main function
+main() {
+    echo "Data Leakage Detection Tool"
+    echo "----------------------------"
+
+    # Validate input
+    if [ $# -ne 1 ]; then
+        echo "Usage: $0 <directory>"
+        exit 1
+    fi
+
+    # Perform Data Leakage detection
+    detect_data_leakage "$1"
+}
+
+# Call main function with directory as argument
+main "$@"
+```
+
+**Explanation:**
+- The script defines a function `detect_data_leakage` to perform Data Leakage detection.
+- It scans files recursively within the specified directory for sensitive information using regular expressions.
+- If any sensitive information is found, it prints the lines containing the information.
+
+#### Usage:
+Save the script to a file (e.g., `data_leakage_detector.sh`) and make it executable (`chmod +x data_leakage_detector.sh`). Then, run the script with the directory to be scanned as an argument:
+
+```bash
+./data_leakage_detector.sh <directory>
+```
+
+Replace `<directory>` with the path to the directory containing files you want to scan for potential data leakage.
+
+#### Considerations:
+- **Regex Patterns**: Modify the regular expressions to match specific types of sensitive information relevant to your organization or use case.
+- **File Types**: Extend the script to handle different file types or exclude certain file types from the scan.
+
+By creating a simple Data Leakage detection tool with Bash scripting, you can automate the process of identifying potential security risks related to inadvertent exposure of sensitive information, helping to improve the security posture of systems and applications.
+
+In the next lesson, we'll summarize key takeaways from this tutorial and provide guidance on further learning resources.
+
+### Lesson 37: Creating Unencrypted Data Storage Detection Tools with Bash
+
+Unencrypted data storage can lead to data exposure and compromise the confidentiality of sensitive information. In this lesson, we'll develop a simple Unencrypted Data Storage detection tool using Bash scripting:
+
+#### Use Case: Unencrypted Data Storage Detection Tool
+
+Let's create a Bash script that scans files or directories to identify unencrypted data storage, such as plaintext storage of sensitive information.
+
+**Bash Script:**
+```bash
+#!/bin/bash
+# This is a comment
+
+# Function to perform Unencrypted Data Storage detection
+detect_unencrypted_data_storage() {
+    echo "Detecting Unencrypted Data Storage..."
+    # Find files containing sensitive information
+    sensitive_files=$(grep -l -r '\bpassword\b' "$1")
+    
+    # Check if sensitive files are stored unencrypted
+    unencrypted_files=""
+    for file in $sensitive_files; do
+        file_type=$(file -b --mime-type "$file")
+        if [[ "$file_type" == "text/plain" ]]; then
+            unencrypted_files+="$file "
+        fi
+    done
+    
+    if [ -n "$unencrypted_files" ]; then
+        echo "Unencrypted data storage detected in the following files:"
+        echo "$unencrypted_files"
+    else
+        echo "No unencrypted data storage detected."
+    fi
+}
+
+# Main function
+main() {
+    echo "Unencrypted Data Storage Detection Tool"
+    echo "--------------------------------------"
+
+    # Validate input
+    if [ $# -ne 1 ]; then
+        echo "Usage: $0 <directory>"
+        exit 1
+    fi
+
+    # Perform Unencrypted Data Storage detection
+    detect_unencrypted_data_storage "$1"
+}
+
+# Call main function with directory as argument
+main "$@"
+```
+
+**Explanation:**
+- The script defines a function `detect_unencrypted_data_storage` to perform Unencrypted Data Storage detection.
+- It searches for files within the specified directory that contain the word "password".
+- For each sensitive file found, it checks if the file type is plaintext using the `file` command.
+- If plaintext storage is detected, it prints the file names.
+
+#### Usage:
+Save the script to a file (e.g., `unencrypted_data_storage_detector.sh`) and make it executable (`chmod +x unencrypted_data_storage_detector.sh`). Then, run the script with the directory to be analyzed as an argument:
+
+```bash
+./unencrypted_data_storage_detector.sh <directory>
+```
+
+Replace `<directory>` with the path to the directory containing files you want to scan for unencrypted data storage.
+
+#### Considerations:
+- **Sensitive Data Patterns**: Modify the script to search for other sensitive data patterns relevant to your organization or use case.
+- **File Types**: Extend the script to handle different file types or exclude certain file types from the scan.
+
+By creating a simple Unencrypted Data Storage detection tool with Bash scripting, you can automate the process of identifying potential security risks related to the storage of sensitive information without encryption, helping to improve the security posture of systems and applications.
+
+In the next lesson, we'll summarize key takeaways from this tutorial and provide guidance on further learning resources.
+
+### Lesson 38: Creating Missing Security Headers Detection Tools with Bash
+
+Security headers play a crucial role in protecting web applications against various attacks. In this lesson, we'll develop a simple Missing Security Headers detection tool using Bash scripting:
+
+#### Use Case: Missing Security Headers Detection Tool
+
+Let's create a Bash script that analyzes HTTP responses to identify missing security headers, such as Content Security Policy (CSP), X-Content-Type-Options, X-Frame-Options, and X-XSS-Protection.
+
+**Bash Script:**
+```bash
+#!/bin/bash
+# This is a comment
+
+# Function to perform Missing Security Headers detection
+detect_missing_security_headers() {
+    echo "Detecting Missing Security Headers..."
+    # Send a request and analyze the response headers
+    response_headers=$(curl -s -I "$1")
+    
+    # Check for missing security headers
+    missing_headers=""
+    if ! grep -q 'Content-Security-Policy' <<< "$response_headers"; then
+        missing_headers+="Content-Security-Policy "
+    fi
+    if ! grep -q 'X-Content-Type-Options' <<< "$response_headers"; then
+        missing_headers+="X-Content-Type-Options "
+    fi
+    if ! grep -q 'X-Frame-Options' <<< "$response_headers"; then
+        missing_headers+="X-Frame-Options "
+    fi
+    if ! grep -q 'X-XSS-Protection' <<< "$response_headers"; then
+        missing_headers+="X-XSS-Protection "
+    fi
+    
+    if [ -n "$missing_headers" ]; then
+        echo "Missing security headers detected: $missing_headers"
+    else
+        echo "No missing security headers detected."
+    fi
+}
+
+# Main function
+main() {
+    echo "Missing Security Headers Detection Tool"
+    echo "---------------------------------------"
+
+    # Validate input
+    if [ $# -ne 1 ]; then
+        echo "Usage: $0 <url>"
+        exit 1
+    fi
+
+    # Perform Missing Security Headers detection
+    detect_missing_security_headers "$1"
+}
+
+# Call main function with URL as argument
+main "$@"
+```
+
+**Explanation:**
+- The script defines a function `detect_missing_security_headers` to perform Missing Security Headers detection.
+- It sends a request to the specified URL and analyzes the response headers.
+- It checks for the presence of essential security headers such as Content-Security-Policy, X-Content-Type-Options, X-Frame-Options, and X-XSS-Protection.
+- If any of these headers are missing, it alerts the user.
+
+#### Usage:
+Save the script to a file (e.g., `missing_security_headers_detector.sh`) and make it executable (`chmod +x missing_security_headers_detector.sh`). Then, run the script with the URL of the web application endpoint as an argument:
+
+```bash
+./missing_security_headers_detector.sh <url>
+```
+
+Replace `<url>` with the URL of the web application endpoint you want to analyze for missing security headers.
+
+#### Considerations:
+- **Additional Headers**: Extend the script to check for other security headers as per your requirements.
+- **Customization**: Customize the script to accommodate specific security requirements or standards relevant to your organization.
+
+By creating a simple Missing Security Headers detection tool with Bash scripting, you can automate the process of identifying potential security risks related to missing security headers in web applications, helping to strengthen their security posture.
+
+In the next lesson, we'll summarize key takeaways from this tutorial and provide guidance on further learning resources.
+
+### Lesson 39: Creating Insecure File Handling Detection Tools with Bash
+
+Insecure file handling can lead to security vulnerabilities such as unauthorized access, file disclosure, or arbitrary code execution. In this lesson, we'll develop a simple Insecure File Handling detection tool using Bash scripting:
+
+#### Use Case: Insecure File Handling Detection Tool
+
+Let's create a Bash script that scans a directory for insecure file handling practices, such as improper file permissions or file operations that could lead to security vulnerabilities.
+
+**Bash Script:**
+```bash
+#!/bin/bash
+# This is a comment
+
+# Function to perform Insecure File Handling detection
+detect_insecure_file_handling() {
+    echo "Detecting Insecure File Handling..."
+    # Find files with insecure permissions (world-writable)
+    insecure_permissions=$(find "$1" -type f -perm -o=w)
+    
+    if [ -n "$insecure_permissions" ]; then
+        echo "Insecure file permissions detected in the following files:"
+        echo "$insecure_permissions"
+    else
+        echo "No insecure file permissions detected."
+    fi
+}
+
+# Main function
+main() {
+    echo "Insecure File Handling Detection Tool"
+    echo "------------------------------------"
+
+    # Validate input
+    if [ $# -ne 1 ]; then
+        echo "Usage: $0 <directory>"
+        exit 1
+    fi
+
+    # Perform Insecure File Handling detection
+    detect_insecure_file_handling "$1"
+}
+
+# Call main function with directory as argument
+main "$@"
+```
+
+**Explanation:**
+- The script defines a function `detect_insecure_file_handling` to perform Insecure File Handling detection.
+- It searches for files within the specified directory that have insecure permissions (world-writable).
+- If any files with insecure permissions are found, it prints their paths.
+
+#### Usage:
+Save the script to a file (e.g., `insecure_file_handling_detector.sh`) and make it executable (`chmod +x insecure_file_handling_detector.sh`). Then, run the script with the directory to be scanned as an argument:
+
+```bash
+./insecure_file_handling_detector.sh <directory>
+```
+
+Replace `<directory>` with the path to the directory containing files you want to scan for insecure file handling practices.
+
+#### Considerations:
+- **File Permissions**: Extend the script to check for other insecure file permissions or file operations relevant to your use case.
+- **File Types**: Customize the script to handle different types of files or exclude certain file types from the scan.
+
+By creating a simple Insecure File Handling detection tool with Bash scripting, you can automate the process of identifying potential security risks related to file handling practices, helping to improve the security posture of systems and applications.
+
+In the next lesson, we'll summarize key takeaways from this tutorial and provide guidance on further learning resources.
+
+### Lesson 40: Creating Default Password Detection Tools with Bash
+
+Default passwords pose a significant security risk, as they can be easily exploited by attackers to gain unauthorized access to systems or applications. In this lesson, we'll develop a simple Default Password detection tool using Bash scripting:
+
+#### Use Case: Default Password Detection Tool
+
+Let's create a Bash script that scans configuration files or databases to identify default or commonly used passwords.
+
+**Bash Script:**
+```bash
+#!/bin/bash
+# This is a comment
+
+# Function to perform Default Password detection
+detect_default_passwords() {
+    echo "Detecting Default Passwords..."
+    # Check for default passwords in configuration files or databases
+    default_passwords=$(grep -r -i -E 'password|pass|pwd' "$1" | grep -i -E 'default|admin|root|123456|password')
+    
+    if [ -n "$default_passwords" ]; then
+        echo "Default passwords detected in the following files or databases:"
+        echo "$default_passwords"
+    else
+        echo "No default passwords detected."
+    fi
+}
+
+# Main function
+main() {
+    echo "Default Password Detection Tool"
+    echo "--------------------------------"
+
+    # Validate input
+    if [ $# -ne 1 ]; then
+        echo "Usage: $0 <directory>"
+        exit 1
+    fi
+
+    # Perform Default Password detection
+    detect_default_passwords "$1"
+}
+
+# Call main function with directory as argument
+main "$@"
+```
+
+**Explanation:**
+- The script defines a function `detect_default_passwords` to perform Default Password detection.
+- It searches for occurrences of words like "password", "pass", or "pwd" in files or databases within the specified directory.
+- It then filters the results to identify common default passwords such as "default", "admin", "root", "123456", or "password".
+- If any default passwords are found, it prints their locations.
+
+#### Usage:
+Save the script to a file (e.g., `default_password_detector.sh`) and make it executable (`chmod +x default_password_detector.sh`). Then, run the script with the directory to be scanned as an argument:
+
+```bash
+./default_password_detector.sh <directory>
+```
+
+Replace `<directory>` with the path to the directory containing configuration files or databases you want to scan for default passwords.
+
+#### Considerations:
+- **Customization**: Customize the script to search for additional default passwords or patterns relevant to your environment.
+- **Sensitive Data Handling**: Ensure that the script is run with appropriate permissions to access sensitive files or databases.
+
+By creating a simple Default Password detection tool with Bash scripting, you can automate the process of identifying potential security risks related to default passwords, helping to strengthen the security posture of systems and applications.
+
+In the next lesson, we'll summarize key takeaways from this tutorial and provide guidance on further learning resources.
+
+### Lesson 41: Creating Directory Listing Detection Tools with Bash
+
+Exposing directory listings can inadvertently disclose sensitive information about a web application's directory structure, potentially aiding attackers in identifying vulnerable areas. In this lesson, we'll develop a simple Directory Listing detection tool using Bash scripting:
+
+#### Use Case: Directory Listing Detection Tool
+
+Let's create a Bash script that checks for directory listings on web servers by inspecting HTTP responses for the presence of directory listing pages.
+
+**Bash Script:**
+```bash
+#!/bin/bash
+# This is a comment
+
+# Function to perform Directory Listing detection
+detect_directory_listing() {
+    echo "Detecting Directory Listing..."
+    # Send a request and analyze the response body
+    response_body=$(curl -s "$1")
+    
+    # Check for directory listing indicators
+    if grep -q '<title>Index of' <<< "$response_body" || grep -q 'Directory Listing' <<< "$response_body"; then
+        echo "Directory listing detected: $1"
+    else
+        echo "No directory listing detected."
+    fi
+}
+
+# Main function
+main() {
+    echo "Directory Listing Detection Tool"
+    echo "--------------------------------"
+
+    # Validate input
+    if [ $# -ne 1 ]; then
+        echo "Usage: $0 <url>"
+        exit 1
+    fi
+
+    # Perform Directory Listing detection
+    detect_directory_listing "$1"
+}
+
+# Call main function with URL as argument
+main "$@"
+```
+
+**Explanation:**
+- The script defines a function `detect_directory_listing` to perform Directory Listing detection.
+- It sends a request to the specified URL and captures the response body.
+- It checks for common directory listing indicators in the response body, such as `<title>Index of` or `Directory Listing`.
+- If any directory listing indicators are found, it alerts the user.
+
+#### Usage:
+Save the script to a file (e.g., `directory_listing_detector.sh`) and make it executable (`chmod +x directory_listing_detector.sh`). Then, run the script with the URL of the web server or web application endpoint as an argument:
+
+```bash
+./directory_listing_detector.sh <url>
+```
+
+Replace `<url>` with the URL of the web server or web application you want to analyze for directory listings.
+
+#### Considerations:
+- **Customization**: Customize the script to detect additional directory listing indicators relevant to your environment.
+- **False Positives**: Carefully analyze the results to avoid false positives, as some web servers may generate similar responses for legitimate pages.
+
+By creating a simple Directory Listing detection tool with Bash scripting, you can automate the process of identifying potential security risks related to exposed directory listings, helping to improve the security posture of web servers and applications.
+
+In the next lesson, we'll summarize key takeaways from this tutorial and provide guidance on further learning resources.
+
+### Lesson 42: Creating Unprotected API Endpoint Detection Tools with Bash
+
+Unprotected API endpoints can expose sensitive data or functionality to unauthorized users, leading to security vulnerabilities such as information disclosure or unauthorized access. In this lesson, we'll develop a simple Unprotected API Endpoint detection tool using Bash scripting:
+
+#### Use Case: Unprotected API Endpoint Detection Tool
+
+Let's create a Bash script that scans a web application for unprotected API endpoints by analyzing HTTP responses for common indicators of unprotected or publicly accessible APIs.
+
+**Bash Script:**
+```bash
+#!/bin/bash
+# This is a comment
+
+# Function to perform Unprotected API Endpoint detection
+detect_unprotected_api_endpoints() {
+    echo "Detecting Unprotected API Endpoints..."
+    # Send a request and analyze the response body
+    response_body=$(curl -s "$1")
+    
+    # Check for common indicators of unprotected API endpoints
+    if grep -q '"error":' <<< "$response_body" || grep -q '"status":' <<< "$response_body"; then
+        echo "Unprotected API endpoint detected: $1"
+    else
+        echo "No unprotected API endpoint detected."
+    fi
+}
+
+# Main function
+main() {
+    echo "Unprotected API Endpoint Detection Tool"
+    echo "--------------------------------------"
+
+    # Validate input
+    if [ $# -ne 1 ]; then
+        echo "Usage: $0 <url>"
+        exit 1
+    fi
+
+    # Perform Unprotected API Endpoint detection
+    detect_unprotected_api_endpoints "$1"
+}
+
+# Call main function with URL as argument
+main "$@"
+```
+
+**Explanation:**
+- The script defines a function `detect_unprotected_api_endpoints` to perform Unprotected API Endpoint detection.
+- It sends a request to the specified URL and captures the response body.
+- It checks for common indicators of unprotected API endpoints in the response body, such as the presence of `"error":` or `"status":` fields.
+- If any indicators are found, it alerts the user.
+
+#### Usage:
+Save the script to a file (e.g., `unprotected_api_endpoint_detector.sh`) and make it executable (`chmod +x unprotected_api_endpoint_detector.sh`). Then, run the script with the URL of the web application endpoint as an argument:
+
+```bash
+./unprotected_api_endpoint_detector.sh <url>
+```
+
+Replace `<url>` with the URL of the web application endpoint you want to analyze for unprotected API endpoints.
+
+#### Considerations:
+- **Customization**: Customize the script to detect additional indicators or patterns specific to your APIs or use case.
+- **False Positives**: Carefully analyze the results to avoid false positives, as some APIs may legitimately return error or status information.
+
+By creating a simple Unprotected API Endpoint detection tool with Bash scripting, you can automate the process of identifying potential security risks related to unprotected or publicly accessible API endpoints, helping to strengthen the security posture of web applications.
+
+In the next lesson, we'll summarize key takeaways from this tutorial and provide guidance on further learning resources.
+
+### Lesson 43: Creating Open Ports and Services Detection Tools with Bash
+
+Open ports and services can introduce security risks if left unmonitored or unprotected, potentially providing avenues for attackers to gain unauthorized access or exploit vulnerabilities. In this lesson, we'll develop a simple Open Ports and Services detection tool using Bash scripting:
+
+#### Use Case: Open Ports and Services Detection Tool
+
+Let's create a Bash script that scans a host for open ports and services using the `nmap` command-line tool and analyzes the output to identify potentially risky services.
+
+**Bash Script:**
+```bash
+#!/bin/bash
+# This is a comment
+
+# Function to perform Open Ports and Services detection
+detect_open_ports_and_services() {
+    echo "Detecting Open Ports and Services..."
+    # Run nmap scan to identify open ports and services
+    nmap_output=$(nmap -p- -T4 "$1" | grep ^[0-9] | awk '{print $1}')
+    
+    # Check for open ports and potentially risky services
+    open_ports=""
+    for port in $nmap_output; do
+        service=$(nmap -p "$port" --open -sV "$1" | grep "open" | awk '{print $3}')
+        if [ -n "$service" ]; then
+            open_ports+="Port $port ($service) "
+        fi
+    done
+    
+    if [ -n "$open_ports" ]; then
+        echo "Open ports and services detected:"
+        echo "$open_ports"
+    else
+        echo "No open ports and services detected."
+    fi
+}
+
+# Main function
+main() {
+    echo "Open Ports and Services Detection Tool"
+    echo "--------------------------------------"
+
+    # Validate input
+    if [ $# -ne 1 ]; then
+        echo "Usage: $0 <host>"
+        exit 1
+    fi
+
+    # Perform Open Ports and Services detection
+    detect_open_ports_and_services "$1"
+}
+
+# Call main function with host as argument
+main "$@"
+```
+
+**Explanation:**
+- The script defines a function `detect_open_ports_and_services` to perform Open Ports and Services detection.
+- It runs an `nmap` scan to identify open ports on the specified host (`-p-` scans all ports) and extracts the port numbers.
+- For each open port, it further queries the service using the `-sV` option to determine the service name/version.
+- It constructs a list of open ports and services found.
+- If any open ports and services are detected, it prints their details.
+
+#### Usage:
+Save the script to a file (e.g., `open_ports_and_services_detector.sh`) and make it executable (`chmod +x open_ports_and_services_detector.sh`). Then, run the script with the host to be scanned as an argument:
+
+```bash
+./open_ports_and_services_detector.sh <host>
+```
+
+Replace `<host>` with the IP address or hostname of the target host you want to scan for open ports and services.
+
+#### Considerations:
+- **Security Implications**: Ensure that the script is run responsibly and only on hosts you have permission to scan.
+- **Network Configuration**: Adjust the script to accommodate specific network configurations or firewalls.
+
+By creating a simple Open Ports and Services detection tool with Bash scripting, you can automate the process of identifying potential security risks related to open ports and services, helping to enhance the security posture of your network infrastructure.
+
+In the next lesson, we'll summarize key takeaways from this tutorial and provide guidance on further learning resources.
+
+### Lesson 44: Creating Improper Access Control Detection Tools with Bash
+
+Improper access control can lead to unauthorized access to sensitive data or functionalities, compromising the security of a system or application. In this lesson, we'll develop a simple Improper Access Control detection tool using Bash scripting:
+
+#### Use Case: Improper Access Control Detection Tool
+
+Let's create a Bash script that analyzes web application responses to identify indications of improper access control, such as unrestricted access to administrative functionalities or sensitive resources.
+
+**Bash Script:**
+```bash
+#!/bin/bash
+# This is a comment
+
+# Function to perform Improper Access Control detection
+detect_improper_access_control() {
+    echo "Detecting Improper Access Control..."
+    # Send a request and analyze the response body
+    response_body=$(curl -s "$1")
+    
+    # Check for common indicators of improper access control
+    if grep -q 'admin' <<< "$response_body" || grep -q 'admin' <<< "$response_body"; then
+        echo "Improper access control detected: $1"
+    else
+        echo "No improper access control detected."
+    fi
+}
+
+# Main function
+main() {
+    echo "Improper Access Control Detection Tool"
+    echo "--------------------------------------"
+
+    # Validate input
+    if [ $# -ne 1 ]; then
+        echo "Usage: $0 <url>"
+        exit 1
+    fi
+
+    # Perform Improper Access Control detection
+    detect_improper_access_control "$1"
+}
+
+# Call main function with URL as argument
+main "$@"
+```
+
+**Explanation:**
+- The script defines a function `detect_improper_access_control` to perform Improper Access Control detection.
+- It sends a request to the specified URL and captures the response body.
+- It checks for common indicators of improper access control in the response body, such as the presence of "admin" keywords.
+- If any indicators are found, it alerts the user.
+
+#### Usage:
+Save the script to a file (e.g., `improper_access_control_detector.sh`) and make it executable (`chmod +x improper_access_control_detector.sh`). Then, run the script with the URL of the web application endpoint as an argument:
+
+```bash
+./improper_access_control_detector.sh <url>
+```
+
+Replace `<url>` with the URL of the web application you want to analyze for improper access control.
+
+#### Considerations:
+- **Customization**: Customize the script to detect additional indicators or patterns specific to your application's access control mechanisms.
+- **False Positives**: Carefully analyze the results to avoid false positives, as some legitimate pages may contain terms like "admin" in non-sensitive contexts.
+
+By creating a simple Improper Access Control detection tool with Bash scripting, you can automate the process of identifying potential security risks related to access control vulnerabilities, helping to enhance the security posture of your web applications.
+
+In the next lesson, we'll summarize key takeaways from this tutorial and provide guidance on further learning resources.
+
+### Lesson 45: Creating Information Disclosure Control Tools with Bash
+
+Information disclosure occurs when sensitive data or system information is unintentionally exposed, potentially leading to security breaches or privacy violations. In this lesson, we'll develop a simple Information Disclosure Control detection tool using Bash scripting:
+
+#### Use Case: Information Disclosure Control Detection Tool
+
+Let's create a Bash script that analyzes web application responses to identify indications of information disclosure, such as the leakage of sensitive data, error messages, or stack traces.
+
+**Bash Script:**
+```bash
+#!/bin/bash
+# This is a comment
+
+# Function to perform Information Disclosure Control detection
+detect_information_disclosure() {
+    echo "Detecting Information Disclosure..."
+    # Send a request and analyze the response body
+    response_body=$(curl -s "$1")
+    
+    # Check for common indicators of information disclosure
+    if grep -q 'error' <<< "$response_body" || grep -q 'stack trace' <<< "$response_body"; then
+        echo "Information disclosure detected: $1"
+    else
+        echo "No information disclosure detected."
+    fi
+}
+
+# Main function
+main() {
+    echo "Information Disclosure Control Detection Tool"
+    echo "---------------------------------------------"
+
+    # Validate input
+    if [ $# -ne 1 ]; then
+        echo "Usage: $0 <url>"
+        exit 1
+    fi
+
+    # Perform Information Disclosure Control detection
+    detect_information_disclosure "$1"
+}
+
+# Call main function with URL as argument
+main "$@"
+```
+
+**Explanation:**
+- The script defines a function `detect_information_disclosure` to perform Information Disclosure Control detection.
+- It sends a request to the specified URL and captures the response body.
+- It checks for common indicators of information disclosure in the response body, such as the presence of "error" keywords or "stack trace" messages.
+- If any indicators are found, it alerts the user.
+
+#### Usage:
+Save the script to a file (e.g., `information_disclosure_detector.sh`) and make it executable (`chmod +x information_disclosure_detector.sh`). Then, run the script with the URL of the web application endpoint as an argument:
+
+```bash
+./information_disclosure_detector.sh <url>
+```
+
+Replace `<url>` with the URL of the web application you want to analyze for information disclosure.
+
+#### Considerations:
+- **Customization**: Customize the script to detect additional indicators or patterns specific to your application's information disclosure risks.
+- **False Positives**: Carefully analyze the results to avoid false positives, as some legitimate pages may contain terms like "error" in non-sensitive contexts.
+
+By creating a simple Information Disclosure Control detection tool with Bash scripting, you can automate the process of identifying potential security risks related to information disclosure vulnerabilities, helping to enhance the security posture of your web applications.
+
+In the next lesson, we'll summarize key takeaways from this tutorial and provide guidance on further learning resources.
+
+### Lesson 46: Creating Unpatched Software Control Tools with Bash
+
+Unpatched software can contain known vulnerabilities that can be exploited by attackers to compromise systems or applications. In this lesson, we'll develop a simple Unpatched Software Control detection tool using Bash scripting:
+
+#### Use Case: Unpatched Software Control Detection Tool
+
+Let's create a Bash script that checks the installed software versions against known vulnerabilities from a database or online source to identify unpatched software.
+
+**Bash Script:**
+```bash
+#!/bin/bash
+# This is a comment
+
+# Function to perform Unpatched Software Control detection
+detect_unpatched_software() {
+    echo "Detecting Unpatched Software..."
+    # Query installed software versions
+    installed_software=$(dpkg -l | awk '/^ii/ { print $2 "=" $3 }')
+    
+    # Compare installed software versions against known vulnerabilities
+    unpatched_software=""
+    for package in $installed_software; do
+        name=$(echo "$package" | cut -d'=' -f1)
+        version=$(echo "$package" | cut -d'=' -f2)
+        known_vulnerability=$(grep "^$name" vulnerabilities_database.txt | cut -d'=' -f2)
+        if [ "$known_vulnerability" != "" ] && [ "$version" != "$known_vulnerability" ]; then
+            unpatched_software+="$name (Installed: $version, Vulnerable: $known_vulnerability) "
+        fi
+    done
+    
+    if [ -n "$unpatched_software" ]; then
+        echo "Unpatched software detected:"
+        echo "$unpatched_software"
+    else
+        echo "No unpatched software detected."
+    fi
+}
+
+# Main function
+main() {
+    echo "Unpatched Software Control Detection Tool"
+    echo "----------------------------------------"
+
+    # Validate input
+    if [ $# -ne 1 ]; then
+        echo "Usage: $0 <vulnerabilities_database>"
+        exit 1
+    fi
+
+    # Perform Unpatched Software Control detection
+    detect_unpatched_software "$1"
+}
+
+# Call main function with vulnerabilities database as argument
+main "$@"
+```
+
+**Explanation:**
+- The script defines a function `detect_unpatched_software` to perform Unpatched Software Control detection.
+- It queries the installed software versions using the `dpkg -l` command on Debian-based systems.
+- It compares the installed software versions against known vulnerabilities from a local database file (`vulnerabilities_database.txt`).
+- If a known vulnerability exists for a package and the installed version is not patched, it adds it to the list of unpatched software.
+- It then prints the list of unpatched software detected.
+
+#### Usage:
+Save the script to a file (e.g., `unpatched_software_detector.sh`) and make it executable (`chmod +x unpatched_software_detector.sh`). Then, run the script with the vulnerabilities database file as an argument:
+
+```bash
+./unpatched_software_detector.sh vulnerabilities_database.txt
+```
+
+Replace `vulnerabilities_database.txt` with the path to your vulnerabilities database file.
+
+#### Considerations:
+- **Vulnerabilities Database**: Maintain an up-to-date vulnerabilities database file containing information about known vulnerabilities and their associated software versions.
+- **Platform Compatibility**: Adapt the script to work with package managers and vulnerabilities databases specific to your environment.
+
+By creating a simple Unpatched Software Control detection tool with Bash scripting, you can automate the process of identifying potential security risks related to unpatched software, helping to enhance the security posture of your systems.
+
+In the next lesson, we'll summarize key takeaways from this tutorial and provide guidance on further learning resources.
+
+### Lesson 47: Creating Misconfigured CORS Control Detection Tools with Bash
+
+Cross-Origin Resource Sharing (CORS) misconfigurations can introduce security vulnerabilities, allowing unauthorized access to resources or sensitive data from other origins. In this lesson, we'll develop a simple Misconfigured CORS Control detection tool using Bash scripting:
+
+#### Use Case: Misconfigured CORS Control Detection Tool
+
+Let's create a Bash script that analyzes HTTP responses to identify indications of misconfigured CORS policies, such as overly permissive or missing CORS headers.
+
+**Bash Script:**
+```bash
+#!/bin/bash
+# This is a comment
+
+# Function to perform Misconfigured CORS Control detection
+detect_misconfigured_cors() {
+    echo "Detecting Misconfigured CORS Control..."
+    # Send a request and analyze the response headers
+    response_headers=$(curl -s -I "$1")
+    
+    # Check for misconfigured CORS headers
+    if grep -q 'Access-Control-Allow-Origin: \*' <<< "$response_headers" || grep -q 'Access-Control-Allow-Origin:' <<< "$response_headers"; then
+        echo "Misconfigured CORS control detected: $1"
+    else
+        echo "No misconfigured CORS control detected."
+    fi
+}
+
+# Main function
+main() {
+    echo "Misconfigured CORS Control Detection Tool"
+    echo "----------------------------------------"
+
+    # Validate input
+    if [ $# -ne 1 ]; then
+        echo "Usage: $0 <url>"
+        exit 1
+    fi
+
+    # Perform Misconfigured CORS Control detection
+    detect_misconfigured_cors "$1"
+}
+
+# Call main function with URL as argument
+main "$@"
+```
+
+**Explanation:**
+- The script defines a function `detect_misconfigured_cors` to perform Misconfigured CORS Control detection.
+- It sends a request to the specified URL and captures the response headers using the `-I` option with `curl`.
+- It checks for common indications of misconfigured CORS policies in the response headers, such as overly permissive wildcard (`*`) origins or missing CORS headers.
+- If any indications are found, it alerts the user.
+
+#### Usage:
+Save the script to a file (e.g., `misconfigured_cors_detector.sh`) and make it executable (`chmod +x misconfigured_cors_detector.sh`). Then, run the script with the URL of the web application endpoint as an argument:
+
+```bash
+./misconfigured_cors_detector.sh <url>
+```
+
+Replace `<url>` with the URL of the web application you want to analyze for misconfigured CORS control.
+
+#### Considerations:
+- **Customization**: Customize the script to detect additional misconfigurations or patterns specific to your CORS policy requirements.
+- **False Positives**: Carefully analyze the results to avoid false positives, as some legitimate responses may contain specific CORS headers.
+
+By creating a simple Misconfigured CORS Control detection tool with Bash scripting, you can automate the process of identifying potential security risks related to CORS misconfigurations, helping to enhance the security posture of your web applications.
+
+In the next lesson, we'll summarize key takeaways from this tutorial and provide guidance on further learning resources.
+
+### Lesson 48: Creating HTTP Security Headers Misconfiguration Detection Tools with Bash
+
+HTTP security headers play a crucial role in protecting web applications from various attacks. Misconfigurations of these headers can lead to security vulnerabilities. In this lesson, we'll develop a simple HTTP Security Headers Misconfiguration detection tool using Bash scripting:
+
+#### Use Case: HTTP Security Headers Misconfiguration Detection Tool
+
+Let's create a Bash script that analyzes HTTP responses to identify indications of misconfigured security headers, such as missing or improperly configured headers like `X-XSS-Protection`, `X-Frame-Options`, `Content-Security-Policy`, etc.
+
+**Bash Script:**
+```bash
+#!/bin/bash
+# This is a comment
+
+# Function to perform HTTP Security Headers Misconfiguration detection
+detect_http_security_headers_misconfig() {
+    echo "Detecting HTTP Security Headers Misconfiguration..."
+    # Send a request and analyze the response headers
+    response_headers=$(curl -s -I "$1")
+    
+    # Check for misconfigured security headers
+    if grep -q 'X-XSS-Protection: 0' <<< "$response_headers" || \
+        grep -q 'X-Frame-Options: DENY' <<< "$response_headers" || \
+        grep -q 'X-Content-Type-Options: nosniff' <<< "$response_headers" || \
+        grep -q 'Content-Security-Policy:' <<< "$response_headers"; then
+        echo "HTTP Security Headers misconfiguration detected: $1"
+    else
+        echo "No HTTP Security Headers misconfiguration detected."
+    fi
+}
+
+# Main function
+main() {
+    echo "HTTP Security Headers Misconfiguration Detection Tool"
+    echo "-----------------------------------------------------"
+
+    # Validate input
+    if [ $# -ne 1 ]; then
+        echo "Usage: $0 <url>"
+        exit 1
+    fi
+
+    # Perform HTTP Security Headers Misconfiguration detection
+    detect_http_security_headers_misconfig "$1"
+}
+
+# Call main function with URL as argument
+main "$@"
+```
+
+**Explanation:**
+- The script defines a function `detect_http_security_headers_misconfig` to perform HTTP Security Headers Misconfiguration detection.
+- It sends a request to the specified URL and captures the response headers using the `-I` option with `curl`.
+- It checks for common indications of misconfigured security headers in the response headers, such as missing or improperly configured headers like `X-XSS-Protection`, `X-Frame-Options`, `X-Content-Type-Options`, `Content-Security-Policy`, etc.
+- If any indications are found, it alerts the user.
+
+#### Usage:
+Save the script to a file (e.g., `http_security_headers_misconfig_detector.sh`) and make it executable (`chmod +x http_security_headers_misconfig_detector.sh`). Then, run the script with the URL of the web application endpoint as an argument:
+
+```bash
+./http_security_headers_misconfig_detector.sh <url>
+```
+
+Replace `<url>` with the URL of the web application you want to analyze for HTTP security headers misconfigurations.
+
+#### Considerations:
+- **Customization**: Customize the script to detect additional misconfigurations or patterns specific to your HTTP security header requirements.
+- **False Positives**: Carefully analyze the results to avoid false positives, as some legitimate responses may have specific security headers disabled or configured differently.
+
+By creating a simple HTTP Security Headers Misconfiguration detection tool with Bash scripting, you can automate the process of identifying potential security risks related to misconfigured security headers, helping to enhance the security posture of your web applications.
+
+In the next lesson, we'll summarize key takeaways from this tutorial and provide guidance on further learning resources.
+
+### Lesson 49: Creating XML External Entity Injection (XXE) Detection Tools with Bash
+
+XML External Entity (XXE) injection is a vulnerability that occurs when an XML parser improperly processes external entities, leading to information disclosure or server-side request forgery (SSRF) attacks. In this lesson, we'll develop a simple XML External Entity Injection detection tool using Bash scripting:
+
+#### Use Case: XML External Entity Injection (XXE) Detection Tool
+
+Let's create a Bash script that sends XML requests to a target web application and analyzes the responses for indications of XXE vulnerabilities, such as including external entities in the response.
+
+**Bash Script:**
+```bash
+#!/bin/bash
+# This is a comment
+
+# Function to perform XML External Entity Injection (XXE) detection
+detect_xxe() {
+    echo "Detecting XML External Entity Injection (XXE)..."
+    # Send a request with XML payload containing external entity
+    response=$(curl -s -X POST -d '<?xml version="1.0"?><!DOCTYPE foo [<!ENTITY xxe SYSTEM "file:///etc/passwd">]><foo>&xxe;</foo>' -H "Content-Type: application/xml" "$1")
+    
+    # Check if the response contains content of /etc/passwd file (indicating XXE)
+    if grep -q 'root:x:' <<< "$response"; then
+        echo "XML External Entity Injection (XXE) detected: $1"
+    else
+        echo "No XML External Entity Injection (XXE) detected."
+    fi
+}
+
+# Main function
+main() {
+    echo "XML External Entity Injection (XXE) Detection Tool"
+    echo "---------------------------------------------------"
+
+    # Validate input
+    if [ $# -ne 1 ]; then
+        echo "Usage: $0 <url>"
+        exit 1
+    fi
+
+    # Perform XML External Entity Injection (XXE) detection
+    detect_xxe "$1"
+}
+
+# Call main function with URL as argument
+main "$@"
+```
+
+**Explanation:**
+- The script defines a function `detect_xxe` to perform XML External Entity Injection (XXE) detection.
+- It sends a POST request with XML payload containing an external entity declaration (`<!ENTITY xxe SYSTEM "file:///etc/passwd">`) to the specified URL.
+- It checks if the response contains the content of the `/etc/passwd` file, which is often used as a test for XXE vulnerabilities.
+- If the content of `/etc/passwd` is found in the response, it alerts the user.
+
+#### Usage:
+Save the script to a file (e.g., `xxe_detector.sh`) and make it executable (`chmod +x xxe_detector.sh`). Then, run the script with the URL of the target web application endpoint as an argument:
+
+```bash
+./xxe_detector.sh <url>
+```
+
+Replace `<url>` with the URL of the web application you want to analyze for XXE vulnerabilities.
+
+#### Considerations:
+- **Payload Customization**: Customize the XML payload to match the target application's XML structure or to test for specific XXE scenarios.
+- **False Positives**: Carefully analyze the results to avoid false positives, as some legitimate responses may contain similar content to `/etc/passwd`.
+
+By creating a simple XML External Entity Injection (XXE) detection tool with Bash scripting, you can automate the process of identifying potential XXE vulnerabilities in web applications, helping to enhance their security posture.
+
+In the next lesson, we'll summarize key takeaways from this tutorial and provide guidance on further learning resources.
+
+### Lesson 50: Creating XML Entity Expansion (XEE) Detection Tools with Bash
+
+XML Entity Expansion (XEE) is a vulnerability that occurs when an XML parser processes XML entities with excessive recursion, leading to denial of service (DoS) attacks or memory exhaustion. In this lesson, we'll develop a simple XML Entity Expansion detection tool using Bash scripting:
+
+#### Use Case: XML Entity Expansion (XEE) Detection Tool
+
+Let's create a Bash script that sends XML requests to a target web application and analyzes the responses for indications of XEE vulnerabilities, such as responses consuming excessive resources or leading to DoS conditions.
+
+**Bash Script:**
+```bash
+#!/bin/bash
+# This is a comment
+
+# Function to perform XML Entity Expansion (XEE) detection
+detect_xee() {
+    echo "Detecting XML Entity Expansion (XEE)..."
+    # Send a request with XML payload containing excessively recursive entity
+    response=$(curl -s -X POST -d '<?xml version="1.0"?><!DOCTYPE foo [<!ENTITY % xee SYSTEM "http://example.com/xxe.dtd">%xee;]><foo>&xee;</foo>' -H "Content-Type: application/xml" "$1")
+    
+    # Check if the response contains signs of excessive resource consumption (indicating XEE)
+    if grep -q 'XML parse error' <<< "$response"; then
+        echo "XML Entity Expansion (XEE) detected: $1"
+    else
+        echo "No XML Entity Expansion (XEE) detected."
+    fi
+}
+
+# Main function
+main() {
+    echo "XML Entity Expansion (XEE) Detection Tool"
+    echo "----------------------------------------"
+
+    # Validate input
+    if [ $# -ne 1 ]; then
+        echo "Usage: $0 <url>"
+        exit 1
+    fi
+
+    # Perform XML Entity Expansion (XEE) detection
+    detect_xee "$1"
+}
+
+# Call main function with URL as argument
+main "$@"
+```
+
+**Explanation:**
+- The script defines a function `detect_xee` to perform XML Entity Expansion (XEE) detection.
+- It sends a POST request with XML payload containing an excessively recursive entity declaration (`<!ENTITY % xee SYSTEM "http://example.com/xxe.dtd">%xee;`) to the specified URL.
+- It checks if the response contains signs of excessive resource consumption, such as an XML parse error, indicating a possible XEE vulnerability.
+- If signs of excessive resource consumption are found, it alerts the user.
+
+#### Usage:
+Save the script to a file (e.g., `xee_detector.sh`) and make it executable (`chmod +x xee_detector.sh`). Then, run the script with the URL of the target web application endpoint as an argument:
+
+```bash
+./xee_detector.sh <url>
+```
+
+Replace `<url>` with the URL of the web application you want to analyze for XEE vulnerabilities.
+
+#### Considerations:
+- **Payload Customization**: Customize the XML payload to match the target application's XML structure or to test for specific XEE scenarios.
+- **False Positives**: Carefully analyze the results to avoid false positives, as some legitimate responses may contain XML parse errors for reasons other than XEE vulnerabilities.
+
+By creating a simple XML Entity Expansion (XEE) detection tool with Bash scripting, you can automate the process of identifying potential XEE vulnerabilities in web applications, helping to enhance their security posture.
+
+In the next lesson, we'll summarize key takeaways from this tutorial and provide guidance on further learning resources.
+
+### Lesson 51: Creating XML Bomb Detection Tools with Bash
+
+XML Bomb, also known as Billion Laughs attack, is a type of denial-of-service (DoS) attack that exploits XML entity expansion to exhaust system resources. In this lesson, we'll develop a simple XML Bomb detection tool using Bash scripting:
+
+#### Use Case: XML Bomb Detection Tool
+
+Let's create a Bash script that sends XML requests to a target web application and analyzes the responses for indications of XML Bomb attacks, such as responses consuming excessive resources or leading to DoS conditions.
+
+**Bash Script:**
+```bash
+#!/bin/bash
+# This is a comment
+
+# Function to perform XML Bomb detection
+detect_xml_bomb() {
+    echo "Detecting XML Bomb..."
+    # Send a request with XML payload containing XML bomb
+    response=$(curl -s -X POST -d '<?xml version="1.0"?><!DOCTYPE bomb [<!ENTITY a "1234567890">]><bomb>&a;&a;&a;&a;&a;&a;&a;&a;&a;&a;</bomb>' -H "Content-Type: application/xml" "$1")
+    
+    # Check if the response contains signs of excessive resource consumption (indicating XML Bomb)
+    if grep -q 'XML parse error' <<< "$response"; then
+        echo "XML Bomb detected: $1"
+    else
+        echo "No XML Bomb detected."
+    fi
+}
+
+# Main function
+main() {
+    echo "XML Bomb Detection Tool"
+    echo "-----------------------"
+
+    # Validate input
+    if [ $# -ne 1 ]; then
+        echo "Usage: $0 <url>"
+        exit 1
+    fi
+
+    # Perform XML Bomb detection
+    detect_xml_bomb "$1"
+}
+
+# Call main function with URL as argument
+main "$@"
+```
+
+**Explanation:**
+- The script defines a function `detect_xml_bomb` to perform XML Bomb detection.
+- It sends a POST request with XML payload containing an XML bomb (a set of nested entities) to the specified URL.
+- It checks if the response contains signs of excessive resource consumption, such as an XML parse error, indicating a possible XML Bomb attack.
+- If signs of excessive resource consumption are found, it alerts the user.
+
+#### Usage:
+Save the script to a file (e.g., `xml_bomb_detector.sh`) and make it executable (`chmod +x xml_bomb_detector.sh`). Then, run the script with the URL of the target web application endpoint as an argument:
+
+```bash
+./xml_bomb_detector.sh <url>
+```
+
+Replace `<url>` with the URL of the web application you want to analyze for XML Bomb attacks.
+
+#### Considerations:
+- **Payload Customization**: Customize the XML payload to match the target application's XML structure or to test for specific XML Bomb scenarios.
+- **False Positives**: Carefully analyze the results to avoid false positives, as some legitimate responses may contain XML parse errors for reasons other than XML Bomb attacks.
+
+By creating a simple XML Bomb detection tool with Bash scripting, you can automate the process of identifying potential XML Bomb vulnerabilities in web applications, helping to enhance their security posture.
+
+In the next lesson, we'll summarize key takeaways from this tutorial and provide guidance on further learning resources.
+
+### Lesson 52: Creating Inadequate Authorization Detection Tools with Bash
+
+Inadequate authorization occurs when users are granted access to resources or functionalities beyond their intended privileges, leading to unauthorized access and potential security breaches. In this lesson, we'll develop a simple Inadequate Authorization detection tool using Bash scripting:
+
+#### Use Case: Inadequate Authorization Detection Tool
+
+Let's create a Bash script that analyzes HTTP responses to identify indications of inadequate authorization, such as accessing restricted resources without proper authentication or authorization checks.
+
+**Bash Script:**
+```bash
+#!/bin/bash
+# This is a comment
+
+# Function to perform Inadequate Authorization detection
+detect_inadequate_authorization() {
+    echo "Detecting Inadequate Authorization..."
+    # Send a request and analyze the response body
+    response_body=$(curl -s -i -H "Authorization: Bearer invalidtoken" "$1")
+    
+    # Check for indications of inadequate authorization in the response
+    if grep -q 'Unauthorized' <<< "$response_body" || grep -q 'Forbidden' <<< "$response_body"; then
+        echo "Inadequate authorization detected: $1"
+    else
+        echo "No inadequate authorization detected."
+    fi
+}
+
+# Main function
+main() {
+    echo "Inadequate Authorization Detection Tool"
+    echo "--------------------------------------"
+
+    # Validate input
+    if [ $# -ne 1 ]; then
+        echo "Usage: $0 <url>"
+        exit 1
+    fi
+
+    # Perform Inadequate Authorization detection
+    detect_inadequate_authorization "$1"
+}
+
+# Call main function with URL as argument
+main "$@"
+```
+
+**Explanation:**
+- The script defines a function `detect_inadequate_authorization` to perform Inadequate Authorization detection.
+- It sends a request to the specified URL with an invalid authorization token in the header.
+- It checks for common indications of inadequate authorization in the response, such as HTTP status codes 401 (Unauthorized) or 403 (Forbidden).
+- If any indications are found, it alerts the user.
+
+#### Usage:
+Save the script to a file (e.g., `inadequate_authorization_detector.sh`) and make it executable (`chmod +x inadequate_authorization_detector.sh`). Then, run the script with the URL of the web application endpoint as an argument:
+
+```bash
+./inadequate_authorization_detector.sh <url>
+```
+
+Replace `<url>` with the URL of the web application you want to analyze for inadequate authorization.
+
+#### Considerations:
+- **Authorization Headers**: Customize the script to include valid or invalid authorization headers specific to your application's authentication mechanism.
+- **False Positives**: Carefully analyze the results to avoid false positives, as some legitimate responses may contain similar status codes for reasons other than inadequate authorization.
+
+By creating a simple Inadequate Authorization detection tool with Bash scripting, you can automate the process of identifying potential security risks related to inadequate authorization, helping to enhance the security posture of your web applications.
+
+In the next lesson, we'll summarize key takeaways from this tutorial and provide guidance on further learning resources.
+
