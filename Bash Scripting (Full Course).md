@@ -12,10 +12,11 @@ To write a Bash script, you can use any text editor like Vim, Emacs, Nano, or ev
 
 Let's create a simple "Hello, World!" script:
 
-
+```bash
 #!/bin/bash
 # This is a comment
 echo "Hello, World!"
+```
 
 Explanation:
 
