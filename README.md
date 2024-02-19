@@ -7,6 +7,7 @@ Welcome to the Programming Courses repository! This repository serves as a compr
 This repository covers a wide range of programming languages, including but not limited to:
 
 - Assembly Language
+- Bash
 - C
 - C++
 - C#
