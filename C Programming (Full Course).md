@@ -1,5 +1,3 @@
-Absolutely! Let's start from the very basics.
-
 ### Lesson 1: Introduction to C Programming
 
 #### What is C Programming?
