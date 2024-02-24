@@ -2337,3 +2337,59 @@ To make this tool more comprehensive, you can enhance it with the following feat
 Building a broken access control tool in C helps demonstrate the importance of robust access control mechanisms in software systems. By understanding and identifying vulnerabilities, developers can implement stronger security measures to protect sensitive resources from unauthorized access.
 
 This concludes our twenty-second lesson on building a broken access control tool in C. If you have any questions or would like to explore specific topics further, feel free to ask!
+
+
+### Lesson 23: Building a CRLF Injection Tool in C
+
+In this lesson, we'll develop a simple command-line tool in C programming to perform CRLF injection. This tool will manipulate user input by injecting CRLF characters, which can be used to exploit vulnerabilities in web applications, such as HTTP response splitting and header injection attacks.
+
+```c
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+// Function to perform CRLF injection
+void perform_injection(char *input) {
+    // Find the end of the input string
+    char *end = strchr(input, '\0');
+    
+    // Inject CRLF characters before the end of the string
+    strcpy(end, "\r\nInjectedHeader: malicious\r\n\r\n");
+
+    // Print the manipulated input
+    printf("Manipulated input:\n%s\n", input);
+}
+
+int main() {
+    char input[100];
+
+    // Prompt user for input
+    printf("Enter your input: ");
+    fgets(input, sizeof(input), stdin);
+
+    // Perform CRLF injection
+    perform_injection(input);
+
+    return 0;
+}
+```
+
+#### Explanation:
+
+- The `perform_injection` function manipulates the input string by finding the end of the string and then injecting CRLF characters along with a malicious header before the end.
+- The `main` function prompts the user for input, reads the input string, and then calls the `perform_injection` function to inject CRLF characters into the input.
+
+#### Further Development:
+
+To make this tool more comprehensive, you can enhance it with the following features:
+
+- Support for injecting CRLF characters at different positions within the input string.
+- Detection and prevention mechanisms to identify and mitigate CRLF injection vulnerabilities in user inputs.
+- Testing against various scenarios to ensure the tool behaves as expected and effectively injects CRLF characters into inputs.
+
+#### Conclusion:
+
+Building a CRLF injection tool in C helps demonstrate the potential risks associated with CRLF injection vulnerabilities in web applications. By understanding how such vulnerabilities can be exploited, developers and security professionals can take steps to prevent and mitigate them in their applications.
+
+This concludes our twenty-third lesson on building a CRLF injection tool in C. If you have any questions or would like to explore specific topics further, feel free to ask!
+
