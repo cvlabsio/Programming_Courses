@@ -14899,7 +14899,7 @@ Developing a JavaScript Prototype Pollution detection tool in C provides a found
 
 This concludes our one hundred forty-eighth lesson on developing a JavaScript Prototype Pollution detection tool in C. If you have any questions or would like to explore specific topics further, feel free to ask!
 
-====================================================
+### Lesson 149: Server-Side React Injection detection
 
 Creating a Server-Side React Injection detection tool involves analyzing server responses to identify potential vulnerabilities where React components are rendered server-side and may be susceptible to injection attacks. Below is a basic example of how you could approach this in C:
 
@@ -14997,7 +14997,7 @@ Further development can include:
 
 This concludes our lesson on creating a Server-Side React Injection detection tool in C. If you have any questions or need further assistance, feel free to ask!
 
-==========================================
+### Lesson 150: Cross-Site Port Attack
 
 Creating a Cross-Site Port Attack detection tool involves analyzing server responses to identify potential vulnerabilities where web applications might be vulnerable to Cross-Site Port Attacks (XSPA). Below is a basic example of how you could approach this in C:
 
@@ -15095,7 +15095,7 @@ Further development can include:
 
 This concludes our lesson on creating a Cross-Site Port Attacks detection tool in C. If you have any questions or need further assistance, feel free to ask!
 
-=====================================================
+### Lesson 151: bypass Anti-CSRF (Cross-Site Request Forgery) tokens
 
 Creating a tool to bypass Anti-CSRF (Cross-Site Request Forgery) tokens involves analyzing web application responses and crafting requests that can exploit potential vulnerabilities in the token generation or validation mechanisms. Below is a basic example of how you could approach this in C:
 
@@ -15193,7 +15193,7 @@ Further development can include:
 
 This concludes our lesson on creating a tool to bypass Anti-CSRF tokens in C. If you have any questions or need further assistance, feel free to ask!
 
-===================================
+### Lesson 152: Cross-Site Flashing
 
 Creating a Cross-Site Flashing detection tool involves analyzing web application responses to identify potential vulnerabilities where untrusted data is embedded in Flash files and executed within the context of a trusted domain. Below is a basic example of how you could approach this in C:
 
@@ -15291,7 +15291,7 @@ Further development can include:
 
 This concludes our lesson on creating a Cross-Site Flashing detection tool in C. If you have any questions or need further assistance, feel free to ask!
 
-======================================
+### Lesson 153: Server-Side SVG Injection
 
 Creating a tool to detect Server-Side SVG Injection vulnerabilities involves analyzing web application responses to identify potential instances where untrusted SVG (Scalable Vector Graphics) content is processed and executed on the server-side. Below is a basic example of how you could approach this in C:
 
@@ -15389,7 +15389,7 @@ Further development can include:
 
 This concludes our lesson on creating a tool to detect Server-Side SVG Injection vulnerabilities in C. If you have any questions or need further assistance, feel free to ask!
 
-==========================
+### Lesson 154: Termination Flaws
 
 Creating a tool to detect Termination Flaws involves analyzing web application responses to identify potential vulnerabilities where untrusted input or malicious requests could lead to unexpected termination or crashes of the application. Below is a basic example of how you could approach this in C:
 
@@ -15487,7 +15487,7 @@ Further development can include:
 
 This concludes our lesson on creating a tool to detect Termination Flaws in C. If you have any questions or need further assistance, feel free to ask!
 
-======================================
+### Lesson 155: Server-Side Timing Attacks
 
 Creating a tool to detect Server-Side Timing Attacks involves analyzing server responses and measuring the time it takes for the server to process requests, looking for discrepancies that may indicate timing vulnerabilities. Below is a basic example of how you could approach this in C:
 
@@ -15598,7 +15598,7 @@ Further development can include:
 
 This concludes our lesson on creating a tool to detect Server-Side Timing Attacks in C. If you have any questions or need further assistance, feel free to ask!
 
-=========================================
+### Lesson 156: Server-Side Protocol Vulnerabilities
 
 Creating a tool to detect Server-Side Protocol Vulnerabilities involves analyzing how the server handles various network protocols and identifying potential vulnerabilities in their implementation. Below is a basic example of how you could approach this in C:
 
@@ -15687,7 +15687,7 @@ Further development can include:
 
 This concludes our lesson on creating a tool to detect Server-Side Protocol Vulnerabilities in C. If you have any questions or need further assistance, feel free to ask!
 
-====================================
+### Lesson 157: Server-Side Identity Theft
 
 Creating a tool to detect Server-Side Identity Theft involves analyzing server responses for indications that sensitive user information or authentication credentials are being mishandled or exposed. Below is a basic example of how you could approach this in C:
 
@@ -15776,7 +15776,7 @@ Further development can include:
 
 This concludes our lesson on creating a tool to detect Server-Side Identity Theft vulnerabilities in C. If you have any questions or need further assistance, feel free to ask!
 
-================================
+### Lesson 158: Server-Side HTTP Response Smuggling
 
 Creating a tool to detect Server-Side HTTP Response Smuggling vulnerabilities involves analyzing HTTP responses from the server for potential inconsistencies that could indicate vulnerability to response smuggling attacks. Below is a basic example of how you could approach this in C:
 
@@ -15865,9 +15865,8 @@ Further development can include:
 
 This concludes our lesson on creating a tool to detect Server-Side HTTP Response Smuggling vulnerabilities in C. If you have any questions or need further assistance, feel free to ask!
 
-=============================
+### Lesson 159: Server-side command Injection in Docker Containers
 
-# Server-Side Command Injection in Docker Containers
 
 Server-Side Command Injection in Docker Containers involves analyzing how containers handle user input and whether they sanitize or properly escape input before executing commands. Below is a basic example of how you could approach this in C:
 
