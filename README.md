@@ -21,6 +21,7 @@ This repository covers a wide range of programming languages, including but not 
 - Go (Golang)
 - Lua
 - SQL
+- Swift
 
 ## About the Courses
 
