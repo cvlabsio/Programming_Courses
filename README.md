@@ -13,9 +13,14 @@ This repository covers a wide range of programming languages, including but not 
 - C#
 - Python
 - Java
+- Julia
 - JavaScript
+- TypeScript
 - PHP
 - Perl
+- Groovy
+- Haskell
+- R
 - Rust
 - Ruby
 - Go (Golang)
