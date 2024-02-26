@@ -41,7 +41,14 @@ Explanation:
   - `mov`: This instruction moves data from one location to another.
   - `int`: This instruction generates a software interrupt, which is used to invoke system calls in assembly language.
 - Comments: Comments start with a semicolon (`;`) and are ignored by the assembler.
+### How to run:
+#### First save the file with exention .asm then run the commands below in your terminal in the same location
+```bash
+nasm -f elf32 -o filename.o filename.asm
+ld -m elf_i386 -o filename filename.o
+./assembly
 
+```
 1.3 Assembly Language Directives:
    - `.data`: This directive declares the data section.
    - `.text`: This directive declares the code section.
