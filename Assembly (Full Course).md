@@ -49,6 +49,10 @@ ld -m elf_i386 -o filename filename.o
 ./assembly
 
 ```
+It will print:
+```bash
+Hello World!
+```
 1.3 Assembly Language Directives:
    - `.data`: This directive declares the data section.
    - `.text`: This directive declares the code section.
