@@ -6,27 +6,27 @@ Welcome to the Programming Courses repository! This repository serves as a compr
 
 This repository covers a wide range of programming languages, including but not limited to:
 
-- Assembly Language
-- Bash
-- C
-- C++
-- C#
-- Python
-- Java
-- Julia
-- JavaScript
-- TypeScript
-- PHP
-- Perl
-- Groovy
-- Haskell
-- R
-- Rust
-- Ruby
-- Go (Golang)
-- Lua
-- SQL
-- Swift
+- [Assembly Language](https://github.com/saidehossain/Programming_Courses/blob/main/Assembly%20(Full%20Course).md)
+- [Bash](https://github.com/saidehossain/Programming_Courses/blob/main/Bash%20Scripting%20(Full%20Course).md)
+- [C](https://github.com/saidehossain/Programming_Courses/blob/main/C%20Programming%20(Full%20Course).md)
+- [C++](https://github.com/saidehossain/Programming_Courses/blob/main/C%2B%2B%20(Full%20Course).md)
+- [C#](https://github.com/saidehossain/Programming_Courses/blob/main/C%23%20(Full%20Course).md)
+- [Python](https://github.com/saidehossain/Programming_Courses/blob/main/Python%20(Full%20Course).md)
+- [Java]
+- [Julia](https://github.com/saidehossain/Programming_Courses/blob/main/Julia%20Programming%20(Full%20Course).md)
+- [JavaScript](https://github.com/saidehossain/Programming_Courses/blob/main/Java%20Script%20(Full%20Course).md)
+- [TypeScript](https://github.com/saidehossain/Programming_Courses/blob/main/Type%20Script%20(Full%20Course).md)
+- [PHP](https://github.com/saidehossain/Programming_Courses/blob/main/PHP%20(Full%20Course).md)
+- [Perl](https://github.com/saidehossain/Programming_Courses/blob/main/Perl%20(Full%20Course).md)
+- [Groovy](https://github.com/saidehossain/Programming_Courses/blob/main/Groovy%20(Full%20Course).md)
+- [Haskell](https://github.com/saidehossain/Programming_Courses/blob/main/Haskell%20(Full%20Course).md)
+- [R](https://github.com/saidehossain/Programming_Courses/blob/main/R%20(Full%20Course).md)
+- [Rust](https://github.com/saidehossain/Programming_Courses/blob/main/Rust%20(Full%20Course).md)
+- [Ruby](https://github.com/saidehossain/Programming_Courses/blob/main/Ruby%20(Full%20Course).md)
+- [Go (Golang)](https://github.com/saidehossain/Programming_Courses/blob/main/Go%20(Full%20Course).md)
+- [Lua](https://github.com/saidehossain/Programming_Courses/blob/main/Lua%20(Full%20Course).md)
+- [SQL](https://github.com/saidehossain/Programming_Courses/blob/main/SQL%20(Full%20Course).md)
+
 
 ## About the Courses
 
