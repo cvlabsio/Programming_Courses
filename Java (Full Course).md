@@ -1,6 +1,6 @@
 #### Let's start with the basics and gradually progress towards more advanced topics. Here's an outline of what we'll cover:
 
-1. [Introduction to Java](#Introduction to Java)
+1. [Introduction to Java](#introduction-to-java)
 2. Setting up the Development Environment
 3. Basic Syntax and Structure
 4. Variables and Data Types
