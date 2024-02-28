@@ -12,7 +12,7 @@ This repository covers a wide range of programming languages, including but not 
 - [C++](https://github.com/saidehossain/Programming_Courses/blob/main/C%2B%2B%20(Full%20Course).md)
 - [C#](https://github.com/saidehossain/Programming_Courses/blob/main/C%23%20(Full%20Course).md)
 - [Python](https://github.com/saidehossain/Programming_Courses/blob/main/Python%20(Full%20Course).md)
-- [Java]
+- [Java](https://github.com/saidehossain/Programming_Courses/blob/main/Java%20(Full%20Course).md)
 - [Julia](https://github.com/saidehossain/Programming_Courses/blob/main/Julia%20Programming%20(Full%20Course).md)
 - [JavaScript](https://github.com/saidehossain/Programming_Courses/blob/main/Java%20Script%20(Full%20Course).md)
 - [TypeScript](https://github.com/saidehossain/Programming_Courses/blob/main/Type%20Script%20(Full%20Course).md)
