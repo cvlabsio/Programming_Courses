@@ -18,8 +18,6 @@ This repository covers a wide range of programming languages, including but not 
 - [TypeScript](https://github.com/saidehossain/Programming_Courses/blob/main/Type%20Script%20(Full%20Course).md)
 - [PHP](https://github.com/saidehossain/Programming_Courses/blob/main/PHP%20(Full%20Course).md)
 - [Perl](https://github.com/saidehossain/Programming_Courses/blob/main/Perl%20(Full%20Course).md)
-- [Groovy](https://github.com/saidehossain/Programming_Courses/blob/main/Groovy%20(Full%20Course).md)
-- [Haskell](https://github.com/saidehossain/Programming_Courses/blob/main/Haskell%20(Full%20Course).md)
 - [R](https://github.com/saidehossain/Programming_Courses/blob/main/R%20(Full%20Course).md)
 - [Rust](https://github.com/saidehossain/Programming_Courses/blob/main/Rust%20(Full%20Course).md)
 - [Ruby](https://github.com/saidehossain/Programming_Courses/blob/main/Ruby%20(Full%20Course).md)
