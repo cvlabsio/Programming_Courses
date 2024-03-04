@@ -1,4 +1,4 @@
-# Programming Courses Repository
+# Programming Courses
 
 Welcome to the Programming Courses repository! This repository serves as a comprehensive resource for learning various programming languages, starting from assembly language to the most commonly used modern languages. Whether you're a beginner or an experienced programmer looking to expand your skills, you'll find valuable content and resources here.
 
