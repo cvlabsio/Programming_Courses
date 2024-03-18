@@ -12,13 +12,10 @@ This repository covers a wide range of programming languages, including but not 
 - [Python](https://github.com/saidehossain/Programming_Courses/blob/main/Python%20(Full%20Course).md)
 - [Java](https://github.com/saidehossain/Programming_Courses/blob/main/Java%20(Full%20Course).md)
 - [JavaScript](https://github.com/saidehossain/Programming_Courses/blob/main/Java%20Script%20(Full%20Course).md)
-- [TypeScript](https://github.com/saidehossain/Programming_Courses/blob/main/Type%20Script%20(Full%20Course).md)
 - [PHP](https://github.com/saidehossain/Programming_Courses/blob/main/PHP%20(Full%20Course).md)
 - [Perl](https://github.com/saidehossain/Programming_Courses/blob/main/Perl%20(Full%20Course).md)
-- [Rust](https://github.com/saidehossain/Programming_Courses/blob/main/Rust%20(Full%20Course).md)
 - [Ruby](https://github.com/saidehossain/Programming_Courses/blob/main/Ruby%20(Full%20Course).md)
 - [Go (Golang)](https://github.com/saidehossain/Programming_Courses/blob/main/Go%20(Full%20Course).md)
-- [Lua](https://github.com/saidehossain/Programming_Courses/blob/main/Lua%20(Full%20Course).md)
 - [SQL](https://github.com/saidehossain/Programming_Courses/blob/main/SQL%20(Full%20Course).md)
 
 
